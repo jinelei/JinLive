@@ -16,7 +16,18 @@
     <mvc:resources mapping="/images/**" location="media.images"/>
     <mvc:resources mapping="videos/**" location="media.videos"/>
 
+   <!--freemarker -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+          id="freeMarkerViewResolver"
+          p:order="1"
+          p:cache="true"
+          p:suffix=".ftl"
+          p:prefix=""/>
 
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
+          p:templateLoaderPath="/WEB-INF/views/ftl/"/>
+
+    <!--internal resource view resolver-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:order="2"
           p:prefix="/WEB-INF/pages/"
