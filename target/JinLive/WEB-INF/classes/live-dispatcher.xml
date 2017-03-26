@@ -9,6 +9,9 @@
     <context:component-scan base-package="cn.jinelei.live.controller"/>
     <mvc:default-servlet-handler/>
 
+    <context:property-placeholder file-encoding="utf8"
+                                  location="classpath:/application.properties"
+                                  ignore-unresolvable="true"/>
 
     <!--mapping resources-->
     <mvc:resources mapping="/css/**" location="script.css/"/>
@@ -16,7 +19,7 @@
     <mvc:resources mapping="/images/**" location="media.images"/>
     <mvc:resources mapping="videos/**" location="media.videos"/>
 
-   <!--freemarker -->
+    <!--freemarker -->
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
           id="freeMarkerViewResolver"
           p:order="1"
@@ -25,7 +28,7 @@
           p:prefix=""/>
 
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
-          p:templateLoaderPath="/WEB-INF/views/ftl/"/>
+          p:templateLoaderPath="/WEB-INF/ftl/"/>
 
     <!--internal resource view resolver-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"

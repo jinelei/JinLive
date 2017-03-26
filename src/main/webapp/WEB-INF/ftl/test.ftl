@@ -5,7 +5,6 @@
     <table>
         <tr>
             <td>${msg}</td>
-            <td>${msg}</td>
         </tr>
     </table>
 </div>
