@@ -11,22 +11,18 @@
     <context:component-scan base-package="cn.jinelei.live"/>
     <mvc:default-servlet-handler/>
     <task:annotation-driven/>
-    <cache:annotation-driven/>
 
-    <cache:advice id="cacheAdvice">
-        <cache:caching>
-            <cache:cacheable
-                    cache="rtmp"
-                    method="updateRTMP"/>
-        </cache:caching>
-    </cache:advice>
-    <!--<aop:config>-->
-        <!--<aop:advisor advice-ref="cacheAdvice"-->
-                     <!--pointcut="execution(* cn.jinelei.live.utils.UpdateRTMP.*(..))"/>-->
-    <!--</aop:config>-->
+    <cache:annotation-driven cache-manager="cacheManager"/>
 
-    <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheManager"
-          id="cacheManager"/>
+    <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml"/>
+    </bean>
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+        <property name="cacheManager" ref="ehcacheManager"/>
+        <property name="transactionAware" value="true"/>
+    </bean>
+
 
     <context:property-placeholder file-encoding="utf8"
                                   location="classpath:/application.properties"
