@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="live@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="live">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="test"/>
+    <schema id="7" parent="1" name="weichat"/>
+    <table id="8" parent="2" name="live"/>
+    <table id="9" parent="2" name="live_audio"/>
+    <table id="10" parent="2" name="live_client"/>
+    <table id="11" parent="2" name="live_map_stream"/>
+    <table id="12" parent="2" name="live_stream"/>
+    <table id="13" parent="2" name="live_stream_map_client"/>
+    <table id="14" parent="2" name="live_video"/>
+    <table id="15" parent="2" name="vod"/>
+    <table id="16" parent="2" name="vod_client"/>
+    <table id="17" parent="2" name="vod_map_stream"/>
+    <table id="18" parent="2" name="vod_stream"/>
+    <table id="19" parent="2" name="vod_stream_map"/>
+    <column id="20" parent="8" name="live_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="21" parent="8" name="live_nclients">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="22" parent="8" name="live_live_id_uindex">
+      <ColNames>live_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="23" parent="8" name="PRIMARY">
+      <ColNames>live_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="24" parent="8" name="live_live_id_uindex">
+      <ColNames>live_id</ColNames>
+      <UnderlyingIndexName>live_live_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="25" parent="9" name="live_audio_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="26" parent="9" name="live_audio_codec">
+      <Position>2</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="9" name="live_audio_profile">
+      <Position>3</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="28" parent="9" name="live_audio_channels">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="29" parent="9" name="live_audio_sample_rate">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="30" parent="9" name="live_audio_live_audio_id_uindex">
+      <ColNames>live_audio_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="31" parent="9" name="PRIMARY">
+      <ColNames>live_audio_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="32" parent="9" name="live_audio_live_audio_id_uindex">
+      <ColNames>live_audio_id</ColNames>
+      <UnderlyingIndexName>live_audio_live_audio_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="33" parent="10" name="live_client_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="34" parent="10" name="live_client_client_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="10" name="live_client_address">
+      <Position>3</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="10" name="live_client_time">
+      <Position>4</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="10" name="live_client_flashver">
+      <Position>5</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="10" name="live_client_dropped">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="10" name="live_client_avsync">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="10" name="live_client_timestamp">
+      <Position>8</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="10" name="live_client_publishing">
+      <Position>9</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="42" parent="10" name="live_client_active">
+      <Position>10</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="43" parent="10" name="live_client_live_client_id_uindex">
+      <ColNames>live_client_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="44" parent="10" name="PRIMARY">
+      <ColNames>live_client_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="45" parent="10" name="live_client_live_client_id_uindex">
+      <ColNames>live_client_id</ColNames>
+      <UnderlyingIndexName>live_client_live_client_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="46" parent="11" name="live_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="11" name="live_stream_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="48" parent="11" name="live_map_stream_live_stream_id_fk">
+      <ColNames>live_stream_id</ColNames>
+    </index>
+    <key id="49" parent="11" name="PRIMARY">
+      <ColNames>live_id
+live_stream_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="50" parent="11" name="live_map_stream_live_id_fk">
+      <ColNames>live_id</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>live</RefTableName>
+      <RefColNames>live_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <foreign-key id="51" parent="11" name="live_map_stream_live_stream_id_fk">
+      <ColNames>live_stream_id</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>live_stream</RefTableName>
+      <RefColNames>live_stream_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <column id="52" parent="12" name="live_stream_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="53" parent="12" name="live_stream_name">
+      <Position>2</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="12" name="live_stream_time">
+      <Position>3</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="12" name="live_stream_bw_in">
+      <Position>4</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="12" name="live_stream_bytes_in">
+      <Position>5</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="12" name="live_stream_bw_out">
+      <Position>6</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="12" name="live_stream_bytes_out">
+      <Position>7</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="12" name="live_stream_bw_audio">
+      <Position>8</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="12" name="live_stream_bw_video">
+      <Position>9</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="12" name="live_stream_video">
+      <Position>10</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="12" name="live_stream_audio">
+      <Position>11</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="63" parent="12" name="live_stream_publishing">
+      <Position>12</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="64" parent="12" name="live_stream_active">
+      <Position>13</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="65" parent="12" name="live_stream_audio_fk">
+      <ColNames>live_stream_audio</ColNames>
+    </index>
+    <index id="66" parent="12" name="live_stream_live_stream_id_uindex">
+      <ColNames>live_stream_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="67" parent="12" name="live_stream_video_fk">
+      <ColNames>live_stream_video</ColNames>
+    </index>
+    <key id="68" parent="12" name="PRIMARY">
+      <ColNames>live_stream_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="69" parent="12" name="live_stream_live_stream_id_uindex">
+      <ColNames>live_stream_id</ColNames>
+      <UnderlyingIndexName>live_stream_live_stream_id_uindex</UnderlyingIndexName>
+    </key>
+    <foreign-key id="70" parent="12" name="live_stream_video_fk">
+      <ColNames>live_stream_video</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>live_video</RefTableName>
+      <RefColNames>live_video_id</RefColNames>
+    </foreign-key>
+    <foreign-key id="71" parent="12" name="live_stream_audio_fk">
+      <ColNames>live_stream_audio</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>live_audio</RefTableName>
+      <RefColNames>live_audio_id</RefColNames>
+    </foreign-key>
+    <column id="72" parent="13" name="live_stream_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="73" parent="13" name="live_client_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="74" parent="13" name="live_stream_map_client_client_id_fk">
+      <ColNames>live_client_id</ColNames>
+    </index>
+    <key id="75" parent="13" name="PRIMARY">
+      <ColNames>live_stream_id
+live_client_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="76" parent="13" name="live_stream_map_client_stream_id_fk">
+      <ColNames>live_stream_id</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>live_stream</RefTableName>
+      <RefColNames>live_stream_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <foreign-key id="77" parent="13" name="live_stream_map_client_client_id_fk">
+      <ColNames>live_client_id</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>live_client</RefTableName>
+      <RefColNames>live_client_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <column id="78" parent="14" name="live_video_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="79" parent="14" name="live_video_height">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="80" parent="14" name="live_video_width">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="81" parent="14" name="live_video_frame_rate">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="82" parent="14" name="live_video_codec">
+      <Position>5</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="83" parent="14" name="live_video_profile">
+      <Position>6</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="84" parent="14" name="live_video_compat">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="85" parent="14" name="llive_video_level">
+      <Position>8</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="86" parent="14" name="live_video_live_video_id_uindex">
+      <ColNames>live_video_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="87" parent="14" name="PRIMARY">
+      <ColNames>live_video_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="88" parent="14" name="live_video_live_video_id_uindex">
+      <ColNames>live_video_id</ColNames>
+      <UnderlyingIndexName>live_video_live_video_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="89" parent="15" name="vod_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="90" parent="15" name="vod_nclients">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="91" parent="15" name="vod_vod_id_uindex">
+      <ColNames>vod_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="92" parent="15" name="PRIMARY">
+      <ColNames>vod_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="93" parent="15" name="vod_vod_id_uindex">
+      <ColNames>vod_id</ColNames>
+      <UnderlyingIndexName>vod_vod_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="94" parent="16" name="vod_client_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="95" parent="16" name="vod_client_client_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="96" parent="16" name="vod_client_address">
+      <Position>3</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="97" parent="16" name="vod_client_time">
+      <Position>4</Position>
+      <DataType>mediumtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="98" parent="16" name="vod_client_flashver">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="99" parent="16" name="vod_client_timestamp">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="100" parent="16" name="vod_client_vod_client_id_uindex">
+      <ColNames>vod_client_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="101" parent="16" name="PRIMARY">
+      <ColNames>vod_client_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="102" parent="16" name="vod_client_vod_client_id_uindex">
+      <ColNames>vod_client_id</ColNames>
+      <UnderlyingIndexName>vod_client_vod_client_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="103" parent="17" name="vod_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="104" parent="17" name="vod_stream_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="105" parent="17" name="vod_map_stream_vod_stream_fk">
+      <ColNames>vod_stream_id</ColNames>
+    </index>
+    <key id="106" parent="17" name="PRIMARY">
+      <ColNames>vod_id
+vod_stream_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="107" parent="17" name="vod_map_stream_vod_id_fk">
+      <ColNames>vod_id</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>vod</RefTableName>
+      <RefColNames>vod_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <foreign-key id="108" parent="17" name="vod_map_stream_vod_stream_fk">
+      <ColNames>vod_stream_id</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>vod_stream</RefTableName>
+      <RefColNames>vod_stream_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <column id="109" parent="18" name="vod_stream_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="110" parent="18" name="vod_stream_name">
+      <Position>2</Position>
+      <DataType>varchar(32)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="111" parent="18" name="vod_stream_active">
+      <Position>3</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="112" parent="18" name="vod_stream_nclients">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="113" parent="18" name="vod_stream_vod_stream_id_uindex">
+      <ColNames>vod_stream_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="114" parent="18" name="PRIMARY">
+      <ColNames>vod_stream_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="115" parent="18" name="vod_stream_vod_stream_id_uindex">
+      <ColNames>vod_stream_id</ColNames>
+      <UnderlyingIndexName>vod_stream_vod_stream_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="116" parent="19" name="vod_client_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="117" parent="19" name="vod_stream_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="118" parent="19" name="vod_stream_map_stream_id_fk">
+      <ColNames>vod_stream_id</ColNames>
+    </index>
+    <key id="119" parent="19" name="PRIMARY">
+      <ColNames>vod_client_id
+vod_stream_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="120" parent="19" name="vod_stream_map_client_fk">
+      <ColNames>vod_client_id</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>vod_client</RefTableName>
+      <RefColNames>vod_client_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+    <foreign-key id="121" parent="19" name="vod_stream_map_stream_id_fk">
+      <ColNames>vod_stream_id</ColNames>
+      <RefSchemaName>live</RefSchemaName>
+      <RefTableName>vod_stream</RefTableName>
+      <RefColNames>vod_stream_id</RefColNames>
+      <OnUpdate>update</OnUpdate>
+      <OnDelete>delete</OnDelete>
+    </foreign-key>
+  </database-model>
+</dataSource>
