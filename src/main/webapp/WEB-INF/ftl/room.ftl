@@ -19,8 +19,8 @@
 </div>
 
 
-<script type="text/javascript" src="/js/player/cyberplayer.js"></script>
-<script type="text/javascript" src="/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="js/player/cyberplayer.js"></script>
+<script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript">
 	var server_ip = $("#server_ip").val();
 	var stream_id = $("#stream_id").val();
@@ -39,7 +39,7 @@
 	});
 
 	//send bullet screen
-	var websocket_url = "ws://" + server_ip + "/bullet";
+	var websocket_url = "ws://" + server_ip + "/message";
 	var socket = new WebSocket(websocket_url);
 	socket.onopen = function () {
 		console.log("ws on load");
@@ -48,8 +48,9 @@
 	socket.onclose = function () {
 		console.log("ws on close");
 	}
-	socket.onerror = function () {
+	socket.onerror = function (err) {
 		console.log("ws on error");
+		console.log(err);
 	}
 	function saySomething(str) {
 		console.log("ws send: " + str);

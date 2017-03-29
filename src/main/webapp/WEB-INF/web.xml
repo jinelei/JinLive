@@ -23,6 +23,15 @@
   </filter-mapping>
 
   <servlet>
+    <servlet-name>mine-servlet</servlet-name>
+    <servlet-class>cn.jinelei.live.test.Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mine-servlet</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>live-servlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
@@ -33,6 +42,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>live-servlet</servlet-name>
-    <url-pattern>/</url-pattern>
+    <url-pattern>/live/*</url-pattern>
   </servlet-mapping>
+
 </web-app>

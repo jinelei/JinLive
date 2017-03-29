@@ -27,7 +27,7 @@
 		}
 
 	</style>
-	<script src="/js/jquery-3.2.0.min.js"></script>
+	<script src="js/jquery-3.2.0.min.js"></script>
 </head>
 <body>
 <div id="header">
@@ -54,7 +54,7 @@
     </#list>
 </div>
 <div hidden>
-	<form action="/room" method="post">
+	<form action="/live/room" method="post">
 		<input type="text" id="stream_id" name="stream_id"/>
 		<input type="submit" id="submit"/>
 	</form>
