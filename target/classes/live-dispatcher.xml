@@ -3,36 +3,41 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:task="http://www.springframework.org/schema/task" xmlns:cache="http://www.springframework.org/schema/cache"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="cn.jinelei.live"/>
-    <mvc:default-servlet-handler/>
+    <!--<mvc:default-servlet-handler/>-->
     <task:annotation-driven/>
 
-    <cache:annotation-driven cache-manager="cacheManager"/>
+    <!--mapping resources-->
+    <mvc:resources mapping="/css/**" location="classpath:script/css/"/>
+    <mvc:resources mapping="/js/**" location="classpath:script/js/"/>
+    <mvc:resources mapping="videos/**" location="classpath:media/videos/"/>
+    <mvc:resources mapping="/images/**" location="classpath:media/images/"/>
 
-    <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <property name="configLocation" value="classpath:ehcache.xml"/>
-    </bean>
 
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager" ref="ehcacheManager"/>
-        <property name="transactionAware" value="true"/>
-    </bean>
+    <!--cache support-->
+    <!--<cache:annotation-driven cache-manager="cacheManager"/>-->
+    <!--<bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">-->
+        <!--<property name="configLocation" value="classpath:ehcache.xml"/>-->
+    <!--</bean>-->
+    <!--<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">-->
+        <!--<property name="cacheManager" ref="ehcacheManager"/>-->
+        <!--<property name="transactionAware" value="true"/>-->
+    <!--</bean>-->
 
 
     <context:property-placeholder file-encoding="utf8"
                                   location="classpath:/application.properties"
                                   ignore-unresolvable="true"/>
 
-    <!--mapping resources-->
-    <mvc:resources mapping="/css/**" location="script.css/"/>
-    <mvc:resources mapping="/js/**" location="script.js"/>
-    <mvc:resources mapping="/images/**" location="media.images"/>
-    <mvc:resources mapping="videos/**" location="media.videos"/>
+
+    <bean class="cn.jinelei.live.utils.rtmp.RTMPCache" id="rtmpCache" scope="singleton"/>
+    <bean class="cn.jinelei.live.utils.rtmp.RTMPUtils" id="rtmpUtils" scope="singleton"/>
+    <bean class="cn.jinelei.live.utils.net.HttpTools" id="httpTools" scope="singleton"/>
+    <bean class="cn.jinelei.live.utils.handler.EntityHandler" id="jinStreamHandler" scope="singleton"/>
 
     <!--freemarker -->
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
@@ -51,6 +56,5 @@
           p:prefix="/WEB-INF/pages/"
           p:suffix=".jsp"
           p:viewClass="org.springframework.web.servlet.view.JstlView"/>
-
 
 </beans>

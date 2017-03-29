@@ -1,4 +1,4 @@
-package cn.jinelei.live.utils;
+package cn.jinelei.live.utils.net;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -17,7 +17,7 @@ public class HttpTools {
 
     private static final Logger logger = LoggerFactory.getLogger(HttpTools.class);
 
-    public static HttpEntity getEntity(String url) {
+    public HttpEntity getEntity(String url) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(url);
         CloseableHttpResponse response = null;

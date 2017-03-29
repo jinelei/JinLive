@@ -1,4 +1,4 @@
-package cn.jinelei.live.handler;
+package cn.jinelei.live.utils.handler;
 
 import cn.jinelei.live.model.nginx.RTMP;
 import cn.jinelei.live.model.nginx.Server;
@@ -8,7 +8,6 @@ import cn.jinelei.live.model.nginx.live.Video;
 import cn.jinelei.live.model.nginx.vod.Vod;
 import org.apache.commons.digester3.Digester;
 import org.apache.http.HttpEntity;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -18,11 +17,11 @@ import java.io.IOException;
 /**
  * Created by jinelei on 17-3-26.
  */
-public class JinStreamHandler {
+public class EntityHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(JinStreamHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(EntityHandler.class);
 
-    public static RTMP handleEntity(HttpEntity entity) {
+    public RTMP handleEntity(HttpEntity entity) {
         RTMP rtmp = null;
         Digester digester = new Digester();
         digester.setValidating(false);
