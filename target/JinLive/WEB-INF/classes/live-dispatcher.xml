@@ -3,13 +3,16 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:task="http://www.springframework.org/schema/task"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="cn.jinelei.live"/>
     <!--<mvc:default-servlet-handler/>-->
     <task:annotation-driven/>
+
+    <!--aop-->
+    <aop:aspectj-autoproxy/>
 
     <!--mapping resources-->
     <mvc:resources mapping="/css/**" location="classpath:script/css/"/>
@@ -21,11 +24,11 @@
     <!--cache support-->
     <!--<cache:annotation-driven cache-manager="cacheManager"/>-->
     <!--<bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">-->
-        <!--<property name="configLocation" value="classpath:ehcache.xml"/>-->
+    <!--<property name="configLocation" value="classpath:ehcache.xml"/>-->
     <!--</bean>-->
     <!--<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">-->
-        <!--<property name="cacheManager" ref="ehcacheManager"/>-->
-        <!--<property name="transactionAware" value="true"/>-->
+    <!--<property name="cacheManager" ref="ehcacheManager"/>-->
+    <!--<property name="transactionAware" value="true"/>-->
     <!--</bean>-->
 
 
@@ -56,5 +59,17 @@
           p:prefix="/WEB-INF/pages/"
           p:suffix=".jsp"
           p:viewClass="org.springframework.web.servlet.view.JstlView"/>
+
+    <!--aop bean-->
+    <bean class="cn.jinelei.live.logger.MainAopLogger" id="aopLogger"/>
+    <!--<aop:config>-->
+        <!--<aop:aspect ref="mineLogger" id="controllerLogger">-->
+            <!--<aop:pointcut id="log" expression="execution(* cn.jinelei.live.controller.*.*(..))"/>-->
+            <!--<aop:before method="before" pointcut-ref="log"/>-->
+            <!--<aop:after method="after" pointcut-ref="log"/>-->
+            <!--<aop:around method="around" pointcut-ref="log"/>-->
+            <!--<aop:after-returning method="afterReturn" pointcut-ref="log" arg-names="joinPoint,reValue" returning="reValue"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
 
 </beans>

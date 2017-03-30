@@ -18,13 +18,11 @@ public class RTMPCache {
         if (rtmpQueue.size() > 0) {
             rtmpQueue.remove();
         }
-        logger.debug("add Cache: " + rtmp.toString());
         rtmpQueue.add(rtmp);
     }
 
     public RTMP getRTMP() {
         RTMP rtmp = rtmpQueue.peek();
-        logger.debug("get Cache: " + rtmp.toString());
         return rtmp;
     }
 }

@@ -42,7 +42,7 @@ public class MainController {
 
     @RequestMapping(value = {"/index", "/"})
     public String index(ModelMap model) {
-        logger.debug("get in index");
+        logger.debug("Current Method Name: " + Thread.currentThread().getStackTrace()[1].getMethodName());
         RTMP rtmp = rtmpCache.getRTMP();
         List<Application> applicationList = rtmp.getServer().getApplications();
         applicationList.forEach((application -> {
@@ -63,7 +63,6 @@ public class MainController {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String test(ModelMap model) {
-        logger.debug("get in info");
         RTMP rtmp = rtmpCache.getRTMP();
         model.addAttribute("rtmp", rtmp);
         return "information";
@@ -71,13 +70,12 @@ public class MainController {
 
     @RequestMapping("/test")
     public String test() {
-        logger.debug("get in test");
         return "test";
     }
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
     public String roomPost(ModelMap model, @RequestParam(value = "stream_id") String streamId) {
-        logger.debug("get in room");
+        logger.debug("stream_id: " + streamId);
         String url = environment.getProperty("server_ip");
         model.addAttribute("server_ip", url);
         model.addAttribute("stream_id", streamId);
