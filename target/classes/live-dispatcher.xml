@@ -72,4 +72,7 @@
         <!--</aop:aspect>-->
     <!--</aop:config>-->
 
+    <!--<bean class="cn.jinelei.live.websocket.HandshakeInterceptor"-->
+
+
 </beans>

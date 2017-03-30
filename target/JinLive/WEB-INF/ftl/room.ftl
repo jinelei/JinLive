@@ -11,11 +11,11 @@
 
 
 <div>
-	<textarea style="width: 200px;height: 600px;"></textarea>
-	<div style="width: 200px;height: 50px;"
-	<input type="text" id="msg" name="name"/>
-	<input type="submit" name="Submit"/>
-</div>
+	<textarea style="width: 200px;height: 600px;" id="message-area"></textarea>
+	<div style="width: 200px;height: 50px;">
+		<input type="text" id="msg" name="name"/>
+		<input type="submit" id="msg_submit" name="Submit"/>
+	</div>
 </div>
 
 
@@ -24,7 +24,7 @@
 <script type="text/javascript">
 	var server_ip = $("#server_ip").val();
 	var stream_id = $("#stream_id").val();
-	console.log("server_ip: " + server_ip);
+	//	console.log("server_ip: " + server_ip);
 	var live_stream_url = "http://" + server_ip + "/live/" + stream_id + "/index.m3u8";
 	var player = cyberplayer("playercontainer").setup({
 		width: 854,
@@ -39,11 +39,10 @@
 	});
 
 	//send bullet screen
-	var websocket_url = "ws://" + server_ip + "/message";
+	var websocket_url = "ws://localhost:8080/live/websck";
 	var socket = new WebSocket(websocket_url);
 	socket.onopen = function () {
 		console.log("ws on load");
-		saySomething("on load message");
 	}
 	socket.onclose = function () {
 		console.log("ws on close");
@@ -52,10 +51,23 @@
 		console.log("ws on error");
 		console.log(err);
 	}
-	function saySomething(str) {
-		console.log("ws send: " + str);
-		socket.send(str);
+	socket.onmessage = function (event) {
+		console.log(event.data);
+		setTextArea(event.data);
 	}
+	function saySomething(str) {
+		socket.send(str);
+		setTextArea(str);
+	}
+	function setTextArea(data) {
+		var msg = $("#message-area").val() + "\n" + data;
+		$("#message-area").val(msg);
+	}
+	$("#msg_submit").on("click",function () {
+	    var msg = $("#msg").val();
+	    saySomething(msg);
+	})
+
 </script>
 </body>
 </html>
