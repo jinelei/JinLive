@@ -28,13 +28,19 @@
 	var stream_id = $("#stream_id").val();
 	//	console.log("server_ip: " + server_ip);
 	var live_stream_url = "http://" + server_ip + "/live/" + stream_id + "/index.m3u8";
+//		var live_stream_url = "rtmp://" + server_ip + ":1935/live/" + stream_id;
+		console.log(live_stream_url);
 	var player = cyberplayer("playercontainer").setup({
 		width: 854,
 		height: 480,
 		stretching: "uniform",
 		file: live_stream_url,
 		autostart: true,
-		repeat: false,
+//		repeat: false,
+//		rtmp: {
+//			reconnecttime: 5, // rtmp直播的重连次数
+//			bufferlength: 1 // 缓冲多少秒之后开始播放 默认1秒
+//		},
 		volume: 100,
 		controls: true,
 		ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey

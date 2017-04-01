@@ -1,6 +1,8 @@
 package cn.jinelei.live.task;
 
-import cn.jinelei.live.utils.rtmp.RTMPCache;
+import cn.jinelei.live.model.nginx.RTMP;
+import cn.jinelei.live.model.nginx.live.Live;
+import cn.jinelei.live.utils.rtmp.RTMPCacheManager;
 import cn.jinelei.live.utils.rtmp.RTMPUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class MyTask {
 
     @Autowired
-    private RTMPCache rtmpCache;
+    private RTMPCacheManager rtmpCacheManager;
 
     @Autowired
     private RTMPUtils rtmpUtils;
@@ -25,9 +27,23 @@ public class MyTask {
     private static final Logger logger = LoggerFactory.getLogger(MyTask.class);
 
     @Scheduled(cron = "*/5 * * * * ?")//每隔5秒执行一次
-    public void updateRTMP() {
-        logger.info("定时任务： 刷新缓存：rtmpCache");
-        rtmpCache.setRtmpMap(rtmpUtils.updateRTMP());
+    public void updateRTMPCache() {
+        logger.info("定时任务： 刷新缓存：rtmpCacheManager");
+        RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
+        rtmpCacheManager.setRtmpMap(rtmp);
     }
+
+//    @Scheduled(cron = "*/15 * * * * ?")//每隔5秒执行一次
+//    public void getScreenShotFromStream() {
+//        logger.info("定时任务： 刷新截图： getScreenShotFromStream");
+//        RTMP rtmp = rtmpCacheManager.getRTMP();
+//        if (rtmp != null) {
+//            rtmp.getServer().getApplications().stream().forEach(application -> {
+//                if ("live".equals(application.getName())) {
+//                    rtmpUtils.getScreenShotFromLiveStream(((Live) application).getStreams());
+//                }
+//            });
+//        }
+//    }
 
 }

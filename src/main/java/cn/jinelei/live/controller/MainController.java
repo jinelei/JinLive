@@ -6,7 +6,7 @@ import cn.jinelei.live.model.nginx.vod.Vod;
 import cn.jinelei.live.utils.handler.EntityHandler;
 import cn.jinelei.live.model.nginx.RTMP;
 import cn.jinelei.live.utils.net.HttpTools;
-import cn.jinelei.live.utils.rtmp.RTMPCache;
+import cn.jinelei.live.utils.rtmp.RTMPCacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @Autowired
-    private RTMPCache rtmpCache;
+    private RTMPCacheManager rtmpCacheManager;
     @Autowired
     private EntityHandler entityHandler;
     @Autowired
@@ -43,7 +43,7 @@ public class MainController {
     @RequestMapping(value = {"/index", "/"})
     public String index(ModelMap model) {
         logger.debug("Current Method Name: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        RTMP rtmp = rtmpCache.getRTMP();
+        RTMP rtmp = rtmpCacheManager.getRTMP();
         List<Application> applicationList = rtmp.getServer().getApplications();
         applicationList.forEach((application -> {
             logger.debug("name: " + application.getName());
@@ -63,14 +63,14 @@ public class MainController {
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String test(ModelMap model) {
-        RTMP rtmp = rtmpCache.getRTMP();
+        RTMP rtmp = rtmpCacheManager.getRTMP();
         model.addAttribute("rtmp", rtmp);
         return "information";
     }
 
     @RequestMapping("/test")
     public String test() {
-        return "test";
+        return "fileupload";
     }
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)

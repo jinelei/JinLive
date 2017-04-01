@@ -37,7 +37,7 @@
                                   ignore-unresolvable="true"/>
 
 
-    <bean class="cn.jinelei.live.utils.rtmp.RTMPCache" id="rtmpCache" scope="singleton"/>
+    <bean class="cn.jinelei.live.utils.rtmp.RTMPCacheManager" id="rtmpCache" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.rtmp.RTMPUtils" id="rtmpUtils" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.net.HttpTools" id="httpTools" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.handler.EntityHandler" id="jinStreamHandler" scope="singleton"/>
@@ -73,6 +73,14 @@
     <!--</aop:config>-->
 
     <!--<bean class="cn.jinelei.live.websocket.HandshakeInterceptor"-->
+
+    <!--fileupload-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="utf-8"
+          p:maxUploadSize="52428880"
+          p:uploadTempDir="upload"
+    />
+
 
 
 </beans>

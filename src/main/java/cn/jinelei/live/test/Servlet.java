@@ -16,11 +16,17 @@ import java.io.IOException;
 @WebServlet(name = "MineServlet")
 public class Servlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(Servlet.class);
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("mineservlet do post");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.debug("mineservlet do get");
+        Runtime runtime = Runtime.getRuntime();
+//        runtime.exec("touch /usr/local/nginx/html/screenshot/asdf");
+//        runtime.exec("rm -rf /usr/local/nginx/html/screenshot/asdf.png");
+//        runtime.exec("ffmpeg -i rtmp://localhost:1935/live/video0 -vframes 1 /usr/local/nginx/html/screenshot/asdf.png");
+        runtime.exec("curl -F 'filename=@/usr/local/nginx/html/screenshot/video0.png' http://192.168.31.169:8080/live/fileupload");
     }
 }

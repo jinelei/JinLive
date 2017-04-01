@@ -10,8 +10,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Created by jinelei on 17-3-28.
  */
-public class RTMPCache {
-    private static final Logger logger = LoggerFactory.getLogger(RTMPCache.class);
+public class RTMPCacheManager {
+    private static final Logger logger = LoggerFactory.getLogger(RTMPCacheManager.class);
     private Queue<RTMP> rtmpQueue = new ArrayBlockingQueue<RTMP>(1);
 
     public void setRtmpMap(RTMP rtmp) {
