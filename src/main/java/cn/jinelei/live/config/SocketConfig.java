@@ -42,7 +42,7 @@ public class SocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/queue","topic");
+        registry.enableSimpleBroker("topic");
 //        registry.enableStompBrokerRelay("/queue","topic");
         registry.setApplicationDestinationPrefixes("/app");
     }

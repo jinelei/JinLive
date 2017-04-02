@@ -17,6 +17,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,31 +38,30 @@ public class STOMPController {
 
     private static final Logger logger = LoggerFactory.getLogger(STOMPController.class);
 
-    @Autowired
-    private RTMPCacheManager rtmpCacheManager;
-    @Autowired
-    private EntityHandler entityHandler;
-    @Autowired
-    private HttpTools httpTools;
-    @Autowired
-    private Environment environment;
+    public SimpMessagingTemplate template;
 
     @Autowired
-    private SimpMessageSendingOperations messaging;
+    public STOMPController(SimpMessagingTemplate template) {
+        this.template = template;
+    }
 
     @MessageMapping("/msg")
     @SendTo("/topic/msg")
     public String handleMessage(String msg) {
-        logger.debug(msg);
-        logger.debug("send msg");
-        messaging.convertAndSend("/topic/msg","this message from server");
+        logger.debug("load msg: " + msg);
         return "recived msg: " + msg;
     }
 
-    @SubscribeMapping("/msg")
-    public String subscriptRoom() {
-        logger.debug("handle scription room");
-        return "room";
+//    @SubscribeMapping("/msg")
+//    public String subscriptRoom() {
+//        logger.debug("handle scription room");
+//        return "room";
+//    }
+
+    @MessageMapping("/message")
+    @SendToUser("/message")
+    public String userMessage(String msg){
+        return msg;
     }
 
 }

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,8 @@ public class MainController {
     private HttpTools httpTools;
     @Autowired
     private Environment environment;
+    @Autowired
+    private SimpMessagingTemplate template;
 
     @RequestMapping(value = {"/index", "/"})
     public String index(ModelMap model) {
@@ -70,6 +73,7 @@ public class MainController {
 
     @RequestMapping("/test")
     public String test() {
+        template.convertAndSend("/topic/msg","asdasdf");
         return "fileupload";
     }
 

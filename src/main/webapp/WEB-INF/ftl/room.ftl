@@ -50,21 +50,17 @@
 		ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey
 	});
 
-	setTextArea("init");
 	var url = "http://" + window.location.host + "/live/msg";
 	var sock = SockJS(url);
 	var stomp = Stomp.over(sock);
-	stomp.connect('guest', 'guest', function (frame) {
-		console.log('*****  Connected  *****');
-//		stomp.subscribe("/app/jinmsg", subscribeHandler);
-		stomp.subscribe("/topic/msg", subscribeHandler);
-		setTextArea("subscribed");
+	stomp.connect({}, function (frame) {
+//		stomp.connect('guest', 'guest', function (frame) {
+		stomp.subscribe("/topic/msg",function (message) {
+			console.log('Received: ', message);
+			setTextArea(JSON.parse(message.body).message);
+		});
+		setTextArea("connected");
 	});
-
-	function subscribeHandler(message) {
-		console.log('Received: ', message);
-		setTextArea(JSON.parse(message.body).message);
-	}
 
 	function setTextArea(data) {
 		var msg = $("#message-area").val() + "\n" + data;
