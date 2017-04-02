@@ -8,12 +8,16 @@ import cn.jinelei.live.model.nginx.vod.Vod;
 import cn.jinelei.live.utils.handler.EntityHandler;
 import cn.jinelei.live.utils.net.HttpTools;
 import cn.jinelei.live.utils.rtmp.RTMPCacheManager;
+import org.aspectj.lang.annotation.Around;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,9 +45,22 @@ public class STOMPController {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private SimpMessageSendingOperations messaging;
+
     @MessageMapping("/msg")
-    public void handleMessage(String msg){
+    @SendTo("/topic/msg")
+    public String handleMessage(String msg) {
         logger.debug(msg);
+        logger.debug("send msg");
+        messaging.convertAndSend("/topic/msg","this message from server");
+        return "recived msg: " + msg;
+    }
+
+    @SubscribeMapping("/msg")
+    public String subscriptRoom() {
+        logger.debug("handle scription room");
+        return "room";
     }
 
 }

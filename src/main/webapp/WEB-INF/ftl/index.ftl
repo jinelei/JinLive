@@ -28,7 +28,7 @@
 
 	</style>
 	<script src="js/jquery-3.2.0.min.js"></script>
-	<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+	<script src="js/sockjs-0.3.min.js"></script>
 	<script src="js/stomp.js"></script>
 </head>
 <body>

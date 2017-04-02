@@ -3,6 +3,9 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Demo: play HLS video</title>
+	<script src="js/sockjs.min.js"></script>
+	<script src="js/stomp.js"></script>
+	<script src="js/jquery-3.2.0.min.js"></script>
 </head>
 <body>
 <div id="main_container">
@@ -11,7 +14,7 @@
 	<div>
 		<textarea style="width: 200px;height: 600px;" id="message-area"></textarea>
 		<div style="width: 200px;height: 50px;">
-			<input type="text" id="msg" name="name"/>
+			<input type="text" onkeypress="getKey()" id="msg" name="name"/>
 			<input type="submit" id="msg_submit" name="Submit"/>
 		</div>
 	</div>
@@ -28,14 +31,15 @@
 	var stream_id = $("#stream_id").val();
 	//	console.log("server_ip: " + server_ip);
 	var live_stream_url = "http://" + server_ip + "/live/" + stream_id + "/index.m3u8";
-//		var live_stream_url = "rtmp://" + server_ip + ":1935/live/" + stream_id;
-		console.log(live_stream_url);
+	//		var live_stream_url = "rtmp://" + server_ip + ":1935/live/" + stream_id;
+	console.log(live_stream_url);
 	var player = cyberplayer("playercontainer").setup({
 		width: 854,
 		height: 480,
 		stretching: "uniform",
 		file: live_stream_url,
-		autostart: true,
+		autostart: false,
+//		autostart: true,
 //		repeat: false,
 //		rtmp: {
 //			reconnecttime: 5, // rtmp直播的重连次数
@@ -46,35 +50,45 @@
 		ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey
 	});
 
-	//send bullet screen
-	var websocket_url = "ws://localhost:8080/live/websck";
-	var socket = new WebSocket(websocket_url);
-	socket.onopen = function () {
-		console.log("ws on load");
+	setTextArea("init");
+	var url = "http://" + window.location.host + "/live/msg";
+	var sock = SockJS(url);
+	var stomp = Stomp.over(sock);
+	stomp.connect('guest', 'guest', function (frame) {
+		console.log('*****  Connected  *****');
+//		stomp.subscribe("/app/jinmsg", subscribeHandler);
+		stomp.subscribe("/topic/msg", subscribeHandler);
+		setTextArea("subscribed");
+	});
+
+	function subscribeHandler(message) {
+		console.log('Received: ', message);
+		setTextArea(JSON.parse(message.body).message);
 	}
-	socket.onclose = function () {
-		console.log("ws on close");
-	}
-	socket.onerror = function (err) {
-		console.log("ws on error");
-		console.log(err);
-	}
-	socket.onmessage = function (event) {
-		console.log(event.data);
-		setTextArea(event.data);
-	}
-	function saySomething(str) {
-		socket.send(str);
-		setTextArea(str);
-	}
+
 	function setTextArea(data) {
 		var msg = $("#message-area").val() + "\n" + data;
 		$("#message-area").val(msg);
 	}
-	$("#msg_submit").on("click", function () {
+
+	function saySomething(msg) {
+		stomp.send("/app/msg", {'head': 'mine head'}, msg);
+	}
+
+	$("#msg_submit").on("click", submitInput);
+
+	function submitInput() {
 		var msg = $("#msg").val();
+		setTextArea(msg);
 		saySomething(msg);
-	})
+		$("#msg").val("");
+	}
+
+	function getKey() {
+		if (event.keyCode == 13) {
+			submitInput();
+		}
+	}
 
 </script>
 </body>
