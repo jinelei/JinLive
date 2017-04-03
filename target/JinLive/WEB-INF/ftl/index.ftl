@@ -27,36 +27,38 @@
 		}
 
 	</style>
-	<script src="js/jquery-3.2.0.min.js"></script>
-	<script src="js/sockjs-0.3.min.js"></script>
-	<script src="js/stomp.js"></script>
+	<script src="${tomcat_proxy_server_ip}/${application_name}/js/jquery-3.2.0.min.js"></script>
+	<script src="${tomcat_proxy_server_ip}/${application_name}/js/sockjs.min.js"></script>
+	<script src="${tomcat_proxy_server_ip}/${application_name}/js/stomp.js"></script>
 </head>
 <body>
+
+
 <div id="header">
 	<h2>FreeMarker Spring MVC Hello World</h2>
 </div>
 <div id="content">
-    <#list vodStreams as vodstream>
-        <div class="item" id="${vodstream.name}">
-            <div class="item_content">
-            </div>
-            <p class="item_title">
-            ${vodstream.name}
-            </p>
-        </div>
-    </#list>
-    <#list liveStreams as livestream>
-        <div class="item" id="${livestream.name}">
-            <div class="item_content">
-            </div>
-            <p class="item_title">
-            ${livestream.name}
-            </p>
-        </div>
-    </#list>
+<#list vodStreams as vodstream>
+	<div class="item" id="${vodstream.name}">
+		<div class="item_content">
+		</div>
+		<p class="item_title">
+        ${vodstream.name}
+		</p>
+	</div>
+</#list>
+<#list liveStreams as livestream>
+	<div class="item" id="${livestream.name}">
+		<div class="item_content">
+		</div>
+		<p class="item_title">
+        ${livestream.name}
+		</p>
+	</div>
+</#list>
 </div>
 <div hidden>
-	<form action="/live/room" method="post">
+	<form action="${base}/room" method="post">
 		<input type="text" id="stream_id" name="stream_id"/>
 		<input type="submit" id="submit"/>
 	</form>
@@ -64,11 +66,15 @@
 
 <script>
 
-    $(".item").on("click",function () {
-        var id = $(this).attr("id");
-        $("#stream_id").val(id);
-        $("#submit").click();
-    })
+	$(".item").on("click", function () {
+		var id = $(this).attr("id");
+		$("#stream_id").val(id);
+		$("#submit").click();
+	})
+
+	var app = "${application_name}";
+	console.log(app);
+	console.log(asdf)
 
 </script>
 

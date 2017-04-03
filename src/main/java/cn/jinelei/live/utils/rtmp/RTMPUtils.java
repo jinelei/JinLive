@@ -35,8 +35,9 @@ public class RTMPUtils {
     private static ExecutorService executor = Executors.newCachedThreadPool();
 
     public RTMP getRTMPInfoFromServer() {
-        String url = environment.getProperty("server_ip");
-        String statUrl = String.format("http://%s/stat", url);
+        String url = environment.getProperty("nginx_server_ip");
+//        String url = "localhost:80";
+        String statUrl = String.format("%s/stat", url);
         RTMP rtmp = entityHandler.handleEntity(httpTools.getEntity(statUrl));
         return rtmp;
     }

@@ -47,10 +47,18 @@
     <!--freemarker -->
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
           id="freeMarkerViewResolver"
+          p:viewClass="cn.jinelei.live.config.MyFreeMarkerView"
+          p:contentType="text/html;charset=UTF-8"
           p:order="1"
+          p:exposeRequestAttributes="true"
+          p:exposeSessionAttributes="true"
+          p:exposePathVariables="true"
+          p:exposeSpringMacroHelpers="true"
+          p:requestContextAttribute="request"
           p:cache="true"
           p:suffix=".ftl"
-          p:prefix=""/>
+          p:prefix="">
+    </bean>
 
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
           p:templateLoaderPath="/WEB-INF/ftl/"/>
