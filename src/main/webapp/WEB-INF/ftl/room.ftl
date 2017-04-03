@@ -50,14 +50,13 @@
 		ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey
 	});
 
-	var url = "http://" + window.location.host + "/live/msg";
+	var url = "http://" + window.location.host + "/live/msgservice";
 	var sock = SockJS(url);
 	var stomp = Stomp.over(sock);
 	stomp.connect({}, function (frame) {
-//		stomp.connect('guest', 'guest', function (frame) {
-		stomp.subscribe("/topic/msg",function (message) {
+		stomp.subscribe("/topic/msg/"+stream_id, function (message) {
 			console.log('Received: ', message);
-			setTextArea(JSON.parse(message.body).message);
+			setTextArea(message.body);
 		});
 		setTextArea("connected");
 	});
@@ -68,14 +67,14 @@
 	}
 
 	function saySomething(msg) {
-		stomp.send("/app/msg", {'head': 'mine head'}, msg);
+		stomp.send("/app/msg", {'room_id':stream_id}, msg);
 	}
 
 	$("#msg_submit").on("click", submitInput);
 
 	function submitInput() {
 		var msg = $("#msg").val();
-		setTextArea(msg);
+//		setTextArea(msg);
 		saySomething(msg);
 		$("#msg").val("");
 	}

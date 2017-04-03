@@ -14,7 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -46,21 +49,17 @@ public class STOMPController {
     }
 
     @MessageMapping("/msg")
-    @SendTo("/topic/msg")
-    public String handleMessage(String msg) {
-        logger.debug("load msg: " + msg);
-        return "recived msg: " + msg;
+//    @SendTo("/topic/msg")
+    public void handleMessage(@Headers Map<String, Object> headers, @Payload String msg) {
+        Map<String, Object> map = (Map<String, Object>) headers.get("nativeHeaders");
+        String room_id = (String) ((List<String>) map.get("room_id")).get(0);
+        logger.debug("room_id", room_id);
+        template.convertAndSend("/topic/msg/" + room_id, "return: " + msg, headers);
     }
-
-//    @SubscribeMapping("/msg")
-//    public String subscriptRoom() {
-//        logger.debug("handle scription room");
-//        return "room";
-//    }
 
     @MessageMapping("/message")
     @SendToUser("/message")
-    public String userMessage(String msg){
+    public String userMessage(String msg) {
         return msg;
     }
 
