@@ -27,9 +27,9 @@
 		}
 
 	</style>
-	<script src="${tomcat_proxy_server_ip}/${application_name}/js/jquery-3.2.0.min.js"></script>
-	<script src="${tomcat_proxy_server_ip}/${application_name}/js/sockjs.min.js"></script>
-	<script src="${tomcat_proxy_server_ip}/${application_name}/js/stomp.js"></script>
+	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
+	<script src="${nginx_server_ip}/js/sockjs.min.js"></script>
+	<script src="${nginx_server_ip}/js/stomp.js"></script>
 </head>
 <body>
 
