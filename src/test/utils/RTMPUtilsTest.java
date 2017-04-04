@@ -23,8 +23,6 @@ public class RTMPUtilsTest {
     @Autowired
     private RTMPUtils rtmpUtils;
 
-//    private ApplicationContext applicationContext;
-
     @Test
     public void getRTMPInfoFromServer() {
         RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
@@ -32,9 +30,11 @@ public class RTMPUtilsTest {
         assert rtmp != null;
     }
 
-//    @Override
-//    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-//        this.applicationContext = applicationContext;
-//    }
+    @Test
+    public void saveScreenShot(){
+        RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
+        assert rtmp != null;
+        rtmpUtils.getScreenShotFromLiveStream(rtmpUtils.getLiveStreamFromRTMP(rtmp));
+    }
 
 }
