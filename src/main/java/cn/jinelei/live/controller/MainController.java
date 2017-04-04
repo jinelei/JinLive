@@ -10,6 +10,7 @@ import cn.jinelei.live.utils.rtmp.RTMPCacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+
 
 
 /**
@@ -43,9 +45,14 @@ public class MainController {
     @Autowired
     private SimpMessagingTemplate template;
 
+
+    @Value("${tomcat_server_ip}")
+    private String tomcat_server_ip;
+
     @RequestMapping(value = {"/index", "/"})
     public String index(ModelMap model) {
         logger.debug("Current Method Name: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+        logger.debug(tomcat_server_ip);
         RTMP rtmp = rtmpCacheManager.getRTMP();
         List<Application> applicationList = rtmp.getServer().getApplications();
         applicationList.forEach((application -> {

@@ -27,9 +27,9 @@
 		}
 
 	</style>
-	<script src="${tomcat_proxy_server_ip}/${application_name}/js/jquery-3.2.0.min.js"></script>
-	<script src="${tomcat_proxy_server_ip}/${application_name}/js/sockjs.min.js"></script>
-	<script src="${tomcat_proxy_server_ip}/${application_name}/js/stomp.js"></script>
+	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
+	<script src="${nginx_server_ip}/js/sockjs.min.js"></script>
+	<script src="${nginx_server_ip}/js/stomp.js"></script>
 </head>
 <body>
 
@@ -58,7 +58,7 @@
 </#list>
 </div>
 <div hidden>
-	<form action="${base}/room" method="post">
+	<form action="${tomcat_proxy_server_ip}/${application_name}/room" method="post">
 		<input type="text" id="stream_id" name="stream_id"/>
 		<input type="submit" id="submit"/>
 	</form>
@@ -71,10 +71,6 @@
 		$("#stream_id").val(id);
 		$("#submit").click();
 	})
-
-	var app = "${application_name}";
-	console.log(app);
-	console.log(asdf)
 
 </script>
 

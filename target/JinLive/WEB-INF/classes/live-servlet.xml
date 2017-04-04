@@ -10,18 +10,9 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="cn.jinelei.live"/>
     <context:component-scan base-package= "cn.jinelei.live.websocket"/>
-    <!--<mvc:default-servlet-handler/>-->
     <task:annotation-driven/>
-
     <!--aop-->
     <aop:aspectj-autoproxy/>
-
-    <!--mapping resources-->
-    <mvc:resources mapping="/css/**" location="classpath:script/css/"/>
-    <mvc:resources mapping="/js/**" location="classpath:script/js/"/>
-    <mvc:resources mapping="videos/**" location="classpath:media/videos/"/>
-    <mvc:resources mapping="/images/**" location="classpath:media/images/"/>
-
 
     <!--cache support-->
     <!--<cache:annotation-driven cache-manager="cacheManager"/>-->
@@ -33,11 +24,9 @@
     <!--<property name="transactionAware" value="true"/>-->
     <!--</bean>-->
 
-
     <context:property-placeholder file-encoding="utf8"
                                   location="classpath:/application.properties"
                                   ignore-unresolvable="true"/>
-
 
     <bean class="cn.jinelei.live.utils.rtmp.RTMPCacheManager" id="rtmpCache" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.rtmp.RTMPUtils" id="rtmpUtils" scope="singleton"/>
@@ -73,28 +62,16 @@
     <!--aop bean-->
     <bean class="cn.jinelei.live.logger.MainAopLogger" id="aopLogger"/>
 
-    <!--<aop:config>-->
-        <!--<aop:aspect ref="mineLogger" id="controllerLogger">-->
-            <!--<aop:pointcut id="log" expression="execution(* cn.jinelei.live.controller.*.*(..))"/>-->
-            <!--<aop:before method="before" pointcut-ref="log"/>-->
-            <!--<aop:after method="after" pointcut-ref="log"/>-->
-            <!--<aop:around method="around" pointcut-ref="log"/>-->
-            <!--<aop:after-returning method="afterReturn" pointcut-ref="log" arg-names="joinPoint,reValue" returning="reValue"/>-->
-        <!--</aop:aspect>-->
-    <!--</aop:config>-->
-
-
     <!--fileupload-->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-          p:defaultEncoding="utf-8"
-          p:maxUploadSize="52428880"
-          p:uploadTempDir="upload"
-    />
-
+    <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"-->
+          <!--p:defaultEncoding="utf-8"-->
+          <!--p:maxUploadSize="52428880"-->
+          <!--p:uploadTempDir="classpath:/upload"-->
+    <!--/>-->
 
     <!--config stomp-->
     <websocket:message-broker application-destination-prefix="/app">
-        <websocket:stomp-endpoint path="/msgservice"><websocket:sockjs/></websocket:stomp-endpoint>
+        <websocket:stomp-endpoint path="/msgservice" allowed-origins="*"><websocket:sockjs/></websocket:stomp-endpoint>
         <websocket:simple-broker prefix="/topic"/>
     </websocket:message-broker>
 

@@ -1,8 +1,3 @@
-package utils;
-
-import cn.jinelei.live.model.nginx.RTMP;
-import cn.jinelei.live.utils.rtmp.RTMPUtils;
-import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,47 +11,26 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.FileNotFoundException;
-
-
 /**
  * Created by jinelei on 17-4-3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:live-servlet.xml"})
 @WebAppConfiguration
-public class RTMPUtilsTest {
-
-    private static final Logger logger = LoggerFactory.getLogger(RTMPUtilsTest.class);
+public class MVCMockTest {
+    private static final Logger logger = LoggerFactory.getLogger(MVCMockTest.class);
     @Autowired
     private WebApplicationContext wac;
     private MockMvc mockMvc;
-
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
-    @Autowired
-    private RTMPUtils rtmpUtils;
-
     @Test
-    public void getRTMPInfoFromServer() {
-        RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
-        logger.debug(rtmp.toString());
-        assert rtmp != null;
-    }
-
-    @Test
-    public void saveScreenShot() {
-        RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
-        assert rtmp != null;
-        rtmpUtils.getScreenShotFromLiveStream(rtmpUtils.getLiveStreamFromRTMP(rtmp));
-    }
-
-    @Test
-    public void test() throws FileNotFoundException {
-        Gson gson = new Gson();
+    public void test(){
+        String app_name = wac.getEnvironment().getProperty("application_name");
+        logger.debug(app_name);
     }
 
 }
