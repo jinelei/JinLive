@@ -23,10 +23,10 @@
   </filter-mapping>
 
   <!--test servlet-->
-  <servlet>
-    <servlet-name>mine-servlet</servlet-name>
-    <servlet-class>cn.jinelei.live.test.Servlet</servlet-class>
-  </servlet>
+  <!--<servlet>-->
+    <!--<servlet-name>mine-servlet</servlet-name>-->
+    <!--<servlet-class>cn.jinelei.live.test.Servlet</servlet-class>-->
+  <!--</servlet>-->
 
   <!--main servlet-->
   <servlet>
@@ -41,13 +41,13 @@
 
   <servlet-mapping>
     <servlet-name>live-servlet</servlet-name>
-    <url-pattern>/live/*</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>mine-servlet</servlet-name>
-    <url-pattern>/test</url-pattern>
-  </servlet-mapping>
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>mine-servlet</servlet-name>-->
+    <!--<url-pattern>/test</url-pattern>-->
+  <!--</servlet-mapping>-->
 
 
 </web-app>

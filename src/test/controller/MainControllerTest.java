@@ -48,7 +48,7 @@ public class MainControllerTest {
         rtmpCacheManager.setRtmpMap(rtmp);
         mockMvc.perform(get("/index"))
                 .andExpect(status().isOk())
-                .andDo(print())
+//                .andDo(print())
 //                .andExpect(model().attribute("message", "Hello Reader!"))
                 .andExpect(view().name("index"));
     }
@@ -57,7 +57,7 @@ public class MainControllerTest {
     public void room() throws Exception {
         mockMvc.perform(post("/room")
                 .param("stream_id", "video0"))
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(view().name("room"));
     }
 

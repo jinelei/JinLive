@@ -7,21 +7,69 @@
 	<script src="${nginx_server_ip}/js/stomp.js"></script>
 	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
 	<script src="${nginx_server_ip}/js/player/cyberplayer.js"></script>
+	<style>
+		#room_matrix{
+			width:100%;
+			height:100%;
+			background-color: aliceblue;
+			position: relative;
+		}
+		#side-box{
+			position: fixed;
+			width:30px;
+			height:100%;
+			background-color: burlywood;
+		}
+		#main_container{
+			position: relative;
+			top:0;
+			left:0;
+			right:0;
+		}
+		#player_box{
+			position: relative;
+			margin-right: 400px;
+			top:0;
+			left:0;
+			right:0;
+            background-color: darkolivegreen;
+		}
+		#chat_room_box{
+			position: fixed;
+			top:0;
+			left:0;
+			right:0;
+            background-color: darkcyan;
+		}
+		#chat_content_box{
+			position: relative;
+			width:100%;
+			height:90%;
+		}
+        #chat_input_box{
+	        position: relative;
+	        width:100%;
+	        height:10%;
+	        bottom:0;
+        }
+
+	</style>
 </head>
 <body>
-<div id="main_container">
-	<div id="playercontainer"></div>
-
-	<h5>${nginx_server_ip}</h5>
-
-	<div>
-		<textarea style="width: 200px;height: 600px;" id="message-area"></textarea>
-		<div style="width: 200px;height: 50px;">
-			<input type="text" onkeypress="getKey()" id="msg" name="name"/>
-			<input type="submit" id="msg_submit" name="Submit"/>
+<div id="room_matrix">
+	<div id="side-box"></div>
+	<div id="main_container">
+		<div id="player_box"></div>
+		<div id="chat_room_box">
+            <div id="chat_content_box">
+                <textarea id="chat_content_area"></textarea>
+            </div>
+			<div id="chat_input_box">
+				<input type="text" onkeypress="getKey()" id="msg" name="name"/>
+				<input type="submit" id="msg_submit" name="Submit"/>
+			</div>
 		</div>
 	</div>
-
 </div>
 
 
@@ -33,7 +81,7 @@
 	var tomcat_server_ip = "${tomcat_server_ip}";
 	var live_stream_url = nginx_server_ip + "/live/" + stream_id + "/index.m3u8";
 	console.log(live_stream_url);
-	var player = cyberplayer("playercontainer").setup({
+	var player = cyberplayer("player_box").setup({
 		width: 854,
 		height: 480,
 		stretching: "uniform",
