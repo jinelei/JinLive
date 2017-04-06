@@ -22,15 +22,16 @@ public class MVCMockTest {
     @Autowired
     private WebApplicationContext wac;
     private MockMvc mockMvc;
+
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
     @Test
-    public void test(){
-        String app_name = wac.getEnvironment().getProperty("application_name");
-        logger.debug(app_name);
+    public void test() {
+//        Object object = wac.getBean("sqlSessionFactory");
+//        assert object == null;
     }
 
 }

@@ -59,7 +59,7 @@
 </div>
 <div hidden>
 	<form action="${tomcat_proxy_server_ip}/${application_name}/room" method="post">
-		<input type="text" id="stream_id" name="stream_id"/>
+		<input type="text" id="stream_key" name="stream_key"/>
 		<input type="submit" id="submit"/>
 	</form>
 </div>
@@ -68,7 +68,7 @@
 
 	$(".item").on("click", function () {
 		var id = $(this).attr("id");
-		$("#stream_id").val(id);
+		$("#stream_key").val(id);
 		$("#submit").click();
 	})
 

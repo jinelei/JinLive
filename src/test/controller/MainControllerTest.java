@@ -56,7 +56,7 @@ public class MainControllerTest {
     @Test
     public void room() throws Exception {
         mockMvc.perform(post("/room")
-                .param("stream_id", "video0"))
+                .param("stream_key", "video0"))
 //                .andDo(print())
                 .andExpect(view().name("room"));
     }

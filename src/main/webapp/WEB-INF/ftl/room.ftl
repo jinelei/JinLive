@@ -109,11 +109,11 @@
 
 <script type="text/javascript">
 	var nginx_server_ip = "${nginx_server_ip}";
-	var stream_id = "${stream_id}";
+	var stream_key = "${stream_key}";
 	var app_name = "${application_name}";
 	var tomcat_proxy_server_ip = "${tomcat_proxy_server_ip}";
 	var tomcat_server_ip = "${tomcat_server_ip}";
-	var live_stream_url = nginx_server_ip + "/live/" + stream_id + "/index.m3u8";
+	var live_stream_url = nginx_server_ip + "/live/" + stream_key + "/index.m3u8";
 	var webSocketUrl = tomcat_server_ip + "/" + app_name + "/msgservice";
 
 	var player_box = $("#player_box");
@@ -140,7 +140,7 @@
 		ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey
 	});
 	stomp.connect({}, function (frame) {
-		stomp.subscribe("/topic/msg/" + stream_id, function (message) {
+		stomp.subscribe("/topic/msg/" + stream_key, function (message) {
 			console.log('Received: ', message);
 			setTextArea(message.body);
 		});
@@ -240,7 +240,7 @@
 		$("#chat_content_area").val(msg);
 	}
 	function saySomething(msg) {
-		stomp.send("/app/msg", {'room_id': stream_id}, msg);
+		stomp.send("/app/msg", {'room_id': stream_key}, msg);
 	}
 	function submitInput() {
 		var msg = $("#msg").val();

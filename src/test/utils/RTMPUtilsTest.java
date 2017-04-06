@@ -2,7 +2,6 @@ package utils;
 
 import cn.jinelei.live.model.nginx.RTMP;
 import cn.jinelei.live.utils.rtmp.RTMPUtils;
-import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.FileNotFoundException;
-import java.util.UUID;
 
 
 /**
@@ -53,12 +51,6 @@ public class RTMPUtilsTest {
         RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
         assert rtmp != null;
         rtmpUtils.getScreenShotFromLiveStream(rtmpUtils.getLiveStreamFromRTMP(rtmp));
-    }
-
-    @Test
-    public void test() throws FileNotFoundException {
-        UUID uuid = UUID.randomUUID();
-        System.out.println(uuid);
     }
 
 }

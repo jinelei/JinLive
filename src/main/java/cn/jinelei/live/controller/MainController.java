@@ -19,6 +19,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
@@ -44,6 +45,8 @@ public class MainController {
     private Environment environment;
     @Autowired
     private SimpMessagingTemplate template;
+    @Autowired
+    private WebApplicationContext wac;
 
 
     @Value("${tomcat_server_ip}")
@@ -80,16 +83,18 @@ public class MainController {
 
     @RequestMapping("/test")
     public String test() {
-        template.convertAndSend("/topic/msg","asdasdf");
+//        template.convertAndSend("/topic/msg","asdasdf");
+        Object object = wac.getBean("sqlSessionFactory");
+        assert object == null;
         return "fileupload";
     }
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
-    public String roomPost(ModelMap model, @RequestParam(value = "stream_id") String streamId) {
-        logger.debug("stream_id: " + streamId);
+    public String roomPost(ModelMap model, @RequestParam(value = "stream_key") String streamKey) {
+        logger.debug("stream_key: " + streamKey);
         String url = environment.getProperty("server_ip");
         model.addAttribute("server_ip", url);
-        model.addAttribute("stream_id", streamId);
+        model.addAttribute("stream_key", streamKey);
         return "room";
     }
 
