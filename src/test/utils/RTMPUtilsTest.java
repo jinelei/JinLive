@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.FileNotFoundException;
+import java.util.UUID;
 
 
 /**
@@ -56,7 +57,8 @@ public class RTMPUtilsTest {
 
     @Test
     public void test() throws FileNotFoundException {
-        Gson gson = new Gson();
+        UUID uuid = UUID.randomUUID();
+        System.out.println(uuid);
     }
 
 }

@@ -13,6 +13,10 @@
 			padding: 0;
 		}
 
+		body{
+			background-color: #d4d4d4;
+		}
+
 		.main-contariner {
 			position: relative;
 			width: 100%;

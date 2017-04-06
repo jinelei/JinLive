@@ -32,6 +32,7 @@
     <bean class="cn.jinelei.live.utils.rtmp.RTMPUtils" id="rtmpUtils" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.net.HttpTools" id="httpTools" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.handler.EntityHandler" id="jinStreamHandler" scope="singleton"/>
+    <bean class="cn.jinelei.live.utils.user.UserUtils" id="userUtils" scope="singleton"/>
 
     <!--freemarker -->
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
