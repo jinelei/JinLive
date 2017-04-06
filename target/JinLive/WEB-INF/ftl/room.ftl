@@ -8,68 +8,90 @@
 	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
 	<script src="${nginx_server_ip}/js/player/cyberplayer.js"></script>
 	<style>
-		#room_matrix{
-			width:100%;
-			height:100%;
-			background-color: aliceblue;
-			position: relative;
+		* {
+			margin: 0;
+			padding: 0;
 		}
-		#side-box{
-			position: fixed;
-			width:30px;
-			height:100%;
-			background-color: burlywood;
-		}
-		#main_container{
-			position: relative;
-			top:0;
-			left:0;
-			right:0;
-		}
-		#player_box{
-			position: relative;
-			margin-right: 400px;
-			top:0;
-			left:0;
-			right:0;
-            background-color: darkolivegreen;
-		}
-		#chat_room_box{
-			position: fixed;
-			top:0;
-			left:0;
-			right:0;
-            background-color: darkcyan;
-		}
-		#chat_content_box{
-			position: relative;
-			width:100%;
-			height:90%;
-		}
-        #chat_input_box{
-	        position: relative;
-	        width:100%;
-	        height:10%;
-	        bottom:0;
-        }
 
+		.main-contariner {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+
+		.side-box {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			background-color: #7E5005;
+			z-index: 0;
+		}
+
+		.side-box-open {
+			width: 230px;
+		}
+
+		.side-box-close {
+			width: 40px;
+		}
+
+		.player-box {
+			overflow: hidden;
+			z-index: 0;
+			background-color: #C5820D;
+			position: relative;
+			height:400px;
+			right:10px;
+		}
+		.player-box-chat-open{
+			margin-right: 370px;
+		}
+		.player-box-chat-close{
+			margin-right: 30px;
+		}
+		.player-box-side-open{
+			margin-left:250px;
+		}
+		.player-box-side-close{
+			margin-left: 50px;
+		}
+
+		.chat-box {
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 0;
+			background-color: blueviolet;
+		}
+
+		.chat-box-open {
+			width: 370px;
+		}
+
+		.chat-box-close {
+			width: 30px;
+		}
 	</style>
 </head>
 <body>
-<div id="room_matrix">
-	<div id="side-box"></div>
-	<div id="main_container">
-		<div id="player_box"></div>
-		<div id="chat_room_box">
-            <div id="chat_content_box">
-                <textarea id="chat_content_area"></textarea>
-            </div>
-			<div id="chat_input_box">
-				<input type="text" onkeypress="getKey()" id="msg" name="name"/>
-				<input type="submit" id="msg_submit" name="Submit"/>
-			</div>
+<div id="main_container" class="main-contariner">
+
+	<div id="side_box" class="side-box side-box-open"></div>
+	<div id="player_box" class="player-box player-box-chat-open player-box-side-open">
+        <div id="player"></div>
+	</div>
+	<div id="chat_box" class="chat-box-open chat-box">
+		<div id="chat_content_box">
+			<textarea id="chat_content_area"></textarea>
+		</div>
+		<div id="chat_input_box">
+			<input type="text" onkeypress="getKey()" id="msg" name="name"/>
+			<input type="submit" id="msg_submit" name="Submit"/>
 		</div>
 	</div>
+
 </div>
 
 
@@ -81,7 +103,7 @@
 	var tomcat_server_ip = "${tomcat_server_ip}";
 	var live_stream_url = nginx_server_ip + "/live/" + stream_id + "/index.m3u8";
 	console.log(live_stream_url);
-	var player = cyberplayer("player_box").setup({
+	var player = cyberplayer("player").setup({
 		width: 854,
 		height: 480,
 		stretching: "uniform",
