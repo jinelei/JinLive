@@ -1,30 +1,19 @@
 package cn.jinelei.live.dao;
 
-import cn.jinelei.live.model.Category;
-import cn.jinelei.live.model.CategoryExample;
+import cn.jinelei.live.model.data.Category;
+import cn.jinelei.live.model.data.CategoryExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface CategoryMapper {
-    int countByExample(CategoryExample example);
+public interface CategoryMapper extends Mapper<Category> {
+    long countByExample(CategoryExample example);
 
     int deleteByExample(CategoryExample example);
 
-    int deleteByPrimaryKey(Integer categoryId);
-
-    int insert(Category record);
-
-    int insertSelective(Category record);
-
     List<Category> selectByExample(CategoryExample example);
-
-    Category selectByPrimaryKey(Integer categoryId);
 
     int updateByExampleSelective(@Param("record") Category record, @Param("example") CategoryExample example);
 
     int updateByExample(@Param("record") Category record, @Param("example") CategoryExample example);
-
-    int updateByPrimaryKeySelective(Category record);
-
-    int updateByPrimaryKey(Category record);
 }

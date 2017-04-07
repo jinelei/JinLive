@@ -1,6 +1,6 @@
 import cn.jinelei.live.dao.UserMapper;
 import cn.jinelei.live.exception.UserException;
-import cn.jinelei.live.model.User;
+import cn.jinelei.live.model.data.User;
 import cn.jinelei.live.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -110,11 +110,11 @@ public class UserServiceTest {
 //        userService.getAllUserInactive().forEach(user -> System.out.println(user));
 //        userService.getAllUserDelete().forEach(user -> System.out.println(user));
 
-//        userService.getAllUser(0,1).forEach(user -> System.out.println(user));
+        userService.getAllUser(0,2).forEach(user -> System.out.println(user));
 //        UserExample example = new UserExample();
 //        example.createCriteria().andUserAgeEqualTo(22);
 //        userMapper.selectByExample(example).forEach(user -> System.out.println(user));
-        logger.debug(String.valueOf(userMapper.selectByPrimaryKey(4)));
+//        logger.debug(String.valueOf(userMapper.selectByPrimaryKey(4)));
     }
 
 }

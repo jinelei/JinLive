@@ -1,8 +1,8 @@
 import cn.jinelei.live.dao.RoomMapper;
 import cn.jinelei.live.dao.UserMapper;
-import cn.jinelei.live.model.Room;
-import cn.jinelei.live.model.RoomExample;
-import cn.jinelei.live.model.User;
+import cn.jinelei.live.model.data.Room;
+import cn.jinelei.live.model.data.RoomExample;
+import cn.jinelei.live.model.data.User;
 import cn.jinelei.live.service.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

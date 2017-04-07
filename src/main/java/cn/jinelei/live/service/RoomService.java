@@ -1,7 +1,7 @@
 package cn.jinelei.live.service;
 
-import cn.jinelei.live.model.Room;
-import cn.jinelei.live.model.User;
+import cn.jinelei.live.model.data.Room;
+import cn.jinelei.live.model.data.User;
 
 import java.util.List;
 

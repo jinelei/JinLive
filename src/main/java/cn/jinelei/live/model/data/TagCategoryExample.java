@@ -1,16 +1,16 @@
-package cn.jinelei.live.model;
+package cn.jinelei.live.model.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TagExample {
+public class TagCategoryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TagExample() {
+    public TagCategoryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,6 +104,66 @@ public class TagExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andTagCategoryIdIsNull() {
+            addCriterion("tag_category_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdIsNotNull() {
+            addCriterion("tag_category_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdEqualTo(Integer value) {
+            addCriterion("tag_category_id =", value, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdNotEqualTo(Integer value) {
+            addCriterion("tag_category_id <>", value, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdGreaterThan(Integer value) {
+            addCriterion("tag_category_id >", value, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("tag_category_id >=", value, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdLessThan(Integer value) {
+            addCriterion("tag_category_id <", value, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("tag_category_id <=", value, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdIn(List<Integer> values) {
+            addCriterion("tag_category_id in", values, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdNotIn(List<Integer> values) {
+            addCriterion("tag_category_id not in", values, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdBetween(Integer value1, Integer value2) {
+            addCriterion("tag_category_id between", value1, value2, "tagCategoryId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTagCategoryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("tag_category_id not between", value1, value2, "tagCategoryId");
+            return (Criteria) this;
+        }
+
         public Criteria andTagIdIsNull() {
             addCriterion("tag_id is null");
             return (Criteria) this;
@@ -164,78 +224,63 @@ public class TagExample {
             return (Criteria) this;
         }
 
-        public Criteria andTagNameIsNull() {
-            addCriterion("tag_name is null");
+        public Criteria andCategoryIdIsNull() {
+            addCriterion("category_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameIsNotNull() {
-            addCriterion("tag_name is not null");
+        public Criteria andCategoryIdIsNotNull() {
+            addCriterion("category_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameEqualTo(String value) {
-            addCriterion("tag_name =", value, "tagName");
+        public Criteria andCategoryIdEqualTo(Integer value) {
+            addCriterion("category_id =", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameNotEqualTo(String value) {
-            addCriterion("tag_name <>", value, "tagName");
+        public Criteria andCategoryIdNotEqualTo(Integer value) {
+            addCriterion("category_id <>", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameGreaterThan(String value) {
-            addCriterion("tag_name >", value, "tagName");
+        public Criteria andCategoryIdGreaterThan(Integer value) {
+            addCriterion("category_id >", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameGreaterThanOrEqualTo(String value) {
-            addCriterion("tag_name >=", value, "tagName");
+        public Criteria andCategoryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("category_id >=", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameLessThan(String value) {
-            addCriterion("tag_name <", value, "tagName");
+        public Criteria andCategoryIdLessThan(Integer value) {
+            addCriterion("category_id <", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameLessThanOrEqualTo(String value) {
-            addCriterion("tag_name <=", value, "tagName");
+        public Criteria andCategoryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("category_id <=", value, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameLike(String value) {
-            addCriterion("tag_name like", value, "tagName");
+        public Criteria andCategoryIdIn(List<Integer> values) {
+            addCriterion("category_id in", values, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameNotLike(String value) {
-            addCriterion("tag_name not like", value, "tagName");
+        public Criteria andCategoryIdNotIn(List<Integer> values) {
+            addCriterion("category_id not in", values, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameIn(List<String> values) {
-            addCriterion("tag_name in", values, "tagName");
+        public Criteria andCategoryIdBetween(Integer value1, Integer value2) {
+            addCriterion("category_id between", value1, value2, "categoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagNameNotIn(List<String> values) {
-            addCriterion("tag_name not in", values, "tagName");
-            return (Criteria) this;
-        }
-
-        public Criteria andTagNameBetween(String value1, String value2) {
-            addCriterion("tag_name between", value1, value2, "tagName");
-            return (Criteria) this;
-        }
-
-        public Criteria andTagNameNotBetween(String value1, String value2) {
-            addCriterion("tag_name not between", value1, value2, "tagName");
-            return (Criteria) this;
-        }
-
-        public Criteria andTagNameLikeInsensitive(String value) {
-            addCriterion("upper(tag_name) like", value.toUpperCase(), "tagName");
+        public Criteria andCategoryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("category_id not between", value1, value2, "categoryId");
             return (Criteria) this;
         }
     }

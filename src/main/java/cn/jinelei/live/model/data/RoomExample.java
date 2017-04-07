@@ -1,4 +1,4 @@
-package cn.jinelei.live.model;
+package cn.jinelei.live.model.data;
 
 import java.util.ArrayList;
 import java.util.List;

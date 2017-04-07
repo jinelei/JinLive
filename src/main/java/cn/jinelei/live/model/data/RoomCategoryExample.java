@@ -1,16 +1,16 @@
-package cn.jinelei.live.model;
+package cn.jinelei.live.model.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TagCategoryExample {
+public class RoomCategoryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TagCategoryExample() {
+    public RoomCategoryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,123 +104,123 @@ public class TagCategoryExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andTagCategoryIdIsNull() {
-            addCriterion("tag_category_id is null");
+        public Criteria andRoomCategoryIdIsNull() {
+            addCriterion("room_category_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdIsNotNull() {
-            addCriterion("tag_category_id is not null");
+        public Criteria andRoomCategoryIdIsNotNull() {
+            addCriterion("room_category_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdEqualTo(Integer value) {
-            addCriterion("tag_category_id =", value, "tagCategoryId");
+        public Criteria andRoomCategoryIdEqualTo(Integer value) {
+            addCriterion("room_category_id =", value, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdNotEqualTo(Integer value) {
-            addCriterion("tag_category_id <>", value, "tagCategoryId");
+        public Criteria andRoomCategoryIdNotEqualTo(Integer value) {
+            addCriterion("room_category_id <>", value, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdGreaterThan(Integer value) {
-            addCriterion("tag_category_id >", value, "tagCategoryId");
+        public Criteria andRoomCategoryIdGreaterThan(Integer value) {
+            addCriterion("room_category_id >", value, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("tag_category_id >=", value, "tagCategoryId");
+        public Criteria andRoomCategoryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("room_category_id >=", value, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdLessThan(Integer value) {
-            addCriterion("tag_category_id <", value, "tagCategoryId");
+        public Criteria andRoomCategoryIdLessThan(Integer value) {
+            addCriterion("room_category_id <", value, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdLessThanOrEqualTo(Integer value) {
-            addCriterion("tag_category_id <=", value, "tagCategoryId");
+        public Criteria andRoomCategoryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("room_category_id <=", value, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdIn(List<Integer> values) {
-            addCriterion("tag_category_id in", values, "tagCategoryId");
+        public Criteria andRoomCategoryIdIn(List<Integer> values) {
+            addCriterion("room_category_id in", values, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdNotIn(List<Integer> values) {
-            addCriterion("tag_category_id not in", values, "tagCategoryId");
+        public Criteria andRoomCategoryIdNotIn(List<Integer> values) {
+            addCriterion("room_category_id not in", values, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdBetween(Integer value1, Integer value2) {
-            addCriterion("tag_category_id between", value1, value2, "tagCategoryId");
+        public Criteria andRoomCategoryIdBetween(Integer value1, Integer value2) {
+            addCriterion("room_category_id between", value1, value2, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagCategoryIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("tag_category_id not between", value1, value2, "tagCategoryId");
+        public Criteria andRoomCategoryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("room_category_id not between", value1, value2, "roomCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdIsNull() {
-            addCriterion("tag_id is null");
+        public Criteria andRoomIdIsNull() {
+            addCriterion("room_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdIsNotNull() {
-            addCriterion("tag_id is not null");
+        public Criteria andRoomIdIsNotNull() {
+            addCriterion("room_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdEqualTo(Integer value) {
-            addCriterion("tag_id =", value, "tagId");
+        public Criteria andRoomIdEqualTo(Integer value) {
+            addCriterion("room_id =", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdNotEqualTo(Integer value) {
-            addCriterion("tag_id <>", value, "tagId");
+        public Criteria andRoomIdNotEqualTo(Integer value) {
+            addCriterion("room_id <>", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdGreaterThan(Integer value) {
-            addCriterion("tag_id >", value, "tagId");
+        public Criteria andRoomIdGreaterThan(Integer value) {
+            addCriterion("room_id >", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("tag_id >=", value, "tagId");
+        public Criteria andRoomIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("room_id >=", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdLessThan(Integer value) {
-            addCriterion("tag_id <", value, "tagId");
+        public Criteria andRoomIdLessThan(Integer value) {
+            addCriterion("room_id <", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdLessThanOrEqualTo(Integer value) {
-            addCriterion("tag_id <=", value, "tagId");
+        public Criteria andRoomIdLessThanOrEqualTo(Integer value) {
+            addCriterion("room_id <=", value, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdIn(List<Integer> values) {
-            addCriterion("tag_id in", values, "tagId");
+        public Criteria andRoomIdIn(List<Integer> values) {
+            addCriterion("room_id in", values, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdNotIn(List<Integer> values) {
-            addCriterion("tag_id not in", values, "tagId");
+        public Criteria andRoomIdNotIn(List<Integer> values) {
+            addCriterion("room_id not in", values, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdBetween(Integer value1, Integer value2) {
-            addCriterion("tag_id between", value1, value2, "tagId");
+        public Criteria andRoomIdBetween(Integer value1, Integer value2) {
+            addCriterion("room_id between", value1, value2, "roomId");
             return (Criteria) this;
         }
 
-        public Criteria andTagIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("tag_id not between", value1, value2, "tagId");
+        public Criteria andRoomIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("room_id not between", value1, value2, "roomId");
             return (Criteria) this;
         }
 

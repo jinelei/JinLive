@@ -1,136 +1,229 @@
-package cn.jinelei.live.model;
+package cn.jinelei.live.model.data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 public class User implements Serializable {
+    @Id
+    @Column(name = "user_id")
     private Integer userId;
 
+    @Column(name = "user_name")
     private String userName;
 
+    @Column(name = "user_nickname")
     private String userNickname;
 
+    @Column(name = "user_sex")
     private Integer userSex;
 
+    @Column(name = "user_age")
     private Integer userAge;
 
+    @Column(name = "user_phone")
     private String userPhone;
 
+    @Column(name = "user_height")
     private Integer userHeight;
 
+    @Column(name = "user_weight")
     private Integer userWeight;
 
+    @Column(name = "user_area")
     private Integer userArea;
 
+    @Column(name = "user_status")
     private Integer userStatus;
 
+    @Column(name = "user_treasure")
     private Integer userTreasure;
 
+    @Column(name = "user_passwd")
     private String userPasswd;
 
+    @Column(name = "user_email")
     private String userEmail;
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return user_id
+     */
     public Integer getUserId() {
         return userId;
     }
 
+    /**
+     * @param userId
+     */
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
+    /**
+     * @return user_name
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * @param userName
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     * @return user_nickname
+     */
     public String getUserNickname() {
         return userNickname;
     }
 
+    /**
+     * @param userNickname
+     */
     public void setUserNickname(String userNickname) {
         this.userNickname = userNickname;
     }
 
+    /**
+     * @return user_sex
+     */
     public Integer getUserSex() {
         return userSex;
     }
 
+    /**
+     * @param userSex
+     */
     public void setUserSex(Integer userSex) {
         this.userSex = userSex;
     }
 
+    /**
+     * @return user_age
+     */
     public Integer getUserAge() {
         return userAge;
     }
 
+    /**
+     * @param userAge
+     */
     public void setUserAge(Integer userAge) {
         this.userAge = userAge;
     }
 
+    /**
+     * @return user_phone
+     */
     public String getUserPhone() {
         return userPhone;
     }
 
+    /**
+     * @param userPhone
+     */
     public void setUserPhone(String userPhone) {
         this.userPhone = userPhone;
     }
 
+    /**
+     * @return user_height
+     */
     public Integer getUserHeight() {
         return userHeight;
     }
 
+    /**
+     * @param userHeight
+     */
     public void setUserHeight(Integer userHeight) {
         this.userHeight = userHeight;
     }
 
+    /**
+     * @return user_weight
+     */
     public Integer getUserWeight() {
         return userWeight;
     }
 
+    /**
+     * @param userWeight
+     */
     public void setUserWeight(Integer userWeight) {
         this.userWeight = userWeight;
     }
 
+    /**
+     * @return user_area
+     */
     public Integer getUserArea() {
         return userArea;
     }
 
+    /**
+     * @param userArea
+     */
     public void setUserArea(Integer userArea) {
         this.userArea = userArea;
     }
 
+    /**
+     * @return user_status
+     */
     public Integer getUserStatus() {
         return userStatus;
     }
 
+    /**
+     * @param userStatus
+     */
     public void setUserStatus(Integer userStatus) {
         this.userStatus = userStatus;
     }
 
+    /**
+     * @return user_treasure
+     */
     public Integer getUserTreasure() {
         return userTreasure;
     }
 
+    /**
+     * @param userTreasure
+     */
     public void setUserTreasure(Integer userTreasure) {
         this.userTreasure = userTreasure;
     }
 
+    /**
+     * @return user_passwd
+     */
     public String getUserPasswd() {
         return userPasswd;
     }
 
+    /**
+     * @param userPasswd
+     */
     public void setUserPasswd(String userPasswd) {
         this.userPasswd = userPasswd;
     }
 
+    /**
+     * @return user_email
+     */
     public String getUserEmail() {
         return userEmail;
     }
 
+    /**
+     * @param userEmail
+     */
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
     }

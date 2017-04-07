@@ -1,36 +1,60 @@
-package cn.jinelei.live.model;
+package cn.jinelei.live.model.data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
+@Table(name = "tag_category")
 public class TagCategory implements Serializable {
+    @Id
+    @Column(name = "tag_category_id")
     private Integer tagCategoryId;
 
+    @Column(name = "tag_id")
     private Integer tagId;
 
+    @Column(name = "category_id")
     private Integer categoryId;
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return tag_category_id
+     */
     public Integer getTagCategoryId() {
         return tagCategoryId;
     }
 
+    /**
+     * @param tagCategoryId
+     */
     public void setTagCategoryId(Integer tagCategoryId) {
         this.tagCategoryId = tagCategoryId;
     }
 
+    /**
+     * @return tag_id
+     */
     public Integer getTagId() {
         return tagId;
     }
 
+    /**
+     * @param tagId
+     */
     public void setTagId(Integer tagId) {
         this.tagId = tagId;
     }
 
+    /**
+     * @return category_id
+     */
     public Integer getCategoryId() {
         return categoryId;
     }
 
+    /**
+     * @param categoryId
+     */
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }

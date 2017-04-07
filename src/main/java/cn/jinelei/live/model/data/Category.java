@@ -1,36 +1,59 @@
-package cn.jinelei.live.model;
+package cn.jinelei.live.model.data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
 public class Category implements Serializable {
+    @Id
+    @Column(name = "category_id")
     private Integer categoryId;
 
+    @Column(name = "category_name")
     private String categoryName;
 
+    @Column(name = "category_introduce")
     private String categoryIntroduce;
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return category_id
+     */
     public Integer getCategoryId() {
         return categoryId;
     }
 
+    /**
+     * @param categoryId
+     */
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
+    /**
+     * @return category_name
+     */
     public String getCategoryName() {
         return categoryName;
     }
 
+    /**
+     * @param categoryName
+     */
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
+    /**
+     * @return category_introduce
+     */
     public String getCategoryIntroduce() {
         return categoryIntroduce;
     }
 
+    /**
+     * @param categoryIntroduce
+     */
     public void setCategoryIntroduce(String categoryIntroduce) {
         this.categoryIntroduce = categoryIntroduce;
     }

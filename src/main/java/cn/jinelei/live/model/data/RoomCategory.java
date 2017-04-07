@@ -1,36 +1,60 @@
-package cn.jinelei.live.model;
+package cn.jinelei.live.model.data;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
+@Table(name = "room_category")
 public class RoomCategory implements Serializable {
+    @Id
+    @Column(name = "room_category_id")
     private Integer roomCategoryId;
 
+    @Column(name = "room_id")
     private Integer roomId;
 
+    @Column(name = "category_id")
     private Integer categoryId;
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * @return room_category_id
+     */
     public Integer getRoomCategoryId() {
         return roomCategoryId;
     }
 
+    /**
+     * @param roomCategoryId
+     */
     public void setRoomCategoryId(Integer roomCategoryId) {
         this.roomCategoryId = roomCategoryId;
     }
 
+    /**
+     * @return room_id
+     */
     public Integer getRoomId() {
         return roomId;
     }
 
+    /**
+     * @param roomId
+     */
     public void setRoomId(Integer roomId) {
         this.roomId = roomId;
     }
 
+    /**
+     * @return category_id
+     */
     public Integer getCategoryId() {
         return categoryId;
     }
 
+    /**
+     * @param categoryId
+     */
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }

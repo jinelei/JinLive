@@ -2,14 +2,17 @@ package cn.jinelei.live.service.impl;
 
 import cn.jinelei.live.dao.UserMapper;
 import cn.jinelei.live.exception.UserException;
-import cn.jinelei.live.model.User;
-import cn.jinelei.live.model.UserExample;
+import cn.jinelei.live.model.data.User;
+import cn.jinelei.live.model.data.UserExample;
 import cn.jinelei.live.model.enumstatus.user.UserStatus;
 import cn.jinelei.live.model.enumstatus.user.UserTreasure;
 import cn.jinelei.live.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -189,13 +192,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUser(Integer offset, Integer limit) {
-        userExample = new UserExample();
-        userExample.createCriteria().andUserAgeEqualTo(22);
-//        return userMapper.selectByExample(userExample);\
-//        PageHelper.startPage(0,1);
-//        return userMapper.selectByExampleAndRowBounds(userExample,new RowBounds(offset,limit));
-//        return userMapper.selectByExample(userExample);
-        return userMapper.selectByExample(userExample);
+//        userExample = new UserExample();
+        Example example = new Example(User.class);
+//        UserExample example = new UserExample();
+//        example.createCriteria().andUserAgeEqualTo(22);
+        example.createCriteria().andEqualTo("userAge", 22);
+        PageHelper.startPage(offset, limit);
+//        userExample.createCriteria().andUserAgeEqualTo(22);
+        List<User> list = userMapper.selectByExample(example);
+        PageInfo<User> pageInfo = new PageInfo<User>(list);
+        System.out.println(pageInfo.getTotal());
+        return pageInfo.getList();
     }
 
 
