@@ -2,6 +2,7 @@ package cn.jinelei.live.service;
 
 import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.model.data.User;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -38,6 +39,8 @@ public interface UserService {
 
     List<User> getAllUser(Integer offset, Integer limit);
 
+    PageInfo<User> getAllUserPageInfo();
+
     List<User> getAllUserAlive();
 
     List<User> getAllUserOnline();
@@ -49,4 +52,5 @@ public interface UserService {
     List<User> getAllUserInactive();
 
     List<User> getAllUserDelete();
+
 }

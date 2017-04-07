@@ -103,18 +103,16 @@ public class UserServiceTest {
     public void getAll() {
 
 //        List<User> userList = userService.getAllUser();
-//        userService.getAllUserAlive().forEach(user -> System.out.println(user));
-//        userService.getAllUserOnline().forEach(user -> System.out.println(user));
-//        userService.getAllUserOffline().forEach(user -> System.out.println(user));
-//        userService.getAllUserActive().forEach(user -> System.out.println(user));
-//        userService.getAllUserInactive().forEach(user -> System.out.println(user));
-//        userService.getAllUserDelete().forEach(user -> System.out.println(user));
+        userService.getAllUserAlive().forEach(user -> System.out.println(user));
+        userService.getAllUserOnline().forEach(user -> System.out.println(user));
+        userService.getAllUserOffline().forEach(user -> System.out.println(user));
+        userService.getAllUserActive().forEach(user -> System.out.println(user));
+        userService.getAllUserInactive().forEach(user -> System.out.println(user));
+        userService.getAllUserDelete().forEach(user -> System.out.println(user));
 
-        userService.getAllUser(0,2).forEach(user -> System.out.println(user));
-//        UserExample example = new UserExample();
-//        example.createCriteria().andUserAgeEqualTo(22);
-//        userMapper.selectByExample(example).forEach(user -> System.out.println(user));
-//        logger.debug(String.valueOf(userMapper.selectByPrimaryKey(4)));
+        userService.getAllUser(0, 2).forEach(user -> System.out.println(user));
+
+        System.out.println(userService.getAllUserPageInfo());
     }
 
 }

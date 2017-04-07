@@ -7,8 +7,11 @@ import cn.jinelei.live.model.data.UserExample;
 import cn.jinelei.live.model.enumstatus.user.UserStatus;
 import cn.jinelei.live.model.enumstatus.user.UserTreasure;
 import cn.jinelei.live.service.UserService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,8 @@ import java.util.stream.Collectors;
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -186,23 +191,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUser() {
-        userExample = new UserExample();
-        return userMapper.selectByExample(userExample);
+        return userMapper.selectByExample(new UserExample());
     }
 
     @Override
     public List<User> getAllUser(Integer offset, Integer limit) {
-//        userExample = new UserExample();
-        Example example = new Example(User.class);
-//        UserExample example = new UserExample();
-//        example.createCriteria().andUserAgeEqualTo(22);
-        example.createCriteria().andEqualTo("userAge", 22);
-        PageHelper.startPage(offset, limit);
-//        userExample.createCriteria().andUserAgeEqualTo(22);
-        List<User> list = userMapper.selectByExample(example);
-        PageInfo<User> pageInfo = new PageInfo<User>(list);
-        System.out.println(pageInfo.getTotal());
+        PageInfo<User> pageInfo = PageHelper.offsetPage(offset, limit).doSelectPageInfo(() -> {
+            userMapper.selectByExample(new UserExample());
+        });
         return pageInfo.getList();
+    }
+
+    @Override
+    public PageInfo<User> getAllUserPageInfo() {
+        UserExample example = new UserExample();
+        return new PageInfo<User>(userMapper.selectByExample(example));
     }
 
 
