@@ -71,5 +71,8 @@ public interface RoomService {
 
     Room getRoomByStream(String streamId) throws RoomException;
 
+    boolean setRoomStatusOffline(Room room);
+
+    boolean setRoomStatusOnline(Room room);
 
 }

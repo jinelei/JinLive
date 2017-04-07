@@ -1,15 +1,8 @@
-import cn.jinelei.live.dao.UserMapper;
 import cn.jinelei.live.exception.RoomException;
-import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.model.data.Room;
-import cn.jinelei.live.model.data.User;
-import cn.jinelei.live.model.enumstatus.room.RoomStatus;
 import cn.jinelei.live.service.RoomService;
-import cn.jinelei.live.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,7 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * Created by jinelei on 17-4-3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:live-servlet.xml", "classpath:spring-config.xml"})
+@ContextConfiguration(locations = {"classpath:config/live-servlet.xml", "classpath:application-config.xml"})
 @WebAppConfiguration
 public class RoomServiceTest {
 
@@ -42,13 +35,13 @@ public class RoomServiceTest {
 //        roomService.updateRoom(room1);
 
 //        System.out.println(roomService.getRoom(room1.getRoomId()));
-        Room room5 = roomService.getRoom(10011);
+        Room room5 = roomService.getRoom(10003);
         System.out.println(room5);
 
 //        room5.setRoomScreenshot("new change");
 //        roomService.updateRoom(room5);
 
-        roomService.deleteRoom(room5);
+//        roomService.deleteRoom(room5);
 
 
 //        roomService.getAllRoomByUser(1).forEach(room3 -> System.out.println(room3));

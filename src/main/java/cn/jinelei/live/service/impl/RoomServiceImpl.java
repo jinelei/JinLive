@@ -6,6 +6,7 @@ import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.model.data.Room;
 import cn.jinelei.live.model.data.RoomExample;
 import cn.jinelei.live.model.data.User;
+import cn.jinelei.live.model.enumstatus.room.RoomStatus;
 import cn.jinelei.live.service.RoomService;
 import cn.jinelei.live.service.UserService;
 import com.github.pagehelper.PageHelper;
@@ -13,7 +14,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class RoomServiceImpl implements RoomService {
             room1.setRoomScreenshot(room.getRoomScreenshot());
         if (room.getRoomStatus() != null && room.getRoomStatus() != room1.getRoomStatus())
             room1.setRoomStatus(room.getRoomStatus());
-        int res = roomMapper.updateByPrimaryKey(room1);
+        int res = roomMapper.updateByPrimaryKeySelective(room1);
         return res == 1 ? true : false;
     }
 
@@ -81,7 +81,7 @@ public class RoomServiceImpl implements RoomService {
             room1.setUserId(userId);
         if (roomStatus != null)
             room1.setRoomStatus(roomStatus);
-        int res = roomMapper.insert(room1);
+        int res = roomMapper.insertSelective(room1);
         if (res != 1)
             throw new RoomException(RoomException.ROOM_INSERT_FAILED);
         return room1;
@@ -253,5 +253,29 @@ public class RoomServiceImpl implements RoomService {
         else if (rooms.size() < 1)
             throw new RoomException(RoomException.ROOM_NOT_EXIST);
         return rooms.get(0);
+    }
+
+    @Override
+    public boolean setRoomStatusOffline(Room room) {
+        room.setRoomStatus(RoomStatus.OFFLINE.ordinal());
+        boolean res = false;
+        try {
+            res = updateRoom(room);
+        } catch (RoomException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public boolean setRoomStatusOnline(Room room) {
+        room.setRoomStatus(RoomStatus.ONLINE.ordinal());
+        boolean res = false;
+        try {
+            res = updateRoom(room);
+        } catch (RoomException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

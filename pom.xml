@@ -256,6 +256,13 @@
             <version>2.1.1</version>
         </dependency>
 
+        <!--task-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>JinLive</finalName>
@@ -284,7 +291,7 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.5</version>
                 <configuration>
-                    <configurationFile>${basedir}/src/main/resources/generatorConfig.xml</configurationFile>
+                    <configurationFile>src/main/resources/mybatis/generatorConfig.xml</configurationFile>
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                 </configuration>

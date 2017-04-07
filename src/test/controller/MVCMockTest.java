@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
  * Created by jinelei on 17-4-3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:live-servlet.xml"})
+@ContextConfiguration(locations = {"classpath:config/live-servlet.xml"})
 @WebAppConfiguration
 public class MVCMockTest {
     private static final Logger logger = LoggerFactory.getLogger(MVCMockTest.class);

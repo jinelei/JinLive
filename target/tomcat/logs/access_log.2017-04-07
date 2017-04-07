@@ -1,0 +1,4 @@
+127.0.0.1 - - [07/Apr/2017:15:15:19 +0000] "GET /live/index HTTP/1.0" 500 5338 http-bio-8080-exec-1 377
+127.0.0.1 - - [07/Apr/2017:15:21:31 +0000] "GET /live/index HTTP/1.0" 500 5338 http-bio-8080-exec-2 17
+127.0.0.1 - - [07/Apr/2017:15:22:31 +0000] "GET /live/index HTTP/1.0" 500 9561 http-bio-8080-exec-1 910
+127.0.0.1 - - [07/Apr/2017:15:28:16 +0000] "GET /live/index HTTP/1.0" 500 9561 http-bio-8080-exec-2 736

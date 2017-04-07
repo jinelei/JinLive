@@ -18,45 +18,45 @@ import java.util.List;
 /**
  * Created by jinelei on 17-4-7.
  */
-@Service("tagService")
+@Service("tagCategoryService")
 @Transactional
 public class TagCategoryServiceImpl implements TagCategoryService {
 
     private static final Logger logger = LoggerFactory.getLogger(TagCategoryServiceImpl.class);
 
     @Autowired
-    private TagCategoryMapper roomCategoryMapper;
+    private TagCategoryMapper tagCategoryMapper;
 
     @Override
-    public TagCategory insertTagCategory(Tag room, Category category) throws TagCategoryException {
-        return insertTagCategory(room.getTagId(), category.getCategoryId());
+    public TagCategory insertTagCategory(Tag tag, Category category) throws TagCategoryException {
+        return insertTagCategory(tag.getTagId(), category.getCategoryId());
     }
 
     @Override
-    public TagCategory insertTagCategory(Integer roomId, Integer categoryId) throws TagCategoryException {
-        TagCategory roomCategory = getTagCategory(roomId, categoryId);
-        if (roomCategory != null)
+    public TagCategory insertTagCategory(Integer tagId, Integer categoryId) throws TagCategoryException {
+        TagCategory tagCategory = getTagCategory(tagId, categoryId);
+        if (tagCategory != null)
             throw new TagCategoryException(TagCategoryException.TAGCATEGORY_WAS_EXIST);
-        roomCategory = new TagCategory();
-        roomCategory.setCategoryId(categoryId);
-        roomCategory.setTagId(roomId);
-        int res = roomCategoryMapper.insertSelective(roomCategory);
+        tagCategory = new TagCategory();
+        tagCategory.setCategoryId(categoryId);
+        tagCategory.setTagId(tagId);
+        int res = tagCategoryMapper.insertSelective(tagCategory);
         if (res != 1)
             throw new TagCategoryException(TagCategoryException.TAGCATEGORY_INSERT_FAILED);
-        return getTagCategory(roomId, categoryId);
+        return getTagCategory(tagId, categoryId);
     }
 
     @Override
-    public boolean deleteTagCategory(Tag room, Category category) throws TagCategoryException {
-        return deleteTagCategory(room.getTagId(), category.getCategoryId());
+    public boolean deleteTagCategory(Tag tag, Category category) throws TagCategoryException {
+        return deleteTagCategory(tag.getTagId(), category.getCategoryId());
     }
 
     @Override
-    public boolean deleteTagCategory(Integer roomId, Integer categoryId) throws TagCategoryException {
-        TagCategory roomCategory = getTagCategory(roomId, categoryId);
-        if (roomCategory == null)
+    public boolean deleteTagCategory(Integer tagId, Integer categoryId) throws TagCategoryException {
+        TagCategory tagCategory = getTagCategory(tagId, categoryId);
+        if (tagCategory == null)
             throw new TagCategoryException(TagCategoryException.TAGCATEGORY_NOT_EXIST);
-        int res = roomCategoryMapper.deleteByPrimaryKey(roomCategory);
+        int res = tagCategoryMapper.deleteByPrimaryKey(tagCategory);
         if (res != 1)
             throw new TagCategoryException(TagCategoryException.TAGCATEGORY_DELETE_FAILED);
         return true;
@@ -68,48 +68,48 @@ public class TagCategoryServiceImpl implements TagCategoryService {
     }
 
     @Override
-    public TagCategory updateTagCategory(Integer roomCategoryId, Integer roomId, Integer categoryId) throws TagCategoryException {
-        TagCategory roomCategory = getTagCategory(roomId, categoryId);
-        if (roomCategory != null)
+    public TagCategory updateTagCategory(Integer tagCategoryId, Integer tagId, Integer categoryId) throws TagCategoryException {
+        TagCategory tagCategory = getTagCategory(tagId, categoryId);
+        if (tagCategory != null)
             throw new TagCategoryException(TagCategoryException.TAGCATEGORY_WAS_EXIST);
-        roomCategory = roomCategoryMapper.selectByPrimaryKey(roomCategoryId);
-        roomCategory.setCategoryId(categoryId);
-        roomCategory.setTagId(roomId);
-        int res = roomCategoryMapper.updateByPrimaryKey(roomCategory);
+        tagCategory = tagCategoryMapper.selectByPrimaryKey(tagCategoryId);
+        tagCategory.setCategoryId(categoryId);
+        tagCategory.setTagId(tagId);
+        int res = tagCategoryMapper.updateByPrimaryKey(tagCategory);
         if (res != 1)
             throw new TagCategoryException(TagCategoryException.TAGCATEGORY_INSERT_FAILED);
-        return roomCategory;
+        return tagCategory;
     }
 
     @Override
-    public TagCategory getTagCategory(Integer roomId, Integer categoryId) throws TagCategoryException {
+    public TagCategory getTagCategory(Integer tagId, Integer categoryId) throws TagCategoryException {
         TagCategoryExample example = new TagCategoryExample();
         example.createCriteria().andCategoryIdEqualTo(categoryId)
-                .andTagIdEqualTo(roomId);
-        List<TagCategory> roomCategories = roomCategoryMapper.selectByExample(example);
-        if (roomCategories.size() > 1)
+                .andTagIdEqualTo(tagId);
+        List<TagCategory> tagCategories = tagCategoryMapper.selectByExample(example);
+        if (tagCategories.size() > 1)
             throw new TagCategoryException(TagCategoryException.TAGCATEGORY_NOT_UNIQUE);
-        else if (roomCategories.size() < 1)
+        else if (tagCategories.size() < 1)
             throw new TagCategoryException(TagCategoryException.TAGCATEGORY_NOT_EXIST);
-        return roomCategories.get(0);
+        return tagCategories.get(0);
     }
 
     @Override
-    public TagCategory getTagCategory(Tag room, Category category) throws TagCategoryException {
-        return getTagCategory(room.getTagId(), category.getCategoryId());
+    public TagCategory getTagCategory(Tag tag, Category category) throws TagCategoryException {
+        return getTagCategory(tag.getTagId(), category.getCategoryId());
     }
 
     @Override
-    public List<TagCategory> getTagCategoryByTagId(Integer roomId) {
+    public List<TagCategory> getTagCategoryByTagId(Integer tagId) {
         TagCategoryExample example = new TagCategoryExample();
-        example.createCriteria().andTagIdEqualTo(roomId);
-        return roomCategoryMapper.selectByExample(example);
+        example.createCriteria().andTagIdEqualTo(tagId);
+        return tagCategoryMapper.selectByExample(example);
     }
 
     @Override
     public List<TagCategory> getTagCategoryByCategoryId(Integer categoryId) {
         TagCategoryExample example = new TagCategoryExample();
         example.createCriteria().andCategoryIdEqualTo(categoryId);
-        return roomCategoryMapper.selectByExample(example);
+        return tagCategoryMapper.selectByExample(example);
     }
 }

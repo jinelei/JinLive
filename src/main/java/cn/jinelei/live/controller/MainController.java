@@ -1,12 +1,8 @@
 package cn.jinelei.live.controller;
 
-import cn.jinelei.live.model.nginx.Application;
-import cn.jinelei.live.model.nginx.live.Live;
-import cn.jinelei.live.model.nginx.vod.Vod;
-import cn.jinelei.live.utils.handler.EntityHandler;
-import cn.jinelei.live.model.nginx.RTMP;
-import cn.jinelei.live.utils.net.HttpTools;
-import cn.jinelei.live.utils.rtmp.RTMPCacheManager;
+import cn.jinelei.live.model.data.Room;
+import cn.jinelei.live.service.RoomService;
+import cn.jinelei.live.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +20,6 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 
 
-
 /**
  * Created by jinelei on 17-3-26.
  */
@@ -36,48 +31,30 @@ public class MainController {
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @Autowired
-    private RTMPCacheManager rtmpCacheManager;
-    @Autowired
-    private EntityHandler entityHandler;
-    @Autowired
-    private HttpTools httpTools;
-    @Autowired
     private Environment environment;
     @Autowired
     private SimpMessagingTemplate template;
     @Autowired
     private WebApplicationContext wac;
-
+    @Autowired
+    private RoomService roomService;
+    @Autowired
+    private UserService userService;
 
     @Value("${tomcat_server_ip}")
     private String tomcat_server_ip;
 
     @RequestMapping(value = {"/index", "/"})
     public String index(ModelMap model) {
-        logger.debug("Current Method Name: " + Thread.currentThread().getStackTrace()[1].getMethodName());
-        logger.debug(tomcat_server_ip);
-        RTMP rtmp = rtmpCacheManager.getRTMP();
-        List<Application> applicationList = rtmp.getServer().getApplications();
-        applicationList.forEach((application -> {
-            logger.debug("name: " + application.getName());
-            if ("vod".equals(application.getName())) {
-                logger.debug("vod -------------------------");
-                List<cn.jinelei.live.model.nginx.vod.Stream> vodStreams = ((Vod) application).getStreams();
-                model.addAttribute("vodStreams", vodStreams);
-            } else if ("live".equals(application.getName())) {
-                logger.debug("live -------------------------");
-                List<cn.jinelei.live.model.nginx.live.Stream> liveStreams = ((Live) application).getStreams();
-                model.addAttribute("liveStreams", liveStreams);
-            }
-        }));
-        logger.debug(rtmp.toString());
+        List<Room> rooms = roomService.getAllRoom();
+        logger.debug("room size: " + rooms.size());
+        model.addAttribute(rooms);
+        userService.getAllUser().forEach(user -> System.out.println(user));
         return "index";
     }
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String test(ModelMap model) {
-        RTMP rtmp = rtmpCacheManager.getRTMP();
-        model.addAttribute("rtmp", rtmp);
         return "information";
     }
 

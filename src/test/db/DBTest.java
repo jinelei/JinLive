@@ -22,7 +22,7 @@ import java.sql.SQLException;
  * Created by jinelei on 17-4-3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:live-servlet.xml", "classpath:spring-config.xml"})
+@ContextConfiguration(locations = {"classpath:config/live-servlet.xml", "classpath:application-config.xml"})
 @WebAppConfiguration
 public class DBTest {
     private static final Logger logger = LoggerFactory.getLogger(DBTest.class);
