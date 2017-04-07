@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
  * Created by jinelei on 17-4-3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:live-servlet.xml"})
+@ContextConfiguration(locations = {"classpath:config/live-servlet.xml"})
 @WebAppConfiguration
 public class MainControllerTest {
     private static final Logger logger = LoggerFactory.getLogger(MainControllerTest.class);

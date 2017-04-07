@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
 
     <context:property-placeholder location="classpath:db.properties"/>
-    <context:component-scan base-package="cn.jinelei.live.service.impl"/>
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <bean class="org.apache.commons.dbcp2.BasicDataSource" id="dataSource">
@@ -18,7 +19,7 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath*:cn/jinelei/live/dao/*.xml"/>
+        <property name="mapperLocations" value="classpath*:cn/jinelei/live/dao/CategoryMapper.xml"/>
         <property name="typeAliasesPackage" value="cn.jinelei.live.model.data"/>
         <property name="plugins">
             <array>
@@ -71,5 +72,6 @@
         <property name="mapperInterface" value="cn.jinelei.live.dao.CategoryMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+
 
 </beans>

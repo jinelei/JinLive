@@ -2,6 +2,7 @@ package cn.jinelei.live.task;
 
 import cn.jinelei.live.model.nginx.RTMP;
 import cn.jinelei.live.model.nginx.live.Live;
+import cn.jinelei.live.utils.live.LiveUtils;
 import cn.jinelei.live.utils.rtmp.RTMPCacheManager;
 import cn.jinelei.live.utils.rtmp.RTMPUtils;
 import org.slf4j.Logger;
@@ -19,10 +20,10 @@ import org.springframework.stereotype.Component;
 public class MyTask {
 
     @Autowired
-    private RTMPCacheManager rtmpCacheManager;
-
-    @Autowired
     private RTMPUtils rtmpUtils;
+    @Autowired
+    private LiveUtils liveUtils;
+
 
     private static final Logger logger = LoggerFactory.getLogger(MyTask.class);
 
@@ -30,7 +31,11 @@ public class MyTask {
     public void updateRTMPCache() {
         logger.info("定时任务： 刷新缓存：rtmpCacheManager");
         RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
-        rtmpCacheManager.setRtmpMap(rtmp);
+        rtmp.getServer().getApplications().stream().forEach(application -> {
+            if ("live".equals(application.getName())) {
+                liveUtils.updateRoomStatus(((Live) application).getStreams());
+            }
+        });
     }
 
 //    @Scheduled(cron = "*/15 * * * * ?")//每隔5秒执行一次

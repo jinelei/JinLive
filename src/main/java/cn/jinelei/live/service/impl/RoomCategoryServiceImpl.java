@@ -1,16 +1,15 @@
 package cn.jinelei.live.service.impl;
 
-import cn.jinelei.live.dao.CategoryMapper;
 import cn.jinelei.live.dao.RoomCategoryMapper;
-import cn.jinelei.live.exception.CategoryException;
 import cn.jinelei.live.exception.RoomCategoryException;
-import cn.jinelei.live.model.data.*;
-import cn.jinelei.live.service.CategoryService;
+import cn.jinelei.live.model.data.Category;
+import cn.jinelei.live.model.data.Room;
+import cn.jinelei.live.model.data.RoomCategory;
+import cn.jinelei.live.model.data.RoomCategoryExample;
 import cn.jinelei.live.service.RoomCategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.feed.RssChannelHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +18,7 @@ import java.util.List;
 /**
  * Created by jinelei on 17-4-7.
  */
-@Service("tagService")
+@Service("roomCategoryService")
 @Transactional
 public class RoomCategoryServiceImpl implements RoomCategoryService {
 

@@ -15,7 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * Created by jinelei on 17-4-3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:live-servlet.xml", "classpath:spring-config.xml"})
+@ContextConfiguration(locations = {"classpath:config/live-servlet.xml", "classpath:application-config.xml"})
 @WebAppConfiguration
 public class UserServiceTest {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceTest.class);

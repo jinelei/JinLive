@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="db.properties"/>
+    <classPathEntry
+            location="/home/jinelei/.m2/repository/mysql/mysql-connector-java/5.1.25/mysql-connector-java-5.1.25.jar"/>
+
+    <context id="minecontext" targetRuntime="MyBatis3">
+        <!-- 抑制警告 -->
+        <property name="suppressTypeWarnings" value="true"/>
+
+        <!-- generate entity时，生成hashcode和equals方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <!-- generate entity时，生成serialVersionUID -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 这个插件只会增加字符串字段映射到一个JDBC字符的方法 -->
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <!-- genenat entity时,生成toString -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="${mapper.plugin}">
+            <property name="mappers" value="${mapper.mapper}"/>
+        </plugin>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="prefix" value="cn.jinelei.live.model"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}"/>
+        <javaModelGenerator targetPackage="${targetModelPackage}" targetProject="${targetJavaProject}"/>
+
+        <!--<sqlMapGenerator targetPackage="${targetXMLPackage}" targetProject="${targetResourcesProject}"/>-->
+        <sqlMapGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}"/>
+
+        <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}"
+                             type="XMLMAPPER"/>
+        <!--<table schema="Category" tableName="category"></table>-->
+        <!--<table schema="Room" tableName="room"></table>-->
+        <!--<table schema="RoomCategory" tableName="room_category"></table>-->
+        <!--<table schema="Tag" tableName="tag"></table>-->
+        <!--<table schema="TagCategory" tableName="tag_category"></table>-->
+        <!--<table schema="User" tableName="user"></table>-->
+        <table tableName="%" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

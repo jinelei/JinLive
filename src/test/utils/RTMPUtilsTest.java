@@ -15,14 +15,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.io.FileNotFoundException;
-
 
 /**
  * Created by jinelei on 17-4-3.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:live-servlet.xml"})
+@ContextConfiguration(locations = {"classpath:config/live-servlet.xml"})
 @WebAppConfiguration
 public class RTMPUtilsTest {
 

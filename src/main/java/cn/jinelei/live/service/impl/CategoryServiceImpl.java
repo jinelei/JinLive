@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by jinelei on 17-4-7.
  */
-@Service("tagService")
+@Service("categoryService")
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
 

@@ -38,21 +38,12 @@
 	<h2>FreeMarker Spring MVC Hello World</h2>
 </div>
 <div id="content">
-<#list vodStreams as vodstream>
-	<div class="item" id="${vodstream.name}">
+<#list room as rooms>
+	<div class="item" id="${room.streamKey}">
 		<div class="item_content">
 		</div>
 		<p class="item_title">
-        ${vodstream.name}
-		</p>
-	</div>
-</#list>
-<#list liveStreams as livestream>
-	<div class="item" id="${livestream.name}">
-		<div class="item_content">
-		</div>
-		<p class="item_title">
-        ${livestream.name}
+        ${room.roomName}
 		</p>
 	</div>
 </#list>
