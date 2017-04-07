@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.jinelei.live.dao.UserMapper" >
   <resultMap id="BaseResultMap" type="cn.jinelei.live.model.User" >
-    <id column="user_ID" property="userId" jdbcType="INTEGER" />
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
     <result column="user_sex" property="userSex" jdbcType="INTEGER" />
@@ -75,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_ID, user_name, user_nickname, user_sex, user_age, user_phone, user_height, user_weight, 
+    user_id, user_name, user_nickname, user_sex, user_age, user_phone, user_height, user_weight, 
     user_area, user_status, user_treasure, user_passwd, user_email
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.jinelei.live.model.UserExample" >
@@ -96,11 +96,11 @@
     select 
     <include refid="Base_Column_List" />
     from user
-    where user_ID = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
-    where user_ID = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="cn.jinelei.live.model.UserExample" >
     delete from user
@@ -109,7 +109,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.jinelei.live.model.User" >
-    insert into user (user_ID, user_name, user_nickname, 
+    insert into user (user_id, user_name, user_nickname, 
       user_sex, user_age, user_phone, 
       user_height, user_weight, user_area, 
       user_status, user_treasure, user_passwd, 
@@ -124,7 +124,7 @@
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
-        user_ID,
+        user_id,
       </if>
       <if test="userName != null" >
         user_name,
@@ -215,7 +215,7 @@
     update user
     <set >
       <if test="record.userId != null" >
-        user_ID = #{record.userId,jdbcType=INTEGER},
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
       <if test="record.userName != null" >
         user_name = #{record.userName,jdbcType=VARCHAR},
@@ -260,7 +260,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update user
-    set user_ID = #{record.userId,jdbcType=INTEGER},
+    set user_id = #{record.userId,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_nickname = #{record.userNickname,jdbcType=VARCHAR},
       user_sex = #{record.userSex,jdbcType=INTEGER},
@@ -317,7 +317,7 @@
         user_email = #{userEmail,jdbcType=VARCHAR},
       </if>
     </set>
-    where user_ID = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.jinelei.live.model.User" >
     update user
@@ -333,6 +333,6 @@
       user_treasure = #{userTreasure,jdbcType=INTEGER},
       user_passwd = #{userPasswd,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR}
-    where user_ID = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

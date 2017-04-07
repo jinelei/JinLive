@@ -30,6 +30,8 @@
                         password="jin"/>
         <javaModelGenerator targetPackage="cn.jinelei.live.model"
                             targetProject="/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java"/>
+        <!--<sqlMapGenerator targetPackage="cn.jinelei.live.dao"-->
+            <!--targetProject="/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java"/>-->
         <sqlMapGenerator targetPackage="mybatis"
                          targetProject="/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/resources"/>
         <javaClientGenerator targetPackage="cn.jinelei.live.dao"

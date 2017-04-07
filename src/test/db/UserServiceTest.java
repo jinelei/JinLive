@@ -1,9 +1,6 @@
 import cn.jinelei.live.dao.UserMapper;
 import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.model.User;
-import cn.jinelei.live.model.UserExample;
-import cn.jinelei.live.model.enumstatus.user.UserStatus;
-import cn.jinelei.live.model.nginx.live.Stream;
 import cn.jinelei.live.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,11 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import javax.sql.rowset.Predicate;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Created by jinelei on 17-4-3.
@@ -119,7 +111,10 @@ public class UserServiceTest {
 //        userService.getAllUserDelete().forEach(user -> System.out.println(user));
 
 //        userService.getAllUser(0,1).forEach(user -> System.out.println(user));
-        userMapper.selectByExample(new UserExample()).forEach(user -> System.out.println(user));
+//        UserExample example = new UserExample();
+//        example.createCriteria().andUserAgeEqualTo(22);
+//        userMapper.selectByExample(example).forEach(user -> System.out.println(user));
+        logger.debug(String.valueOf(userMapper.selectByPrimaryKey(4)));
     }
 
 }
