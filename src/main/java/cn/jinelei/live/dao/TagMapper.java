@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface TagMapper {
-    long countByExample(TagExample example);
+    int countByExample(TagExample example);
 
     int deleteByExample(TagExample example);
 

@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoomCategoryMapper {
-    long countByExample(RoomCategoryExample example);
+    int countByExample(RoomCategoryExample example);
 
     int deleteByExample(RoomCategoryExample example);
 

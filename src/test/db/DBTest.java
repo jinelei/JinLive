@@ -1,5 +1,9 @@
+import cn.jinelei.live.dao.RoomMapper;
 import cn.jinelei.live.dao.UserMapper;
+import cn.jinelei.live.model.Room;
+import cn.jinelei.live.model.RoomExample;
 import cn.jinelei.live.model.User;
+import cn.jinelei.live.service.UserService;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Before;
@@ -34,6 +38,11 @@ public class DBTest {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private RoomMapper roomMapper;
+    @Autowired
+    private UserService userService;
+
     @Test
     public void test() throws SQLException {
         assert sqlSessionFactory != null;
@@ -42,6 +51,20 @@ public class DBTest {
         assert userMapper != null;
         User user = userMapper.selectByPrimaryKey(1);
         logger.debug(String.valueOf(user));
+
+        assert roomMapper != null;
+        RoomExample example = new RoomExample();
+        example.createCriteria().andUserIdEqualTo(1);
+        Room room = roomMapper.selectByExample(example).get(0);
+        logger.debug(String.valueOf(room));
+
+
+    }
+
+
+    @Test
+    public void testUserService() {
+        assert userService != null;
     }
 
 }

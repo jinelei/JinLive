@@ -17,6 +17,9 @@
         <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
         <!-- genenat entity时,生成toString -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
+            <!--<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
+        <!--</plugin>-->
 
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
