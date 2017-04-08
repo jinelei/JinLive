@@ -48,8 +48,9 @@ public class MainController {
     public String index(ModelMap model) {
         List<Room> rooms = roomService.getAllRoom();
         logger.debug("room size: " + rooms.size());
-        model.addAttribute(rooms);
-        userService.getAllUser().forEach(user -> System.out.println(user));
+        model.addAttribute("rooms",rooms);
+//        userService.getAllUser().forEach(user -> System.out.println(user));
+        logger.debug(model.toString());
         return "index";
     }
 
@@ -72,6 +73,7 @@ public class MainController {
         String url = environment.getProperty("server_ip");
         model.addAttribute("server_ip", url);
         model.addAttribute("stream_key", streamKey);
+        logger.debug(model.toString());
         return "room";
     }
 

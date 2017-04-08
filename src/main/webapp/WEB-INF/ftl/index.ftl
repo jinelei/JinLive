@@ -2,28 +2,38 @@
 <head>
 	<title>freemark index</title>
 	<style>
-		#content {
-			width: 80%;
-			background-color: darkgray;
+		body {
+			background-color: #d4d4d4;
+		}
+
+		#room_list_container {
+			margin-left: 250px;
 			padding: 5px;
 		}
 
 		.item {
-			width: 160px;
-			height: 100px;
+			width: 300px;
 			display: inline-block;
-			background-color: darkslategrey;
+			background-color: white;
+			box-shadow: 0px 0px 6px 3px #4c4948;
+			margin: 4px;
 		}
 
 		.item_content {
-			width: 160px;
-			height: 90px;
+			width: 300px;
+			height: 170px;
 			display: inline-block;
 			background-color: darkslategrey;
 		}
 
 		.item_title {
 			text-align: center;
+			font-size: 15px;;
+			margin: 0;
+		}
+        .item_info{
+	        width: 300px;
+	        background-color: #727670;
 		}
 
 	</style>
@@ -37,14 +47,21 @@
 <div id="header">
 	<h2>FreeMarker Spring MVC Hello World</h2>
 </div>
-<div id="content">
-<#list room as rooms>
+<#include  'menu-navigation.ftl'>
+<div id="room_list_container">
+<#list rooms as room>
 	<div class="item" id="${room.streamKey}">
 		<div class="item_content">
+            <#if room.roomScreenshot ?? >
+            <#--<img src="${nginx_server_ip}/images/default-screenshot.png">-->
+				<h2>asdf</h2>
+            <#else>
+				<img src="${nginx_server_ip}/images/default-screenshot.png">
+            </#if>
 		</div>
-		<p class="item_title">
-        ${room.roomName}
-		</p>
+		<div class="item_info">
+			<p class="item_title"> ${room.roomName}</p>
+		</div>
 	</div>
 </#list>
 </div>
@@ -57,6 +74,7 @@
 
 <script>
 
+	//	bind click event
 	$(".item").on("click", function () {
 		var id = $(this).attr("id");
 		$("#stream_key").val(id);

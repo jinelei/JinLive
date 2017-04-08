@@ -1,5 +1,6 @@
 package cn.jinelei.live.utils.live;
 
+import cn.jinelei.live.model.enumstatus.room.RoomStatus;
 import cn.jinelei.live.model.nginx.live.Stream;
 import cn.jinelei.live.service.RoomService;
 import org.slf4j.Logger;
@@ -25,10 +26,13 @@ public class LiveUtils {
         List<String> roomList = streamList.stream().map(stream -> stream.getName()).collect(Collectors.toList());
 
         roomService.getAllRoom().forEach(room -> {
-            if (roomList.contains(room.getStreamKey()))
+            if (roomList.contains(room.getStreamKey()) && room.getRoomStatus() != RoomStatus.ONLINE.ordinal()) {
                 roomService.setRoomStatusOnline(room);
-            else
+                logger.info("toggle room status online: " + room.getStreamKey());
+            } else if (!roomList.contains(room.getStreamKey()) && room.getRoomStatus() != RoomStatus.OFFLINE.ordinal()) {
                 roomService.setRoomStatusOffline(room);
+                logger.info("toggle room status offline: " + room.getStreamKey());
+            }
         });
     }
 
