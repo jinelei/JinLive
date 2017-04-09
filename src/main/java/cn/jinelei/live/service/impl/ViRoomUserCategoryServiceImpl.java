@@ -49,6 +49,7 @@ public class ViRoomUserCategoryServiceImpl implements ViRoomUserCategoryService 
         return new PageInfo<ViRoomUserCategory>(viRoomUserCategoryMapper.selectByExample(example));
     }
 
+
     @Override
     public List<ViRoomUserCategory> getAllViRoomUserCategoryByStatus(Integer roomStatus) {
         ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
@@ -73,39 +74,16 @@ public class ViRoomUserCategoryServiceImpl implements ViRoomUserCategoryService 
         return new PageInfo<ViRoomUserCategory>(viRoomUserCategoryMapper.selectByExample(example));
     }
 
-    @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyName(String name) {
-        ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
-        example.createCriteria().andRoomNameLike(name);
-        return viRoomUserCategoryMapper.selectByExample(example);
-    }
 
     @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyNameLimit(String name, Integer offset, Integer limit) {
-        PageInfo<ViRoomUserCategory> pageInfo = PageHelper.offsetPage(offset, limit).doSelectPageInfo(() -> {
-            ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
-            example.createCriteria().andRoomNameLike(name);
-            viRoomUserCategoryMapper.selectByExample(example);
-        });
-        return pageInfo.getList();
-    }
-
-    @Override
-    public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyNamePageInfo(String name) {
-        ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
-        example.createCriteria().andRoomNameLike(name);
-        return new PageInfo<ViRoomUserCategory>(viRoomUserCategoryMapper.selectByExample(example));
-    }
-
-    @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyIntroduce(String introduce) {
+    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyRoomIntroduce(String introduce) {
         ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
         example.createCriteria().andRoomIntroduceLike(introduce);
         return viRoomUserCategoryMapper.selectByExample(example);
     }
 
     @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyIntroduceLimit(String introduce, Integer offset, Integer limit) {
+    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyRoomIntroduceLimit(String introduce, Integer offset, Integer limit) {
         PageInfo<ViRoomUserCategory> pageInfo = PageHelper.offsetPage(offset, limit).doSelectPageInfo(() -> {
             ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
             example.createCriteria().andRoomIntroduceLike(introduce);
@@ -115,68 +93,50 @@ public class ViRoomUserCategoryServiceImpl implements ViRoomUserCategoryService 
     }
 
     @Override
-    public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyIntroducePageInfo(String introduce) {
+    public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyRoomIntroducePageInfo(String introduce) {
         ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
         example.createCriteria().andRoomIntroduceLike(introduce);
         return new PageInfo<ViRoomUserCategory>(viRoomUserCategoryMapper.selectByExample(example));
     }
 
-    @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryByUser(String username) throws UserException {
-        User user = userService.getUserInfo(username);
-        return getAllViRoomUserCategoryByUser(user.getUserId());
-    }
 
     @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryByUserLimit(String username, Integer offset, Integer limit) throws UserException {
-        User user = userService.getUserInfo(username);
-        return getAllViRoomUserCategoryByUserLimit(user.getUserId(), offset, limit);
-    }
-
-    @Override
-    public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryByUserPageInfo(String username) throws UserException {
-        User user = userService.getUserInfo(username);
-        return getAllViRoomUserCategoryByUserPageInfo(user.getUserId());
-    }
-
-    @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryByUser(Integer userId) {
+    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyUsername(String username) {
         ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
-        example.createCriteria().andUserIdEqualTo(userId);
+        example.createCriteria().andUserNameLike(username);
         return viRoomUserCategoryMapper.selectByExample(example);
     }
 
     @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryByUserLimit(Integer userId, Integer offset, Integer limit) {
+    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyUsernameLimit(String username, Integer offset, Integer limit) {
         PageInfo<ViRoomUserCategory> pageInfo = PageHelper.offsetPage(offset, limit).doSelectPageInfo(() -> {
             ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
-            example.createCriteria().andUserIdEqualTo(userId);
+            example.createCriteria().andUserNameLike(username);
             viRoomUserCategoryMapper.selectByExample(example);
         });
         return pageInfo.getList();
     }
 
     @Override
-    public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryByUserPageInfo(Integer userId) {
+    public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyUsernamePageInfo(String username) {
         ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
-        example.createCriteria().andUserIdEqualTo(userId);
+        example.createCriteria().andUserNameLike(username);
         return new PageInfo<ViRoomUserCategory>(viRoomUserCategoryMapper.selectByExample(example));
     }
 
-    @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryByUser(User user) {
-        return getAllViRoomUserCategoryByUser(user.getUserId());
-    }
 
     @Override
-    public List<ViRoomUserCategory> getAllViRoomUserCategoryByUserLimit(User user, Integer offset, Integer limit) {
-        return getAllViRoomUserCategoryByUserLimit(user.getUserId(), offset, limit);
+    public ViRoomUserCategory getAllViRoomUserCategoryByUserId(Integer userId) throws RoomException {
+        ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
+        example.createCriteria().andUserIdEqualTo(userId);
+        List<ViRoomUserCategory> viRoomUserCategories = viRoomUserCategoryMapper.selectByExample(example);
+        if (viRoomUserCategories.size() > 1)
+            throw new RoomException(RoomException.ROOM_NOT_UNIQUE);
+        else if (viRoomUserCategories.size() < 1)
+            throw new RoomException(RoomException.ROOM_NOT_EXIST);
+        return viRoomUserCategories.get(0);
     }
 
-    @Override
-    public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryByUserPageInfo(User user) {
-        return getAllViRoomUserCategoryByUserPageInfo(user.getUserId());
-    }
 
     @Override
     public List<ViRoomUserCategory> getAllViRoomUserCategoryByCategory(Integer categoryId) {
@@ -202,6 +162,7 @@ public class ViRoomUserCategoryServiceImpl implements ViRoomUserCategoryService 
         return new PageInfo<ViRoomUserCategory>(viRoomUserCategoryMapper.selectByExample(example));
     }
 
+
     @Override
     public List<ViRoomUserCategory> getAllViRoomUserCategoryByCategory(String categoryName) throws CategoryException {
         List<Category> categorys = categoryService.getCategoryFuzzyName(categoryName);
@@ -226,6 +187,7 @@ public class ViRoomUserCategoryServiceImpl implements ViRoomUserCategoryService 
         return getAllViRoomUserCategoryByCategoryPageInfo(categorys.get(0).getCategoryId());
     }
 
+
     @Override
     public List<ViRoomUserCategory> getAllViRoomUserCategoryByCategory(Category category) {
         return getAllViRoomUserCategoryByCategory(category.getCategoryId());
@@ -240,6 +202,31 @@ public class ViRoomUserCategoryServiceImpl implements ViRoomUserCategoryService 
     public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryByCategoryPageInfo(Category category) {
         return getAllViRoomUserCategoryByCategoryPageInfo(category.getCategoryId());
     }
+
+    @Override
+    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyRoomName(String roomName) {
+        ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
+        example.createCriteria().andRoomNameLike(roomName);
+        return viRoomUserCategoryMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyRoomNameLimit(String roomName, Integer offset, Integer limit) {
+        PageInfo<ViRoomUserCategory> pageInfo = PageHelper.offsetPage(offset, limit).doSelectPageInfo(() -> {
+            ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
+            example.createCriteria().andRoomNameLike(roomName);
+            viRoomUserCategoryMapper.selectByExample(example);
+        });
+        return pageInfo.getList();
+    }
+
+    @Override
+    public PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyRoomNamePageInfo(String roomName) {
+        ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
+        example.createCriteria().andRoomNameLike(roomName);
+        return new PageInfo<ViRoomUserCategory>(viRoomUserCategoryMapper.selectByExample(example));
+    }
+
 
 
 }

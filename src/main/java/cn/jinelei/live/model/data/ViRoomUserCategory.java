@@ -26,6 +26,12 @@ public class ViRoomUserCategory implements Serializable {
     @Column(name = "category_id")
     private Integer categoryId;
 
+    @Column(name = "category_name")
+    private String categoryName;
+
+    @Column(name = "category_introduce")
+    private String categoryIntroduce;
+
     @Column(name = "user_id")
     private Integer userId;
 
@@ -160,6 +166,34 @@ public class ViRoomUserCategory implements Serializable {
      */
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    /**
+     * @return category_name
+     */
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    /**
+     * @param categoryName
+     */
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    /**
+     * @return category_introduce
+     */
+    public String getCategoryIntroduce() {
+        return categoryIntroduce;
+    }
+
+    /**
+     * @param categoryIntroduce
+     */
+    public void setCategoryIntroduce(String categoryIntroduce) {
+        this.categoryIntroduce = categoryIntroduce;
     }
 
     /**
@@ -349,6 +383,8 @@ public class ViRoomUserCategory implements Serializable {
             && (this.getRoomIntroduce() == null ? other.getRoomIntroduce() == null : this.getRoomIntroduce().equals(other.getRoomIntroduce()))
             && (this.getStreamKey() == null ? other.getStreamKey() == null : this.getStreamKey().equals(other.getStreamKey()))
             && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
+            && (this.getCategoryName() == null ? other.getCategoryName() == null : this.getCategoryName().equals(other.getCategoryName()))
+            && (this.getCategoryIntroduce() == null ? other.getCategoryIntroduce() == null : this.getCategoryIntroduce().equals(other.getCategoryIntroduce()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
             && (this.getUserNickname() == null ? other.getUserNickname() == null : this.getUserNickname().equals(other.getUserNickname()))
@@ -374,6 +410,8 @@ public class ViRoomUserCategory implements Serializable {
         result = prime * result + ((getRoomIntroduce() == null) ? 0 : getRoomIntroduce().hashCode());
         result = prime * result + ((getStreamKey() == null) ? 0 : getStreamKey().hashCode());
         result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
+        result = prime * result + ((getCategoryName() == null) ? 0 : getCategoryName().hashCode());
+        result = prime * result + ((getCategoryIntroduce() == null) ? 0 : getCategoryIntroduce().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
         result = prime * result + ((getUserNickname() == null) ? 0 : getUserNickname().hashCode());
@@ -402,6 +440,8 @@ public class ViRoomUserCategory implements Serializable {
         sb.append(", roomIntroduce=").append(roomIntroduce);
         sb.append(", streamKey=").append(streamKey);
         sb.append(", categoryId=").append(categoryId);
+        sb.append(", categoryName=").append(categoryName);
+        sb.append(", categoryIntroduce=").append(categoryIntroduce);
         sb.append(", userId=").append(userId);
         sb.append(", userName=").append(userName);
         sb.append(", userNickname=").append(userNickname);

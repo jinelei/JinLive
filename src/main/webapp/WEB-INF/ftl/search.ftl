@@ -1,13 +1,8 @@
 <html>
 <head>
-	<title>freemark index</title>
+	<title>search result</title>
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
 	<style>
-		* {
-			padding: 0;
-			margin: 0;
-		}
-
 		body {
 			background-color: #d4d4d4;
 		}
@@ -115,34 +110,67 @@
 </head>
 <body>
 
-
 <#include  'menu-navigation.ftl'>
 <div id="room_list_container">
-<#list rooms as room>
-	<div class="item" id="${room.streamKey}">
-		<div class="item_content_mask_layer">
-			<img class="item_content_mask_layer_img" src="${nginx_server_ip}/images/play-button.png"/>
+<#if fuzzyUserName ??>
+	<h4>anchors</h4>
+    <#list fuzzyUserName as room>
+		<div class="item" id="${room.streamKey}">
+			<div class="item_content_mask_layer">
+				<img class="item_content_mask_layer_img" src="${nginx_server_ip}/images/play-button.png"/>
+			</div>
+			<div class="item_screenshot">
+                <#if room.roomScreenshot ?? >
+					<h2>asdf</h2>
+                <#else>
+					<img src="${nginx_server_ip}/images/default-screenshot.png">
+                </#if>
+			</div>
+			<div class="item_info_room_status">
+                <#if  room.roomStatus == 1 >
+					<span>Live</span>
+                <#else>
+					<span>Rest</span>
+                </#if>
+			</div>
+			<div class="item_info">
+				<span class="item_info_room_name"> ${room.roomName}</span>
+				<span class="item_info_user_name"> ${room.userName}</span>
+			</div>
 		</div>
-		<div class="item_screenshot">
-            <#if room.roomScreenshot ?? >
-				<h2>asdf</h2>
-            <#else>
-				<img src="${nginx_server_ip}/images/default-screenshot.png">
-            </#if>
+    </#list>
+</#if>
+
+<#if fuzzyRoomName ??>
+	<h4>rooms</h4>
+    <#list fuzzyRoomName as room>
+		<div class="item" id="${room.streamKey}">
+			<div class="item_content_mask_layer">
+				<img class="item_content_mask_layer_img" src="${nginx_server_ip}/images/play-button.png"/>
+			</div>
+			<div class="item_screenshot">
+                <#if room.roomScreenshot ?? >
+					<h2>asdf</h2>
+                <#else>
+					<img src="${nginx_server_ip}/images/default-screenshot.png">
+                </#if>
+			</div>
+			<div class="item_info_room_status">
+                <#if  room.roomStatus == 1 >
+					<span>Live</span>
+                <#else>
+					<span>Rest</span>
+                </#if>
+			</div>
+			<div class="item_info">
+				<span class="item_info_room_name"> ${room.roomName}</span>
+				<span class="item_info_user_name"> ${room.userName}</span>
+			</div>
 		</div>
-		<div class="item_info_room_status">
-            <#if  room.roomStatus == 1 >
-				<span>Live</span>
-            <#else>
-				<span>Rest</span>
-            </#if>
-		</div>
-		<div class="item_info">
-			<span class="item_info_room_name"> ${room.roomName}</span>
-			<span class="item_info_user_name"> ${room.userName}</span>
-		</div>
-	</div>
-</#list>
+    </#list>
+<#else>
+	<h4>not search any matche result, try another words</h4>
+</#if>
 </div>
 <div hidden>
 	<form action="${tomcat_proxy_server_ip}/${application_name}/room" method="post">

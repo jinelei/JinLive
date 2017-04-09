@@ -15,7 +15,15 @@
     <import resource="servlet-viewresolver-config.xml"/>
     <import resource="servlet-aop-config.xml"/>
 
-    <mvc:annotation-driven/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
     <context:component-scan base-package="cn.jinelei.live"/>
     <!--开启task-->
     <task:annotation-driven/>
@@ -26,5 +34,6 @@
     <bean class="cn.jinelei.live.utils.handler.EntityHandler" id="jinStreamHandler" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.user.UserUtils" id="userUtils" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.live.LiveUtils" id="liveUtils" scope="singleton"/>
+    <bean class="cn.jinelei.live.config.MyAuthenticationProvider" id="myAuthenticationProvider"/>
 
 </beans>

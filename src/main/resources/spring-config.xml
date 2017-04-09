@@ -2,6 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <import resource="application-security-config.xml"/>
+
+    <!--<bean id="myAuthenticationProvider" class="cn.jinelei.live.config.MyAuthenticationProvider"/>-->
+    <!--<import resource="spring-security.xml"/>-->
+    <bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/>
 
 </beans>

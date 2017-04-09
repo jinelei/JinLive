@@ -1,8 +1,10 @@
 package cn.jinelei.live.controller;
 
 import cn.jinelei.live.model.data.Room;
+import cn.jinelei.live.model.data.ViRoomUserCategory;
 import cn.jinelei.live.service.RoomService;
 import cn.jinelei.live.service.UserService;
+import cn.jinelei.live.service.ViRoomUserCategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +42,17 @@ public class MainController {
     private RoomService roomService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ViRoomUserCategoryService viRoomUserCategoryService;
 
     @Value("${tomcat_server_ip}")
     private String tomcat_server_ip;
 
     @RequestMapping(value = {"/index", "/"})
     public String index(ModelMap model) {
-        List<Room> rooms = roomService.getAllRoom();
-        logger.debug("room size: " + rooms.size());
-        model.addAttribute("rooms",rooms);
+        List<ViRoomUserCategory> viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategory();
+        logger.debug("room size: " + viRoomUserCategories.size());
+        model.addAttribute("rooms", viRoomUserCategories);
 //        userService.getAllUser().forEach(user -> System.out.println(user));
         logger.debug(model.toString());
         return "index";

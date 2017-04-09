@@ -3,6 +3,9 @@ cn/jinelei/live/exception/RoomCategoryException.class
 cn/jinelei/live/controller/UserController.class
 cn/jinelei/live/service/RoomCategoryService.class
 cn/jinelei/live/service/CategoryService.class
+cn/jinelei/live/controller/SearchController.class
+cn/jinelei/live/config/MyAuthenticationProvider.class
+cn/jinelei/live/config/CORSFilter.class
 cn/jinelei/live/dao/TagCategoryMapper.class
 cn/jinelei/live/exception/TagException.class
 cn/jinelei/live/service/TagService.class
@@ -10,6 +13,7 @@ cn/jinelei/live/dao/CategoryMapper.class
 cn/jinelei/live/dao/RoomMapper.class
 cn/jinelei/live/service/TagCategoryService.class
 cn/jinelei/live/service/impl/TagServiceImpl.class
+cn/jinelei/live/controller/CategoryController.class
 cn/jinelei/live/dao/UserMapper.class
 cn/jinelei/live/dao/TagMapper.class
 cn/jinelei/live/exception/TagCategoryException.class
@@ -18,4 +22,5 @@ cn/jinelei/live/service/impl/TagCategoryServiceImpl.class
 cn/jinelei/live/utils/live/LiveUtils.class
 cn/jinelei/live/service/impl/CategoryServiceImpl.class
 cn/jinelei/live/dao/RoomCategoryMapper.class
+cn/jinelei/live/controller/LoginController.class
 cn/jinelei/live/exception/CategoryException.class

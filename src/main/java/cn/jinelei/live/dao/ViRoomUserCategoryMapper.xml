@@ -12,6 +12,8 @@
     <result column="room_introduce" jdbcType="VARCHAR" property="roomIntroduce" />
     <result column="stream_key" jdbcType="VARCHAR" property="streamKey" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="category_introduce" jdbcType="VARCHAR" property="categoryIntroduce" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
@@ -94,8 +96,8 @@
       WARNING - @mbg.generated
     -->
     room_id, room_name, room_status, room_screenshot, room_introduce, stream_key, category_id, 
-    user_id, user_name, user_nickname, user_sex, user_age, user_phone, user_email, user_height, 
-    user_weight, user_area, user_status, user_treasure
+    category_name, category_introduce, user_id, user_name, user_nickname, user_sex, user_age, 
+    user_phone, user_email, user_height, user_weight, user_area, user_status, user_treasure
   </sql>
   <select id="selectByExample" parameterType="cn.jinelei.live.model.data.ViRoomUserCategoryExample" resultMap="BaseResultMap">
     <!--
@@ -159,6 +161,12 @@
       <if test="record.categoryId != null">
         category_id = #{record.categoryId,jdbcType=INTEGER},
       </if>
+      <if test="record.categoryName != null">
+        category_name = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryIntroduce != null">
+        category_introduce = #{record.categoryIntroduce,jdbcType=VARCHAR},
+      </if>
       <if test="record.userId != null">
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
@@ -212,6 +220,8 @@
       room_introduce = #{record.roomIntroduce,jdbcType=VARCHAR},
       stream_key = #{record.streamKey,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=INTEGER},
+      category_name = #{record.categoryName,jdbcType=VARCHAR},
+      category_introduce = #{record.categoryIntroduce,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_nickname = #{record.userNickname,jdbcType=VARCHAR},

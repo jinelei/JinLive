@@ -564,6 +564,146 @@ public class ViRoomUserCategoryExample {
             return (Criteria) this;
         }
 
+        public Criteria andCategoryNameIsNull() {
+            addCriterion("category_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameIsNotNull() {
+            addCriterion("category_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameEqualTo(String value) {
+            addCriterion("category_name =", value, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameNotEqualTo(String value) {
+            addCriterion("category_name <>", value, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameGreaterThan(String value) {
+            addCriterion("category_name >", value, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameGreaterThanOrEqualTo(String value) {
+            addCriterion("category_name >=", value, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameLessThan(String value) {
+            addCriterion("category_name <", value, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameLessThanOrEqualTo(String value) {
+            addCriterion("category_name <=", value, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameLike(String value) {
+            addCriterion("category_name like", value, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameNotLike(String value) {
+            addCriterion("category_name not like", value, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameIn(List<String> values) {
+            addCriterion("category_name in", values, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameNotIn(List<String> values) {
+            addCriterion("category_name not in", values, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameBetween(String value1, String value2) {
+            addCriterion("category_name between", value1, value2, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameNotBetween(String value1, String value2) {
+            addCriterion("category_name not between", value1, value2, "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceIsNull() {
+            addCriterion("category_introduce is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceIsNotNull() {
+            addCriterion("category_introduce is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceEqualTo(String value) {
+            addCriterion("category_introduce =", value, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceNotEqualTo(String value) {
+            addCriterion("category_introduce <>", value, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceGreaterThan(String value) {
+            addCriterion("category_introduce >", value, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceGreaterThanOrEqualTo(String value) {
+            addCriterion("category_introduce >=", value, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceLessThan(String value) {
+            addCriterion("category_introduce <", value, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceLessThanOrEqualTo(String value) {
+            addCriterion("category_introduce <=", value, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceLike(String value) {
+            addCriterion("category_introduce like", value, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceNotLike(String value) {
+            addCriterion("category_introduce not like", value, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceIn(List<String> values) {
+            addCriterion("category_introduce in", values, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceNotIn(List<String> values) {
+            addCriterion("category_introduce not in", values, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceBetween(String value1, String value2) {
+            addCriterion("category_introduce between", value1, value2, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceNotBetween(String value1, String value2) {
+            addCriterion("category_introduce not between", value1, value2, "categoryIntroduce");
+            return (Criteria) this;
+        }
+
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -1341,6 +1481,16 @@ public class ViRoomUserCategoryExample {
 
         public Criteria andStreamKeyLikeInsensitive(String value) {
             addCriterion("upper(stream_key) like", value.toUpperCase(), "streamKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNameLikeInsensitive(String value) {
+            addCriterion("upper(category_name) like", value.toUpperCase(), "categoryName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIntroduceLikeInsensitive(String value) {
+            addCriterion("upper(category_introduce) like", value.toUpperCase(), "categoryIntroduce");
             return (Criteria) this;
         }
 
