@@ -51,7 +51,7 @@
 
 <script type="text/javascript">
 
-	var live_stream_url = "${nginx_server_ip}" + "/live/" + "${stream_key}" + "/index.m3u8";
+	var live_stream_url = "${nginx_server_ip}" + "/stream/" + "${stream_key}" + "/index.m3u8";
 	//		初始化播放器andwebsocket
 	var player = cyberplayer("player").setup({
 		width: 854,

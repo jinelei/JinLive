@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -64,10 +65,11 @@ public class MainController {
     }
 
     @RequestMapping("/test")
-    public String test() {
+    public String test(HttpServletRequest request) {
+        request.getSession().setAttribute("jin", "asdf");
+        String str = (String) request.getSession().getAttribute("jin");
+        logger.debug(str);
 //        template.convertAndSend("/topic/msg","asdasdf");
-        Object object = wac.getBean("sqlSessionFactory");
-        assert object == null;
         return "fileupload";
     }
 
@@ -80,5 +82,21 @@ public class MainController {
         logger.debug(model.toString());
         return "room";
     }
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(@RequestParam(value = "error", required = false) String error,
+                        @RequestParam(value = "logout", required = false) String logout,
+                        ModelMap model,
+                        HttpServletRequest request) {
+        logger.debug("login get");
+        request.getSession().setAttribute("jin", "get");
+        if (error != null)
+            model.addAttribute("error", "Invalid username and password!");
+        if (logout != null)
+            model.addAttribute("msg", "You've been logged out successfully.");
+        return "login-jsp";
+    }
+
 
 }

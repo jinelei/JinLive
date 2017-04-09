@@ -1,7 +1,9 @@
 cn/jinelei/live/utils/user/UserUtils.class
+cn/jinelei/live/config/MySecurityConfig.class
 cn/jinelei/live/exception/RoomCategoryException.class
 cn/jinelei/live/controller/UserController.class
 cn/jinelei/live/service/RoomCategoryService.class
+cn/jinelei/live/config/RedisConfig.class
 cn/jinelei/live/service/CategoryService.class
 cn/jinelei/live/controller/SearchController.class
 cn/jinelei/live/config/MyAuthenticationProvider.class

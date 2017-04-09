@@ -1,3 +1,5 @@
+<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tags"]/>-->
+<#assign security=JspTaglibs["/WEB-INF/tlds/security.tld"]/>
 <style>
 	.side-box {
 		position: fixed;
@@ -107,15 +109,16 @@
 		padding: 10px 1px;
 		margin: 28px auto;
 		text-align: center;
-        font-size: 18px;
-        transition:  all 0.5s;
+		font-size: 18px;
+		transition: all 0.5s;
 	}
 
-	.menu-mini:hover{
+	.menu-mini:hover {
 		background: rgba(106, 108, 111, 0.99);
 	}
 
 </style>
+
 
 <div id="side_box" class="side-box">
 	<div id="side_menu" class="side-menu side-menu-open">
@@ -158,7 +161,10 @@
 			<img width="50px" height="50px" src="${nginx_server_ip}/images/computer.png"/>
 			<span>robot</span>
 		</div>
-		<div class="menu-toggle-switch" id="user_box"></div>
+		<div class="menu-toggle-switch" id="user_box">
+        <@security.authorize access="hasRole('ROLE_USER')"> Hello admin!</@security.authorize>
+        <@security.authorize principal.username="jin"> Hello jin!</@security.authorize>
+		</div>
 	</div>
 	<a id="collapsing_menu_btn" class="collapsing-menu-btn-open"></a>
 </div>

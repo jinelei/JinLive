@@ -27,38 +27,38 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ContextConfiguration(locations = {"classpath:config/live-servlet.xml"})
 @WebAppConfiguration
 public class MainControllerTest {
-    private static final Logger logger = LoggerFactory.getLogger(MainControllerTest.class);
-    @Autowired
-    private WebApplicationContext wac;
-    private MockMvc mockMvc;
-    @Autowired
-    private RTMPUtils rtmpUtils;
-    @Autowired
-    private RTMPCacheManager rtmpCacheManager;
-
-    @Before
-    public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-    }
-
-    @Test
-    public void index() throws Exception {
-        RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
-        rtmpCacheManager.setRtmpMap(rtmp);
-        mockMvc.perform(get("/index"))
-                .andExpect(status().isOk())
-//                .andDo(print())
-//                .andExpect(model().attribute("message", "Hello Reader!"))
-                .andExpect(view().name("index"));
-    }
-
-    @Test
-    public void room() throws Exception {
-        mockMvc.perform(post("/room")
-                .param("stream_key", "video0"))
-//                .andDo(print())
-                .andExpect(view().name("room"));
-    }
+//    private static final Logger logger = LoggerFactory.getLogger(MainControllerTest.class);
+//    @Autowired
+//    private WebApplicationContext wac;
+//    private MockMvc mockMvc;
+//    @Autowired
+//    private RTMPUtils rtmpUtils;
+//    @Autowired
+//    private RTMPCacheManager rtmpCacheManager;
+//
+//    @Before
+//    public void setup() {
+//        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+//    }
+//
+//    @Test
+//    public void index() throws Exception {
+//        RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
+//        rtmpCacheManager.setRtmpMap(rtmp);
+//        mockMvc.perform(get("/index"))
+//                .andExpect(status().isOk())
+////                .andDo(print())
+////                .andExpect(model().attribute("message", "Hello Reader!"))
+//                .andExpect(view().name("index"));
+//    }
+//
+//    @Test
+//    public void room() throws Exception {
+//        mockMvc.perform(post("/room")
+//                .param("stream_key", "video0"))
+////                .andDo(print())
+//                .andExpect(view().name("room"));
+//    }
 
 
 }

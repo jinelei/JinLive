@@ -25,43 +25,43 @@ import java.sql.SQLException;
 @ContextConfiguration(locations = {"classpath:config/live-servlet.xml", "classpath:spring-config.xml"})
 @WebAppConfiguration
 public class DBTest {
-    private static final Logger logger = LoggerFactory.getLogger(DBTest.class);
-    @Autowired
-    private WebApplicationContext wac;
-
-    @Autowired
-    private SqlSessionFactory sqlSessionFactory;
-
-    @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
-    private RoomMapper roomMapper;
-    @Autowired
-    private UserService userService;
-
-    @Test
-    public void test() throws SQLException {
-        assert sqlSessionFactory != null;
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        logger.debug(sqlSession.getConnection().getCatalog());
-        assert userMapper != null;
-        User user = userMapper.selectByPrimaryKey(1);
-        logger.debug(String.valueOf(user));
-
-        assert roomMapper != null;
-        RoomExample example = new RoomExample();
-        example.createCriteria().andUserIdEqualTo(1);
-        Room room = roomMapper.selectByExample(example).get(0);
-        logger.debug(String.valueOf(room));
-
-
-    }
-
-
-    @Test
-    public void testUserService() {
-        assert userService != null;
-    }
+//    private static final Logger logger = LoggerFactory.getLogger(DBTest.class);
+//    @Autowired
+//    private WebApplicationContext wac;
+//
+//    @Autowired
+//    private SqlSessionFactory sqlSessionFactory;
+//
+//    @Autowired
+//    private UserMapper userMapper;
+//
+//    @Autowired
+//    private RoomMapper roomMapper;
+//    @Autowired
+//    private UserService userService;
+//
+//    @Test
+//    public void test() throws SQLException {
+//        assert sqlSessionFactory != null;
+//        SqlSession sqlSession = sqlSessionFactory.openSession();
+//        logger.debug(sqlSession.getConnection().getCatalog());
+//        assert userMapper != null;
+//        User user = userMapper.selectByPrimaryKey(1);
+//        logger.debug(String.valueOf(user));
+//
+//        assert roomMapper != null;
+//        RoomExample example = new RoomExample();
+//        example.createCriteria().andUserIdEqualTo(1);
+//        Room room = roomMapper.selectByExample(example).get(0);
+//        logger.debug(String.valueOf(room));
+//
+//
+//    }
+//
+//
+//    @Test
+//    public void testUserService() {
+//        assert userService != null;
+//    }
 
 }

@@ -7,6 +7,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/controller/MainController.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/RoomCategoryMapper.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/ViRoomUserCategoryServiceImpl.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/RedisConfig.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/TagServiceImpl.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/CategoryMapper.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/UserMapper.java
@@ -65,6 +66,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/live/LiveUtils.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/rtmp/RTMPCacheManager.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/enumstatus/user/UserStatus.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/MySecurityConfig.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/UserServiceImpl.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/live/Audio.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/ViRoomUserCategory.java
