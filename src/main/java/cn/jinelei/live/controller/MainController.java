@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import java.util.List;
  * Created by jinelei on 17-3-26.
  */
 @Controller
+//@RestController
 @PropertySource("classpath:/application.properties")
 @RequestMapping(value = "/")
 public class MainController {

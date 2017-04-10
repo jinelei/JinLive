@@ -1,10 +1,6 @@
 package cn.jinelei.live.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -33,14 +29,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/live/index","/live/category**","/login").permitAll()
                 .regexMatchers("/live/index","/live/","/live/search.*","/live/room.*","/live/login").permitAll()
                 .anyRequest().authenticated()
-//                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-//                .antMatchers("/category/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
                 .and().formLogin()
 //                .loginPage(String.format("%s/%s/minelogin", tomcat_nginx_server_ip, application_name))
-                .loginPage("/live/login")
+//                .loginPage("/live/login")
 //                .defaultSuccessUrl("/live")
                 .loginProcessingUrl("/perform_login")
 //                .defaultSuccessUrl(String.format("%s/%s/index", tomcat_nginx_server_ip, application_name))
