@@ -1,6 +1,7 @@
 import cn.jinelei.live.dao.UserMapper;
 import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.model.data.User;
+import cn.jinelei.live.model.enumstatus.user.UserStatus;
 import cn.jinelei.live.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,10 +19,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @ContextConfiguration(locations = {"classpath:config/live-servlet.xml", "classpath:spring-config.xml"})
 @WebAppConfiguration
 public class UserServiceTest {
-//    private static final Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
+    //    private static final Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
 //
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private UserService userService;
 //
 //    @Test
 //    public void register1() throws UserException {
@@ -113,6 +114,17 @@ public class UserServiceTest {
 //        userService.getAllUser(0, 2).forEach(user -> System.out.println(user));
 //
 //        System.out.println(userService.getAllUserPageInfo());
+//    }
+
+//    @Test
+//    public void test() throws UserException {
+//        User user = userService.getUserInfo("jinelei");
+//
+//        assert user.getUserStatus() instanceof Integer;
+//        assert Integer.valueOf(UserStatus.EXPIRED.ordinal()) instanceof Integer;
+//        System.out.println(user.getUserStatus());
+//        System.out.println(UserStatus.EXPIRED.toString());
+//        System.out.println(user.getUserStatus() & Integer.valueOf(UserStatus.EXPIRED.toString()));
 //    }
 
 }

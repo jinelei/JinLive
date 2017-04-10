@@ -5,10 +5,12 @@
   Time: 上午10:39
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head></head>
 <body>
 <h1>Login</h1>
+<h2>asdfasdf</h2>
 <form name='f' action="/perform_login" method='POST'>
     <table>
         <tr>
@@ -20,7 +22,9 @@
             <td><input type='password' name='password'/></td>
         </tr>
         <tr>
-            <td><input name="submit" type="submit" value="submit"/></td>
+            <td>
+                <input type="hidden" name="${_csrf.parameterNmae}" value="${_csrf.token}"/>
+                <input name="submit" type="submit" value="submit"/></td>
         </tr>
     </table>
 </form>

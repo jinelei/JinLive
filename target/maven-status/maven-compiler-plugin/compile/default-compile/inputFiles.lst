@@ -21,6 +21,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/TagCategoryExample.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/TagCategoryServiceImpl.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/RoomExample.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/user/MyUserDetailsService.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/test/Servlet.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/TagCategory.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/RoomMapper.java
@@ -73,7 +74,6 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/controller/LoginController.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/MyFreeMarkerView.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/websocket/InfoSocketEndPoint.java
-/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/user/UserUtils.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/TagCategoryMapper.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/RoomCategoryServiceImpl.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/exception/RoomException.java

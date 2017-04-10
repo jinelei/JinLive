@@ -1,9 +1,17 @@
 package cn.jinelei.live.model.data;
 
+import cn.jinelei.live.model.enumstatus.user.UserStatus;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 
-public class User implements Serializable {
+public class User implements Serializable ,UserDetails {
     @Id
     @Column(name = "user_id")
     private Integer userId;
@@ -298,4 +306,45 @@ public class User implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        if ((getUserStatus() & Integer.valueOf(UserStatus.ANCHOR.toString())) != 0) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ANCHOR"));
+        }
+        return grantedAuthorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return getUserPasswd();
+    }
+
+    @Override
+    public String getUsername() {
+        return getUserName();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return (getUserStatus() & Integer.valueOf(UserStatus.EXPIRED.toString())) == 0 ? true : false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return (getUserStatus() & Integer.valueOf(UserStatus.LOCKED.toString())) == 0 ? true : false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return (getUserStatus() & Integer.valueOf(UserStatus.ENABLE.toString())) == 0 ? true : false;
+    }
+
 }

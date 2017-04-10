@@ -117,6 +117,54 @@
 		background: rgba(106, 108, 111, 0.99);
 	}
 
+	#user_box {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		height: 80px;
+		background-color: #295680;
+	}
+
+	.user-action-item {
+		color: white;
+		padding: 4px 10px;
+		margin: 4px 10px;
+		background-color: #346b76;
+		border: solid 1px #52aabb;
+		border-radius: 4px;
+		display: inline-block;
+		transition: all 200ms;
+		cursor: pointer;
+	}
+
+	.user-action-item:hover {
+		background-color: #183237;
+		border: solid 1px #2e606a;
+	}
+
+	#login_register_box {
+		text-align: center;
+		margin: 18px auto;
+	}
+
+	#login_box {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin-left: -250px;
+		margin-top: -150px;
+		width: 500px;
+		height: 300px;
+		background-color: #52aabb;
+		box-shadow: 0 0 7px 2px #2a5760;
+		z-index: 10000;
+		display: none;
+	}
+
+	.bounce-item {
+	}
+
 </style>
 
 
@@ -162,11 +210,59 @@
 			<span>robot</span>
 		</div>
 		<div class="menu-toggle-switch" id="user_box">
-        <@security.authorize access="hasRole('ROLE_USER')"> Hello admin!</@security.authorize>
-        <@security.authorize principal.username="jin"> Hello jin!</@security.authorize>
+        <@security.authorize access="hasAnyRole('USER')">
+			<div>
+				<div class="user-action-item">
+                    <#--<@security.authentication property="principal.username"/>-->
+                    <@security.authentication property="principal" var="user"/>
+					${user.userName}
+				</div>
+				<div class="user-action-item" id="logout_btn">logout</div>
+			</div>
+        </@security.authorize>
+        <@security.authorize access="!hasAnyRole('USER')">
+			<div id="login_register_box">
+				<div class="user-action-item" id="login_btn">login</div>
+				<div class="user-action-item" id="register_btn">regist</div>
+			</div>
+        </@security.authorize>
 		</div>
 	</div>
 	<a id="collapsing_menu_btn" class="collapsing-menu-btn-open"></a>
+	<div class="bounce-item" id="login_box">
+		<table border="0" align="center" cellpadding="0" cellspacing="0" class="tab_search">
+			<tr>
+				<td>
+					<label for="username_input">username: </label>
+				</td>
+				<td>
+					<input type="text" name="username" title="username" class="searchinput" id="username_input"
+					       onkeydown="if (event.keyCode==13) {}"
+					       onblur="if(this.value=='')value='- username -';"
+					       onfocus="if(this.value=='- username -')value='';"
+					       value="- username -" size="10"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="password_input">password: </label>
+				</td>
+				<td>
+					<input type="password" name="password" title="username" class="searchinput" id="password_input"
+					       onkeydown="if (event.keyCode==13) {}"
+					       size="10"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="reset">
+				</td>
+				<td><input type="button" id="login_submit" value="Submit"/></td>
+			</tr>
+		</table>
+	</div>
+	<div class="bounce-item" id="logout_box"></div>
+	<div class="bounce-item" id="register_box"></div>
 </div>
 
 <script type="text/javascript">
@@ -181,6 +277,46 @@
 	})
 	$("#category_category").on('click', function () {
 		window.location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
+	})
+	$(document).one('click', function () {
+		console.log("body click");
+//		$("#login_box").fadeIn(200);
+	})
+	$("#login_btn").on('click', function () {
+		console.log("login");
+		$("#login_box").toggle(200);
+	})
+	$("#logout_btn").on('click', function () {
+		console.log("logout");
+		$.get("http://localhost/logout", function (data, status) {
+			console.log(status);
+			if (status == "success")
+				location.reload(false);
+//				history.go("http://localhost/live/index");
+		})
+	})
+	$("#register_btn").on('click', function () {
+		console.log("register");
+	})
+	$("#login_submit").on('click', function () {
+		var username = $("#username_input").val();
+		var password = $("#password_input").val();
+		if (username != null && password != null) {
+			$.post("http://localhost/live/loginAjax", {username: username, password: password},
+					function (result) {
+						console.log(result);
+						var res = JSON.parse(result);
+						if (res.status == 0) {
+							console.log(res.user);
+							alert("login success " + res.user);
+						} else {
+							alert("login error")
+						}
+					}
+			)
+		} else {
+			alert("username/password not be null");
+		}
 	})
 
 

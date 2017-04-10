@@ -38,14 +38,15 @@
 
         <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}"
                              type="XMLMAPPER"/>
-        <!--<table schema="Category" tableName="category"></table>-->
-        <!--<table schema="Room" tableName="room"></table>-->
-        <!--<table schema="RoomCategory" tableName="room_category"></table>-->
-        <!--<table schema="Tag" tableName="tag"></table>-->
-        <!--<table schema="TagCategory" tableName="tag_category"></table>-->
+        <table schema="Category" tableName="category"></table>
+        <table schema="Room" tableName="room"></table>
+        <table schema="RoomCategory" tableName="room_category"></table>
+        <table schema="Tag" tableName="tag"></table>
+        <table schema="TagCategory" tableName="tag_category"></table>
+        <table schema="ViRoomUserCategory" tableName="vi_room_user_category"></table>
         <!--<table schema="User" tableName="user"></table>-->
-        <table tableName="%" >
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
+        <!--<table tableName="%" >-->
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

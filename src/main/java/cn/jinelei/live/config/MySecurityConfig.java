@@ -1,5 +1,8 @@
 package cn.jinelei.live.config;
 
+import cn.jinelei.live.service.UserService;
+import cn.jinelei.live.utils.user.MyUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,31 +17,41 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     private String tomcat_nginx_server_ip = "http://localhost/tomcat";
     private String application_name = "live";
 
+    @Autowired
+    private UserService userService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("jin").password("jin").roles("USER").and()
-                .withUser("admin").password("admin").roles("ADMIN");
-
+        auth.userDetailsService(new MyUserDetailsService(userService));
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .regexMatchers("/live/index","/live/","/live/search.*","/live/room.*","/live/login").permitAll()
+                .regexMatchers( "/live/index",
+                        "/live/",
+                        "/live",
+                        "/",
+                        "/live/search.*",
+                        "/live/category.*",
+                        "/live/room.*",
+                        "/login.*",
+                        "/logout.*",
+                        "/live/login.*",
+                        "/live/logout.*").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
-//                .loginPage(String.format("%s/%s/minelogin", tomcat_nginx_server_ip, application_name))
-//                .loginPage("/live/login")
-//                .defaultSuccessUrl("/live")
-                .loginProcessingUrl("/perform_login")
-//                .defaultSuccessUrl(String.format("%s/%s/index", tomcat_nginx_server_ip, application_name))
-//                .failureUrl(String.format("%s/%s/minelogin?error", tomcat_nginx_server_ip, application_name))
-//                .failureForwardUrl("/live/error")
+                .loginPage("/live/login")
+                .loginProcessingUrl("/live/perform_login")
+                .failureForwardUrl("/live/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/live/index")
                 .and()
                 .csrf().disable();
     }

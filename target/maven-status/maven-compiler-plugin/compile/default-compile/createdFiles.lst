@@ -1,4 +1,3 @@
-cn/jinelei/live/utils/user/UserUtils.class
 cn/jinelei/live/config/MySecurityConfig.class
 cn/jinelei/live/exception/RoomCategoryException.class
 cn/jinelei/live/controller/UserController.class
@@ -20,7 +19,6 @@ cn/jinelei/live/dao/UserMapper.class
 cn/jinelei/live/dao/TagMapper.class
 cn/jinelei/live/exception/TagCategoryException.class
 cn/jinelei/live/service/impl/RoomCategoryServiceImpl.class
-cn/jinelei/live/config/RestConfig.class
 cn/jinelei/live/service/impl/TagCategoryServiceImpl.class
 cn/jinelei/live/utils/live/LiveUtils.class
 cn/jinelei/live/service/impl/CategoryServiceImpl.class

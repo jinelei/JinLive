@@ -94,7 +94,7 @@ public class SearchController {
 
         resObj.add("array", jsonArray);
 
-        logger.debug(resObj.toString());
+//        logger.debug(resObj.toString());
         return resObj.toString();
     }
 
