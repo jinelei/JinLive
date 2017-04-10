@@ -28,7 +28,6 @@ import java.util.List;
  * Created by jinelei on 17-3-26.
  */
 @Controller
-//@RestController
 @PropertySource("classpath:/application.properties")
 @RequestMapping(value = "/")
 public class MainController {
