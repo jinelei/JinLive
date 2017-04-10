@@ -34,7 +34,7 @@
 </#if>
 
 	<#--<form id="login_form" name="f" action="${tomcat_proxy_server_ip}/${application_name}/login" method="POST">-->
-    <form id="login_form" name="f" action="http://localhost/live/perfrom_login" method="POST">
+    <form id="login_form" name="f" action="http://localhost/perfrom_login" method="POST">
 		<table>
 
 			<tr>

@@ -31,24 +31,25 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .regexMatchers( "/live/index",
-                        "/live/",
-                        "/live",
-                        "/",
-                        "/live/search.*",
-                        "/live/category.*",
-                        "/live/room.*",
-                        "/login.*",
-                        "/logout.*",
-                        "/live/login.*",
-                        "/live/logout.*").permitAll()
-                .anyRequest().authenticated()
+//                .regexMatchers( "/live/index",
+//                        "/live/",
+//                        "/live",
+//                        "/",
+//                        "/live/search.*",
+//                        "/live/category.*",
+//                        "/live/room.*",
+//                        "/login.*",
+//                        "/logout.*",
+//                        "/live/login.*",
+//                        "/live/logout.*").permitAll()
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and().formLogin()
-                .loginPage("/live/login")
-                .loginProcessingUrl("/live/perform_login")
-                .failureForwardUrl("/live/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
+//                .loginPage("/live/login")
+//                .loginProcessingUrl("/perform_login")
+//                .failureForwardUrl("/live/login")
+//                .usernameParameter("username")
+//                .passwordParameter("password")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/live/index")

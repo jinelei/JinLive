@@ -17,16 +17,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,10 +29,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -104,29 +99,29 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginPost(@RequestParam(value = "username", required = false) String username,
-                            @RequestParam(value = "password", required = false) String password) {
-        return "forword:/live/loginAjax";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public ModelAndView loginPost(@RequestParam(value = "username", required = false) String username,
+//                                  @RequestParam(value = "password", required = false) String password) {
+//        return new ModelAndView("forword:/live/loginAjax");
+//    }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(@RequestParam(value = "error", required = false) String error,
-                        @RequestParam(value = "logout", required = false) String logout,
-                        ModelMap model,
-                        HttpServletRequest request) {
-        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        logger.debug(user.toString());
-        if (!user.toString().equals("anonymousUser"))
-            return "redirect:/live/index";
-        logger.debug("login get");
-        boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
-        logger.debug("is ajax: " + isAjax);
-        if (isAjax)
-            return "forward:/loginAjax";
-        else
-            return "login";
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+//                              @RequestParam(value = "logout", required = false) String logout,
+//                              ModelMap model,
+//                              HttpServletRequest request) {
+//        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        logger.debug(user.toString());
+//        if (!user.toString().equals("anonymousUser"))
+//            return new ModelAndView("forward:/live/index");
+//        logger.debug("login get");
+//        boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+//        logger.debug("is ajax: " + isAjax);
+//        if (isAjax)
+//            return new ModelAndView("forward:/loginAjax");
+//        else
+//            return new ModelAndView("login-jsp");
+//    }
 
     @ResponseBody
     @RequestMapping(value = "/loginAjax", method = RequestMethod.GET)

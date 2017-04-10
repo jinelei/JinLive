@@ -55,7 +55,7 @@
 		padding-left: 8px;
 	}
 
-	.tab_search {
+	.tab_login {
 		height: 30px;
 	}
 
@@ -162,6 +162,23 @@
 		display: none;
 	}
 
+	#login_box > div {
+		font-size: 20px;
+		color: #295680;
+		margin: 30px 0px 0px 30px;
+	}
+
+	.tab_login {
+		margin: 20px auto;
+	}
+
+	.tab_login tr > td {
+		margin: 20px;
+		padding: 5px 20px;
+		align-items: center;
+		text-align: center;
+	}
+
 	.bounce-item {
 	}
 
@@ -175,7 +192,7 @@
 		</div>
 		<div id="search_box" class="menu-toggle-switch">
 			<form action="${tomcat_proxy_server_ip}/${application_name}/search" method="post" name="search">
-				<table border="0" align="center" cellpadding="0" cellspacing="0" class="tab_search">
+				<table border="0" align="center" cellpadding="0" cellspacing="0" class="tab_login">
 					<tr>
 						<td>
 							<input type="text" name="q" title="Search" class="searchinput" id="searchinput"
@@ -213,7 +230,7 @@
         <@security.authorize access="hasAnyRole('USER')">
 			<div>
 				<div class="user-action-item">
-                    <#--<@security.authentication property="principal.username"/>-->
+                <#--<@security.authentication property="principal.username"/>-->
                     <@security.authentication property="principal" var="user"/>
 					${user.userName}
 				</div>
@@ -230,7 +247,8 @@
 	</div>
 	<a id="collapsing_menu_btn" class="collapsing-menu-btn-open"></a>
 	<div class="bounce-item" id="login_box">
-		<table border="0" align="center" cellpadding="0" cellspacing="0" class="tab_search">
+		<div>login</div>
+		<table border="0" align="center" cellpadding="0" cellspacing="0" class="tab_login">
 			<tr>
 				<td>
 					<label for="username_input">username: </label>
@@ -249,7 +267,7 @@
 				</td>
 				<td>
 					<input type="password" name="password" title="username" class="searchinput" id="password_input"
-					       onkeydown="if (event.keyCode==13) {}"
+					       onkeydown="if (event.keyCode==13) {LoginVaild()}"
 					       size="10"/>
 				</td>
 			</tr>
@@ -274,50 +292,23 @@
 	});
 	$("#category_all").on('click', function () {
 		window.location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
-	})
+	});
 	$("#category_category").on('click', function () {
 		window.location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
-	})
-	$(document).one('click', function () {
-		console.log("body click");
-//		$("#login_box").fadeIn(200);
-	})
+	});
+	//	$(document).one('click', function () {
+	//		console.log("body click");
+	////		$("#login_box").fadeIn(200);
+	//	});
 	$("#login_btn").on('click', function () {
 		console.log("login");
 		$("#login_box").toggle(200);
-	})
-	$("#logout_btn").on('click', function () {
-		console.log("logout");
-		$.get("http://localhost/logout", function (data, status) {
-			console.log(status);
-			if (status == "success")
-				location.reload(false);
-//				history.go("http://localhost/live/index");
-		})
-	})
+	});
+	$("#logout_btn").on('click', LogoutAction);
 	$("#register_btn").on('click', function () {
 		console.log("register");
-	})
-	$("#login_submit").on('click', function () {
-		var username = $("#username_input").val();
-		var password = $("#password_input").val();
-		if (username != null && password != null) {
-			$.post("http://localhost/live/loginAjax", {username: username, password: password},
-					function (result) {
-						console.log(result);
-						var res = JSON.parse(result);
-						if (res.status == 0) {
-							console.log(res.user);
-							alert("login success " + res.user);
-						} else {
-							alert("login error")
-						}
-					}
-			)
-		} else {
-			alert("username/password not be null");
-		}
-	})
+	});
+	$("#login_submit").on('click', LoginVaild);
 
 
 	$.get("${tomcat_proxy_server_ip}/${application_name}/search", function (data) {
@@ -337,6 +328,33 @@
 		})
 	})
 
+	function LogoutAction() {
+		console.log("logout");
+		$.get("http://localhost/logout", function (data, status) {
+			console.log(status);
+			if (status == "success")
+				location.reload(false);
+		})
+	}
+	function LoginVaild() {
+		var username = $("#username_input").val();
+		var password = $("#password_input").val();
+		if (username != null && password != null) {
+			$.post("http://localhost/live/loginAjax", {username: username, password: password},
+					function (result) {
+						var res = JSON.parse(result);
+						if (res.status == 0) {
+							$("#login_box").fadeOut(200);
+							location.reload(false);
+						} else {
+							alert("login error")
+						}
+					}
+			)
+		} else {
+			alert("username/password not be null");
+		}
+	}
 	function MenuMouseOverAction(event) {
 		if (event.type == 'mouseenter') {
 //			console.log("mouse enter action");
