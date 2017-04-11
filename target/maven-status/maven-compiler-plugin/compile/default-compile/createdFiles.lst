@@ -18,9 +18,11 @@ cn/jinelei/live/controller/CategoryController.class
 cn/jinelei/live/dao/UserMapper.class
 cn/jinelei/live/dao/TagMapper.class
 cn/jinelei/live/exception/TagCategoryException.class
+cn/jinelei/live/websocket/MyHandshakeHandler.class
 cn/jinelei/live/service/impl/RoomCategoryServiceImpl.class
 cn/jinelei/live/service/impl/TagCategoryServiceImpl.class
 cn/jinelei/live/utils/live/LiveUtils.class
+cn/jinelei/live/config/MyStompConfig.class
 cn/jinelei/live/service/impl/CategoryServiceImpl.class
 cn/jinelei/live/dao/RoomCategoryMapper.class
 cn/jinelei/live/controller/LoginController.class

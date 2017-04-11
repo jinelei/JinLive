@@ -67,7 +67,7 @@
 
     <servlet-mapping>
         <servlet-name>live-servlet</servlet-name>
-        <url-pattern>/live/*</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
 </web-app>

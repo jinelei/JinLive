@@ -12,7 +12,7 @@
                                   ignore-unresolvable="true"/>
 
     <import resource="servlet-mybatis-config.xml"/>
-    <import resource="servlet-websocket-config.xml"/>
+    <!--<import resource="servlet-websocket-config.xml"/>-->
     <import resource="servlet-viewresolver-config.xml"/>
     <import resource="servlet-aop-config.xml"/>
 
@@ -40,13 +40,5 @@
     <bean class="cn.jinelei.live.utils.user.MyUserDetailsService" id="userDetailsService">
         <constructor-arg ref="userService"/>
     </bean>
-    <!--config stomp-->
-    <websocket:message-broker application-destination-prefix="/app">
-        <websocket:stomp-endpoint path="/msgservice" allowed-origins="*">
-            <websocket:sockjs/>
-        </websocket:stomp-endpoint>
-        <websocket:simple-broker prefix="/topic"/>
-    </websocket:message-broker>
-
 
 </beans>

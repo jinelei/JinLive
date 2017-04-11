@@ -3,6 +3,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/Room.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/task/MyTask.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/vod/Client.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/websocket/MyHandshakeHandler.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/controller/FileUploadController.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/controller/MainController.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/RoomCategoryMapper.java
@@ -64,6 +65,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/controller/SearchController.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/Tag.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/handler/EntityHandler.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/MyStompConfig.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/live/LiveUtils.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/rtmp/RTMPCacheManager.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/enumstatus/user/UserStatus.java
