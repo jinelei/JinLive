@@ -3,8 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:task="http://www.springframework.org/schema/task"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
     <context:property-placeholder file-encoding="utf8"
                                   location="classpath:/application.properties"
@@ -15,7 +16,15 @@
     <import resource="servlet-viewresolver-config.xml"/>
     <import resource="servlet-aop-config.xml"/>
 
-    <mvc:annotation-driven/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
     <context:component-scan base-package="cn.jinelei.live"/>
     <!--开启task-->
     <task:annotation-driven/>
@@ -24,7 +33,19 @@
     <bean class="cn.jinelei.live.utils.rtmp.RTMPUtils" id="rtmpUtils" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.net.HttpTools" id="httpTools" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.handler.EntityHandler" id="jinStreamHandler" scope="singleton"/>
-    <bean class="cn.jinelei.live.utils.user.UserUtils" id="userUtils" scope="singleton"/>
+    <!--<bean class="cn.jinelei.live.utils.user.UserUtils" id="userUtils" scope="singleton"/>-->
     <bean class="cn.jinelei.live.utils.live.LiveUtils" id="liveUtils" scope="singleton"/>
+    <bean class="cn.jinelei.live.config.MyAuthenticationProvider" id="myAuthenticationProvider"/>
+    <bean class="cn.jinelei.live.utils.user.MyUserDetailsService" id="userDetailsService">
+        <constructor-arg ref="userService"/>
+    </bean>
+    <!--config stomp-->
+    <websocket:message-broker application-destination-prefix="/app">
+        <websocket:stomp-endpoint path="/msgservice" allowed-origins="*">
+            <websocket:sockjs/>
+        </websocket:stomp-endpoint>
+        <websocket:simple-broker prefix="/topic"/>
+    </websocket:message-broker>
+
 
 </beans>

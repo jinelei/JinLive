@@ -28,7 +28,7 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 
     @Override
     public void handleTransportError(WebSocketSession webSocketSession, Throwable throwable) throws Exception {
-        if(webSocketSession.isOpen()){
+        if (webSocketSession.isOpen()) {
             webSocketSession.close();
         }
         logger.debug("websocket connection closed......");

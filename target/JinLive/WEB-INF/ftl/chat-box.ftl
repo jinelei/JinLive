@@ -40,7 +40,8 @@
 	var chat_box = $("#chat_box");
 	var chat_textarea = $("#chat_content_area");
 	var chat_input_box = $("#chat_input_box");
-	var webSocketUrl = "${tomcat_server_ip}" + "/" + "${application_name}" + "/msgservice";
+    <#--var webSocketUrl = "${tomcat_server_ip}" + "/" + "${application_name}" + "/msgservice";-->
+	var webSocketUrl = "${tomcat_server_ip}" + "/msgservice";
 	var sock = SockJS(webSocketUrl);
 	var stomp = Stomp.over(sock);
 	stomp.connect({}, function (frame) {

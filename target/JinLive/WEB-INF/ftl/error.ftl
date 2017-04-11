@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>freemark index</title>
+	<title>error</title>
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
 	<style>
 		* {
