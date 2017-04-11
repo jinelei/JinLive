@@ -10,6 +10,7 @@
     <result column="room_id" jdbcType="INTEGER" property="roomId" />
     <result column="room_name" jdbcType="VARCHAR" property="roomName" />
     <result column="user_subscribe_id" jdbcType="INTEGER" property="userSubscribeId" />
+    <result column="anchor_id" jdbcType="INTEGER" property="anchorId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -79,7 +80,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    user_id, user_name, room_id, room_name, user_subscribe_id
+    user_id, user_name, room_id, room_name, user_subscribe_id, anchor_id
   </sql>
   <select id="selectByExample" parameterType="cn.jinelei.live.model.data.ViUserSubscribeExample" resultMap="BaseResultMap">
     <!--
@@ -137,6 +138,9 @@
       <if test="record.userSubscribeId != null">
         user_subscribe_id = #{record.userSubscribeId,jdbcType=INTEGER},
       </if>
+      <if test="record.anchorId != null">
+        anchor_id = #{record.anchorId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -151,7 +155,8 @@
       user_name = #{record.userName,jdbcType=VARCHAR},
       room_id = #{record.roomId,jdbcType=INTEGER},
       room_name = #{record.roomName,jdbcType=VARCHAR},
-      user_subscribe_id = #{record.userSubscribeId,jdbcType=INTEGER}
+      user_subscribe_id = #{record.userSubscribeId,jdbcType=INTEGER},
+      anchor_id = #{record.anchorId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

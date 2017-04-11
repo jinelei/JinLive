@@ -424,6 +424,66 @@ public class ViUserSubscribeExample {
             return (Criteria) this;
         }
 
+        public Criteria andAnchorIdIsNull() {
+            addCriterion("anchor_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdIsNotNull() {
+            addCriterion("anchor_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdEqualTo(Integer value) {
+            addCriterion("anchor_id =", value, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdNotEqualTo(Integer value) {
+            addCriterion("anchor_id <>", value, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdGreaterThan(Integer value) {
+            addCriterion("anchor_id >", value, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("anchor_id >=", value, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdLessThan(Integer value) {
+            addCriterion("anchor_id <", value, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("anchor_id <=", value, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdIn(List<Integer> values) {
+            addCriterion("anchor_id in", values, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdNotIn(List<Integer> values) {
+            addCriterion("anchor_id not in", values, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdBetween(Integer value1, Integer value2) {
+            addCriterion("anchor_id between", value1, value2, "anchorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAnchorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("anchor_id not between", value1, value2, "anchorId");
+            return (Criteria) this;
+        }
+
         public Criteria andUserNameLikeInsensitive(String value) {
             addCriterion("upper(user_name) like", value.toUpperCase(), "userName");
             return (Criteria) this;
