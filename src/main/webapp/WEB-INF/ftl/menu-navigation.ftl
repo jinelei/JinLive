@@ -250,6 +250,8 @@
 		</div>
 	</div>
 	<a id="collapsing_menu_btn" class="collapsing-menu-btn-open"></a>
+	<#--userlogin-->
+
 	<div class="bounce-item" id="login_box">
 		<div>login</div>
 		<table border="0" align="center" cellpadding="0" cellspacing="0" class="tab_login">
@@ -291,23 +293,12 @@
 
 	$("#collapsing_menu_btn").on("mouseenter mouseout", MenuMouseOverAction);
 	$("#collapsing_menu_btn").on('click', MenuCollapsingBtnToggle);
-	$("#icon_box").on('click', function () {
-		window.location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
-	});
-	$("#category_all").on('click', function () {
-		window.location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
-	});
-	$("#category_category").on('click', function () {
-		window.location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
-	});
-	$("#login_btn").on('click', function () {
-		console.log("login");
-		$("#login_box").toggle(200);
-	});
+	$("#icon_box").on('click', IndexClick);
+	$("#category_all").on('click', {'category': 'all'}, CategoryClick);
+	$("#category_category").on('click', {'category': 'one'}, CategoryClick);
+	$("#login_btn").on('click', LoginAction);
 	$("#logout_btn").on('click', LogoutAction);
-	$("#register_btn").on('click', function () {
-		console.log("register");
-	});
+	$("#register_btn").on('click', RegisterAction);
 	$("#login_submit").on('click', LoginVaild);
 
 
@@ -328,6 +319,28 @@
 		})
 	})
 
+	function IndexClick() {
+		window.location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
+	}
+	function CategoryClick(event) {
+		console.log(event.data);
+		if (event.data.category == "all") {
+			window.location.href = "${tomcat_proxy_server_ip}/${application_name}/category/all";
+		}
+		else {
+			window.location.href = "${tomcat_proxy_server_ip}/${application_name}/category/all";
+		}
+	}
+	function RegisterAction() {
+		console.log("register");
+	}
+	function LoginAction() {
+		console.log("login");
+//		$("#login_box").toggle(200);
+		$('#myModal').on('shown.bs.modal', function () {
+			$('#myInput').focus()
+		})
+	}
 	function LogoutAction() {
 		console.log("logout");
 		$.get("/live/logout", function (data, status) {
@@ -340,7 +353,7 @@
 		var username = $("#username_input").val();
 		var password = $("#password_input").val();
 		if (username != null && password != null) {
-			$.post("http://localhost/live/loginAjax", {username: username, password: password},
+			$.post("http://localhost/live/user/loginAjax", {username: username, password: password},
 					function (result) {
 						var res = JSON.parse(result);
 						if (res.status == 0) {

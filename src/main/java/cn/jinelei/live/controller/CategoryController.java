@@ -1,16 +1,9 @@
 package cn.jinelei.live.controller;
 
-import cn.jinelei.live.exception.CategoryException;
-import cn.jinelei.live.model.data.Category;
-import cn.jinelei.live.model.data.Tag;
 import cn.jinelei.live.model.data.ViRoomUserCategory;
-import cn.jinelei.live.service.CategoryService;
-import cn.jinelei.live.service.TagCategoryService;
-import cn.jinelei.live.service.TagService;
+import cn.jinelei.live.model.enumstatus.room.RoomStatus;
 import cn.jinelei.live.service.ViRoomUserCategoryService;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -39,18 +32,33 @@ public class CategoryController {
     @Autowired
     private ViRoomUserCategoryService viRoomUserCategoryService;
 
-    @Value("${tomcat_server_ip}")
-    private String tomcat_server_ip;
+    @Value("${live_item_page_limit}")
+    private int LiveItemPageLimit;
 
     @RequestMapping(value = "/cid/{cid}", method = RequestMethod.GET)
-    public String searchGet(@PathVariable int cid, ModelMap model) {
+    public ModelAndView searchGet(@PathVariable int cid, ModelAndView model) {
         logger.debug("search cid: " + cid);
         List<ViRoomUserCategory> viRoomUserCategoryByCategory = viRoomUserCategoryService.getAllViRoomUserCategoryByCategory(cid);
         if (viRoomUserCategoryByCategory.size() > 0) {
-            model.addAttribute("byCategoryId", viRoomUserCategoryByCategory);
-            model.addAttribute("categoryName", viRoomUserCategoryByCategory.get(0).getCategoryName());
+            model.addObject("byCategoryId", viRoomUserCategoryByCategory);
+            model.addObject("categoryName", viRoomUserCategoryByCategory.get(0).getCategoryName());
         }
-        return "category";
+        model.setViewName("category");
+        return model;
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ModelAndView allCategory(ModelAndView model) {
+        List<ViRoomUserCategory> viRoomUserCategories = null;
+        PageInfo<ViRoomUserCategory> viRoomUserCategoryPageInfo = viRoomUserCategoryService.getAllViRoomUserCategoryByStatusPageInfo(RoomStatus.ONLINE.ordinal());
+        if (viRoomUserCategoryPageInfo.getTotal() / LiveItemPageLimit > 0) {
+            viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategoryByStatusLimit(RoomStatus.ONLINE.ordinal(), 0, LiveItemPageLimit);
+        } else {
+            viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategoryByStatus(RoomStatus.ONLINE.ordinal());
+        }
+        model.addObject("byOnline", viRoomUserCategories);
+        model.setViewName("category");
+        return model;
     }
 
 }

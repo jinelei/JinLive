@@ -17,6 +17,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/RoomCategoryExample.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/exception/RoomCategoryException.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/vod/Stream.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/ViUserSubscribe.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/RoomService.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/rtmp/RTMPUtils.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/TagCategoryExample.java
@@ -24,6 +25,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/RoomExample.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/user/MyUserDetailsService.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/test/Servlet.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/ViUserSubscribeMapper.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/TagCategory.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/RoomMapper.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/RoomCategory.java
@@ -35,6 +37,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/ViRoomUserCategoryService.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/RTMP.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/live/Live.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/ViUserSubscribeExample.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/exception/CategoryException.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/live/Stream.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/CategoryServiceImpl.java
@@ -46,6 +49,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/websocket/ConnectedCount.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/CategoryExample.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/RoomCategoryService.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/ViUserSubscribeService.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/ViRoomUserCategoryExample.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/User.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/UserService.java
@@ -63,8 +67,10 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/exception/UserException.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/TagCategoryService.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/controller/SearchController.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/UserSubscribe.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/Tag.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/handler/EntityHandler.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/UserSubscribeMapper.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/MyStompConfig.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/live/LiveUtils.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/rtmp/RTMPCacheManager.java
@@ -73,8 +79,9 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/UserServiceImpl.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/live/Audio.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/ViRoomUserCategory.java
-/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/controller/LoginController.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/MyFreeMarkerView.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/UserSubscribeExample.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/ViUserSubscribeServiceImpl.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/websocket/InfoSocketEndPoint.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/dao/TagCategoryMapper.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/impl/RoomCategoryServiceImpl.java

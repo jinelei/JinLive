@@ -140,6 +140,34 @@
 		</div>
     </#list>
 </#if>
+<#if byOnline ??>
+	<h4>Online</h4>
+	<#list byOnline as room>
+		<div class="item" id="${room.streamKey}">
+			<div class="item_content_mask_layer">
+				<img class="item_content_mask_layer_img" src="${nginx_server_ip}/images/play-button.png"/>
+			</div>
+			<div class="item_screenshot">
+				<#if room.roomScreenshot ?? >
+					<h2>asdf</h2>
+				<#else>
+					<img src="${nginx_server_ip}/images/default-screenshot.png">
+				</#if>
+			</div>
+			<div class="item_info_room_status">
+				<#if  room.roomStatus == 1 >
+					<span>Live</span>
+				<#else>
+					<span>Rest</span>
+				</#if>
+			</div>
+			<div class="item_info">
+				<span class="item_info_room_name"> ${room.roomName}</span>
+				<span class="item_info_user_name"> ${room.userName}</span>
+			</div>
+		</div>
+	</#list>
+</#if>
 
 </div>
 <div hidden>
