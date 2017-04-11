@@ -52,7 +52,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 //                .passwordParameter("password")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/live/index")
+//                .logoutSuccessUrl("/live/index")
                 .and()
                 .csrf().disable();
     }

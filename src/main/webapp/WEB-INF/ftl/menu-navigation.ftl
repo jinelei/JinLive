@@ -143,7 +143,7 @@
 		border: solid 1px #2e606a;
 	}
 
-	#login_register_box {
+	#login_and_register_box, #userinfo_and_logout_box {
 		text-align: center;
 		margin: 18px auto;
 	}
@@ -182,9 +182,14 @@
 	.bounce-item {
 	}
 
+	#user_info_btn {
+		text-decoration: none;
+		color: white;
+	}
+
 </style>
 
-
+<#--侧边栏容器-->
 <div id="side_box" class="side-box">
 	<div id="side_menu" class="side-menu side-menu-open">
 		<div id="icon_box">
@@ -228,17 +233,16 @@
 		</div>
 		<div class="menu-toggle-switch" id="user_box">
         <@security.authorize access="hasAnyRole('USER')">
-			<div>
+			<div id="userinfo_and_logout_box">
 				<div class="user-action-item">
-                <#--<@security.authentication property="principal.username"/>-->
                     <@security.authentication property="principal" var="user"/>
-					${user.userName}
+					<a id="user_info_btn" href="/live/user/info"> ${user.userName} </a>
 				</div>
 				<div class="user-action-item" id="logout_btn">logout</div>
 			</div>
         </@security.authorize>
         <@security.authorize access="!hasAnyRole('USER')">
-			<div id="login_register_box">
+			<div id="login_and_register_box">
 				<div class="user-action-item" id="login_btn">login</div>
 				<div class="user-action-item" id="register_btn">regist</div>
 			</div>
@@ -296,10 +300,6 @@
 	$("#category_category").on('click', function () {
 		window.location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
 	});
-	//	$(document).one('click', function () {
-	//		console.log("body click");
-	////		$("#login_box").fadeIn(200);
-	//	});
 	$("#login_btn").on('click', function () {
 		console.log("login");
 		$("#login_box").toggle(200);
@@ -330,7 +330,7 @@
 
 	function LogoutAction() {
 		console.log("logout");
-		$.get("http://localhost/logout", function (data, status) {
+		$.get("/live/logout", function (data, status) {
 			console.log(status);
 			if (status == "success")
 				location.reload(false);
