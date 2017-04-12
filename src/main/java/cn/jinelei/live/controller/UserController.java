@@ -19,10 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +58,23 @@ public class UserController {
 //        return "/login";
 //    }
 
+
+    @ResponseBody
+    @RequestMapping(value = "/exist/name/{name}", method = RequestMethod.GET)
+    public String userIsExist(@PathVariable(value = "name", required = false) String name) {
+        JsonObject jsonObject = new JsonObject();
+        try {
+            User user = userService.getUserInfo(name.trim());
+            jsonObject.addProperty("status", 1);
+        } catch (UserException e) {
+            if (e.getMessage().equals(UserException.USER_NOT_EXIST))
+                jsonObject.addProperty("status", 0);
+            else
+                jsonObject.addProperty("status", 1);
+        }
+        logger.debug(jsonObject.toString());
+        return jsonObject.toString();
+    }
 
     @ResponseBody
     @RequestMapping(value = "/loginAjax", method = RequestMethod.GET)

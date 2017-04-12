@@ -30,7 +30,7 @@
 					</div>
 					<div class="form-group">
 						<label for="modal_register_user_phone" id="modal_register_user_phone_label">Phone:</label>
-						<input type="number" maxlength='11' class="form-control" id="modal_register_user_phone"
+						<input type="text" maxlength='11' class="form-control" id="modal_register_user_phone"
 						       placeholder="Phone">
 					</div>
 					<div class="form-group">
@@ -238,27 +238,83 @@
 	$("#user_register_submit").on('click', userRegisterSubmit);
 	$("#user_modal").on('show.bs.modal', modalShowAction);
 	$("#modal_register_user_password1").on('blur', checkPasswordConformity);
-	$("#modal_login_user_name,#modal_login_user_password,#modal_register_user_name,#modal_register_user_password,#modal_register_user_phone").on('blur', checkInputEmpty);
+	$("#modal_login_user_password,#modal_register_user_password").on('blur', checkPassword);
+	$("#modal_login_user_name,#modal_register_user_name").on('blur', checkUsername);
+	$("#modal_register_user_phone").on('blur', checkPhoneNumber);
 	//	functions
+	function checkUsername() {
+		var name = $(this).val();
+		console.log(name);
+		if ($(this) == $("#modal_register_user_name"))
+            requestUsernameIsExist(name);
+		if (name == "") {
+			errorShowController(this, 1, "Not be empty");
+			inputShake(this);
+		} else if (!(/^[a-z][a-z0-9_]{5,18}$/.test(name))) {
+			errorShowController(this, 1, "Consist of character,number and underline, length 6-18, start with character");
+			inputShake(this);
+		} else {
+			errorShowController(this, 0, "Illegal phone number");
+		}
+	}
 	function checkPasswordConformity() {
 		var password = $("#modal_register_user_password").val();
 		var password1 = $("#modal_register_user_password1").val();
 		if (password != password1 || password1 == "") {
-			errorShowController(this, 1, "Two Passwords Are Not Consistent");
+			errorShowController(this, 1, "Two passwords are not consistent");
 			inputShake(this);
 		} else {
-			errorShowController(this, 0, "Not Be Empty");
+			errorShowController(this, 0, "Not be empty");
 		}
 	}
-	function checkInputEmpty() {
+	function checkPhoneNumber() {
+		var phone = $(this).val();
+		console.log(phone);
+		if (phone == "") {
+			errorShowController(this, 1, "Not be empty");
+			inputShake(this);
+		} else if (!(/^1(3|4|5|7|8)\d{9}$/.test(phone))) {
+			errorShowController(this, 1, "Illegal phone number");
+			inputShake(this);
+		} else {
+			errorShowController(this, 0, "Illegal phone number");
+		}
+	}
+	function checkPassword() {
 //		console.log($(this).val());
 		if ($(this).val() == "") {
-			errorShowController(this, 1, "Not Be Empty");
+			errorShowController(this, 1, "Not be empty");
 			inputShake(this);
-		} else {
-			errorShowController(this, 0, "Not Be Empty");
+		} else if (!(/^[a-z0-9]{6,18}$/.test($(this).val()))) {
+			errorShowController(this, 1, "Length must between 6 and 18");
+			inputShake(this);
+		}
+		else {
+			errorShowController(this, 0, "Not be empty");
 		}
 	}
+
+	function errorShowController(inputEle, status, errorMsg) {
+		var str = $(inputEle).prev('label').text();
+		var preStr = str.substr(0, str.indexOf(':') + 1);
+		if (status == 1) {
+			$(inputEle).parent(".form-group").addClass("has-error");
+			$(inputEle).prev('label').addClass("text-danger");
+			$(inputEle).prev('label').text(preStr + errorMsg);
+			inputShake($(inputEle));
+		}
+		else {
+			$(inputEle).parent(".form-group").removeClass("has-error");
+			$(inputEle).prev('label').addClass("text-danger");
+			$(inputEle).prev('label').removeClass("text-danger");
+			$(inputEle).prev('label').text(preStr);
+		}
+	}
+	function inputShake(inputEle) {
+		$(inputEle).stop().animate({"margin-left": "-10px"}, 30).animate({"margin-left": "10px"}, 30)
+				.animate({"margin-left": "-10px"}, 30).animate({"margin-left": "0px"}, 30);
+	}
+
 	function userRegisterSubmit() {
 		var password = $("#modal_register_user_password").val();
 		var username = $("#modal_register_user_name").val();
@@ -281,33 +337,15 @@
 				} else {
 //					    USER_NOT_EXIST = "0"; USER_NOT_UNIQUE = "1"; USER_WAS_EXIST = "2";
 					if (res.errorCode == 2) {
-						errorShowController($("#modal_register_user_name"), 1, "Already Exist");
+						errorShowController($("#modal_register_user_name"), 1, "Already exist");
+						inputShake($("#modal_register_user_name"));
 					} else {
-						errorShowController($("#modal_register_user_name"), 1, "Unknow Error");
+						errorShowController($("#modal_register_user_name"), 1, "Unknow error");
+						inputShake($("#modal_register_user_name"));
 					}
 				}
 			});
 		}
-	}
-	function errorShowController(inputEle, status, errorMsg) {
-		var str = $(inputEle).prev('label').text();
-		var preStr = str.substr(0, str.indexOf(':') + 1);
-		if (status == 1) {
-			$(inputEle).parent(".form-group").addClass("has-error");
-			$(inputEle).prev('label').addClass("text-danger");
-			$(inputEle).prev('label').text(preStr + errorMsg);
-		}
-		else {
-			$(inputEle).parent(".form-group").removeClass("has-error");
-			$(inputEle).prev('label').addClass("text-danger");
-			$(inputEle).prev('label').removeClass("text-danger");
-			$(inputEle).prev('label').text(preStr);
-		}
-		inputShake($(inputEle));
-	}
-	function inputShake(inputEle) {
-		$(inputEle).stop().animate({"margin-left": "-10px"}, 30).animate({"margin-left": "10px"}, 30)
-				.animate({"margin-left": "-10px"}, 30).animate({"margin-left": "0px"}, 30);
 	}
 	function userLogoutSubmit() {
 		console.log("logout");
@@ -320,21 +358,32 @@
 	function userLoginSubmit() {
 		var username = $("#modal_login_user_name").val();
 		var password = $("#modal_login_user_password").val();
-		if (username != null && password != null) {
-			$.post("http://localhost/live/user/loginAjax", {username: username, password: password},
-					function (result) {
-						var res = JSON.parse(result);
-						if (res.status == 0) {
-							$("#login_box").fadeOut(200);
-							location.reload(false);
-						} else {
-							alert("login error")
+		$(".login> .form-group > input").trigger('blur');
+		if ($(".login>.has-error").length == 0) {
+			if (username != null && password != null) {
+				$.post("http://localhost/live/user/loginAjax", {username: username, password: password},
+						function (result) {
+							var res = JSON.parse(result);
+							if (res.status == 0) {
+								$("#login_box").fadeOut(200);
+								location.reload(false);
+							} else {
+								alert("login error")
+							}
 						}
-					}
-			)
-		} else {
-			alert("username/password not be null");
+				)
+			} else {
+				alert("username/password not be null");
+			}
 		}
+	}
+
+	function requestUsernameIsExist(name) {
+		$.get("${tomcat_proxy_server_ip}/${application_name}/user/exist/name/" + name, function (data) {
+			var res = JSON.parse(data);
+			console.log(res);
+			errorShowController($("#modal_register_user_name"), res.status, "User already exist");
+		});
 	}
 	function processCategoryData(data) {
 		var tmp = JSON.parse(data);
