@@ -102,7 +102,7 @@
 		background-color: #346b76;
 	}
 
-	.menu-mini {
+	.side-menu-mini {
 		display: none;
 		width: 60px;
 		height: 70px;
@@ -113,7 +113,7 @@
 		transition: all 0.5s;
 	}
 
-	.menu-mini:hover {
+	.side-menu-mini:hover {
 		background: rgba(106, 108, 111, 0.99);
 	}
 
@@ -190,7 +190,7 @@
 </style>
 
 
-侧边栏容器
+<#--侧边栏容器-->
 <div id="side_box" class="side-box container">
 	<div id="side_menu" class="side-menu side-menu-open">
 		<div id="icon_box">

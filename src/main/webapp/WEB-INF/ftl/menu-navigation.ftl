@@ -79,7 +79,18 @@
 		left: 0;
 		bottom: 0;
 		/*background-color: #0e4127;*/
+		background-color: #dee1d9;
 		border: dashed 1px red;
+	}
+
+	#collapsing_menu_btn {
+		width: 14px;
+		height: 120px;
+		position: fixed;
+		top: 40%;
+		left: 300px;
+		background: url(http://192.168.31.169/images/collapsing.png) no-repeat;
+		background-position: -30px 0;
 	}
 
 	#icon_box > img {
@@ -163,11 +174,24 @@
 		border: dashed 1px yellow;
 	}
 
-	n
+	.side-menu-mini {
+		display: none;
+		width: 50px;
+		height: 50px;
+		margin: 30px auto;
+		text-align: center;
+		font-size: 18px;
+		transition: all 0.5s;
+	}
+
+	.side-menu-mini:hover {
+		background: rgba(106, 108, 111, 0.99);
+	}
+
 </style>
 
 </div>
-<div class="container-fluid" id="menu_container">
+<div class="container-fluid side-container-open" id="menu_container">
 <#--logo box-->
 	<div class="row-fluid">
 		<div class="span12">
@@ -177,7 +201,7 @@
 		</div>
 	</div>
 <#--search box-->
-	<div class="row-fluid">
+	<div class="side-open row-fluid">
 		<div class="span12">
 			<div class="input-group">
 				<input id="search_input" type="text" class="form-control" name="search_key"
@@ -187,48 +211,66 @@
 		</div>
 	</div>
 <#--seapartor bar-->
-	<div id="div_separator2" class="menu-toggle-switch"
+	<div id="div_separator2" class="side-open menu-toggle-switch"
 	     style="margin: 20px auto;width: 100%; border-bottom: solid 1px darkgrey"></div>
-	<ul id="category_list" class="row-fluid">
+	<ul id="category_list" class="side-open row-fluid">
 	</ul>
+<#--side box close display-->
+	<div class="side-close row ">
+		<div id="category_all" class="side-close span12 side-menu-mini">
+			<img width="50px" height="50px" src="${nginx_server_ip}/images/computer.png"/>
+		</div>
+		<div id="category_category" class="side-close span12 side-menu-mini">
+			<img width="50px" height="50px" src="${nginx_server_ip}/images/menu.png"/>
+		</div>
+		<div class="side-close side-menu-mini span12">
+			<img width="50px" height="50px" src="${nginx_server_ip}/images/computer.png"/>
+		</div>
+	</div>
 <#--category list-->
-	<div class="row-fluid">
+	<div class="side-open row-fluid">
 		<div class="span12">
 		</div>
 	</div>
-<div id="user_box">
-<@security.authorize access="hasAnyRole('USER')">
-	<div id="userinfo_and_logout_box">
-		<div class="user-action-item">
+	<div id="user_box">
+    <@security.authorize access="hasAnyRole('USER')">
+		<div id="userinfo_and_logout_box">
             <@security.authentication property="principal" var="user"/>
-			<a id="user_info_btn" href="/live/user/info"> ${user.userName} </a>
+			<div class="user-action-item side-open">
+				<a id="user_info_btn" href="/live/user/info"> ${user.userName} </a>
+			</div>
+			<div class="side-close" style="display: none;padding: 0 8px;">
+				<a id="user_info_btn" href="/live/user/info">
+					<img width="50px" height="50px" src="${nginx_server_ip}/images/computer.png"/>
+				</a>
+			</div>
+			<div class="user-action-item side-open" data-whatever="logout" data-toggle="modal" data-target="#user_modal"
+			     role="button">Logout
+			</div>
 		</div>
-    <#--<div class="user-action-item" id="logout_btn">logout</div>-->
-		<div class="user-action-item" data-whatever="logout" data-toggle="modal" data-target="#user_modal"
-		     role="button">Logout
+    </@security.authorize>
+    <@security.authorize access="!hasAnyRole('USER')">
+		<div id="login_and_register_box">
+			<div class="user-action-item side-open" data-whatever="login" data-toggle="modal" data-target="#user_modal"
+			     role="button">Login
+			</div>
+			<div class="side-close" style="display: none;">
+				<div data-whatever="login" data-toggle="modal" data-target="#user_modal" role="button">Login</div>
+			</div>
+			<div class="user-action-item side-open" data-whatever="register" data-toggle="modal"
+			     data-target="#user_modal"
+			     role="button">Register
+			</div>
 		</div>
+    </@security.authorize>
+
+    <#--侧边栏开关-->
+		<a id="collapsing_menu_btn" class="collapsing-menu-btn-open"></a>
+
 	</div>
 </div>
-</@security.authorize>
-<@security.authorize access="!hasAnyRole('USER')">
-	<div id="login_and_register_box">
-		<div class="user-action-item" data-whatever="login" data-toggle="modal" data-target="#user_modal"
-		     role="button">Login
-		</div>
-		<div class="user-action-item" data-whatever="register" data-toggle="modal" data-target="#user_modal"
-		     role="button">Register
-		</div>
-	</div>
-</@security.authorize>
-</div>
-
-</div>
-
 
 <script type="text/javascript">
-
-	//	load category data
-	$.get("${tomcat_proxy_server_ip}/${application_name}/search/category", processCategoryData);
 
 
 	//	handle search event
@@ -241,12 +283,15 @@
 	$("#modal_login_user_password,#modal_register_user_password").on('blur', checkPassword);
 	$("#modal_login_user_name,#modal_register_user_name").on('blur', checkUsername);
 	$("#modal_register_user_phone").on('blur', checkPhoneNumber);
+	$("#collapsing_menu_btn").on("mouseenter mouseout", MenuMouseOverAction);
+	$("#collapsing_menu_btn").on('click', MenuCollapsingBtnToggle);
+
 	//	functions
 	function checkUsername() {
 		var name = $(this).val();
 		console.log(name);
 		if ($(this) == $("#modal_register_user_name"))
-            requestUsernameIsExist(name);
+			requestUsernameIsExist(name);
 		if (name == "") {
 			errorShowController(this, 1, "Not be empty");
 			inputShake(this);
@@ -378,6 +423,7 @@
 		}
 	}
 
+	//	load category data
 	function requestUsernameIsExist(name) {
 		$.get("${tomcat_proxy_server_ip}/${application_name}/user/exist/name/" + name, function (data) {
 			var res = JSON.parse(data);
@@ -385,6 +431,8 @@
 			errorShowController($("#modal_register_user_name"), res.status, "User already exist");
 		});
 	}
+	$.get("${tomcat_proxy_server_ip}/${application_name}/search/category", processCategoryData);
+
 	function processCategoryData(data) {
 		var tmp = JSON.parse(data);
 		$.each(tmp.array, function (key, value) {
@@ -428,6 +476,46 @@
 			modal.find('.register').show();
 			modal.find('.login').hide();
 		}
+	}
+	function MenuMouseOverAction(event) {
+		if (event.type == 'mouseenter') {
+//			console.log("mouse enter action");
+			if ($(this).hasClass('collapsing-menu-btn-open'))
+				$(this).css('background-position-x', '-45px');
+			else
+				$(this).css('background-position-x', '-15px');
+		} else if (event.type == 'mouseout') {
+//			console.log("mouse out action");
+			if ($(this).hasClass('collapsing-menu-btn-open'))
+				$(this).css('background-position-x', '-30px');
+			else
+				$(this).css('background-position-x', '0px');
+		}
+	}
+	function MenuCollapsingBtnToggle() {
+		console.log("toggle btn click");
+		$("#collapsing_menu_btn").toggleClass("collapsing-menu-btn-open");
+		$("#collapsing_menu_btn").toggleClass("collapsing-menu-btn-close");
+		$("#collapsing_menu_btn").trigger("mouseover");
+//		$(".menu-toggle-switch").toggle();
+		if ($("#menu_container").hasClass("side-container-open")) {
+			$(".side-open").hide();
+			$(".side-close").show();
+			$("#collapsing_menu_btn").animate({left: '69px'}, 200);
+			$("#menu_container").animate({width: "70px"}, 200, function () {
+				$("#side_box").trigger("boxzoomin");
+			});
+		} else {
+			$(".side-open").show();
+			$(".side-close").hide();
+			$("#collapsing_menu_btn").animate({left: '300px'}, 200);
+			$("#menu_container").animate({width: "300px"}, 200, function () {
+				$("#side_box").trigger("boxzoomout");
+			});
+		}
+
+		$("#menu_container").toggleClass("side-container-close");
+		$("#menu_container").toggleClass("side-container-open");
 	}
 
 </script>
