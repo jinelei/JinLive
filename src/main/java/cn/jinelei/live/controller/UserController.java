@@ -108,6 +108,31 @@ public class UserController {
         return jsonObject.toString();
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/registerAjax", method = RequestMethod.POST)
+    public String registerAjaxPost(@RequestParam(value = "username", required = false) String username,
+                                   @RequestParam(value = "password", required = false) String password,
+                                   @RequestParam(value = "phone", required = false) String phone,
+                                   @RequestParam(value = "age", required = false) Integer age,
+                                   @RequestParam(value = "sex", required = false) Integer sex,
+                                   HttpServletRequest request) {
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+        try {
+            User user1 = userService.register(username, sex, age, password, phone);
+            jsonObject.addProperty("status", "0");
+        } catch (UserException e) {
+            jsonObject.addProperty("status", "1");
+            if (e.getMessage().equals(UserException.USER_NOT_EXIST))
+                jsonObject.addProperty("errorCode", UserException.USER_NOT_EXIST);
+            else if (e.getMessage().equals(UserException.USER_NOT_UNIQUE))
+                jsonObject.addProperty("errorCode", UserException.USER_NOT_UNIQUE);
+            else if (e.getMessage().equals(UserException.USER_WAS_EXIST))
+                jsonObject.addProperty("errorCode", UserException.USER_WAS_EXIST);
+        }
+        logger.debug(jsonObject.toString());
+        return jsonObject.toString();
+    }
 
     @RequestMapping(value = "info", method = RequestMethod.GET)
     public ModelAndView info(ModelAndView model, HttpServletRequest request) {

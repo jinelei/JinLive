@@ -1,4 +1,4 @@
-package cn.jinelei.live.config;
+package cn.jinelei.live.config.viewer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

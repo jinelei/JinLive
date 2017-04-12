@@ -8,7 +8,7 @@
     <!--freemarker -->
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
           id="freeMarkerViewResolver"
-          p:viewClass="cn.jinelei.live.config.MyFreeMarkerView"
+          p:viewClass="cn.jinelei.live.config.viewer.MyFreeMarkerView"
           p:contentType="text/html;charset=UTF-8"
           p:order="1"
           p:exposeRequestAttributes="true"
@@ -24,7 +24,7 @@
     <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
           p:templateLoaderPath="/WEB-INF/ftl/"/>
 
-    <!--internal resource view resolver-->
+    <!--internal resource viewer resolver-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:order="2"
           p:prefix="/WEB-INF/pages/"

@@ -15,7 +15,7 @@ public interface UserService {
 
     User register(String userName, String userNickname, Integer userSex, Integer userAge, String userPhone, Integer userHeight, Integer userWeight, Integer userArea, String userPasswd, String userEmail) throws UserException;
 
-    User register(String userName, Integer userSex, Integer userAge, String userPasswd) throws UserException;
+    User register(String userName, Integer userSex, Integer userAge, String userPasswd,String userPhone) throws UserException;
 
     User register(User user) throws UserException;
 

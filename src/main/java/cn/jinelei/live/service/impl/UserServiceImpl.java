@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String userName, Integer userSex, Integer userAge, String userPasswd) throws UserException {
+    public User register(String userName, Integer userSex, Integer userAge, String userPasswd,String userPhone) throws UserException {
         User user = new User();
         user.setUserName(userName);
         user.setUserNickname(userName);
@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService {
         user.setUserStatus(1);
         user.setUserTreasure(50000);
         user.setUserPasswd(userPasswd);
+        user.setUserPhone(userPhone);
         return register(user);
     }
 
@@ -94,7 +95,11 @@ public class UserServiceImpl implements UserService {
                     user.setUserStatus(Integer.valueOf(UserStatus.INACTIVE.toString()));
                 if (user.getUserTreasure() == null)
                     user.setUserTreasure(Integer.valueOf(UserTreasure.DEFAULT.toString()));
-                userMapper.insert(user);
+                userMapper.insertSelective(user);
+            }
+            if (UserException.USER_WAS_EXIST.equals(e.getMessage())) {
+//                throw new UserException(UserException.USER_WAS_EXIST);
+                throw e;
             }
         }
         return getUserInfo(user.getUserName());

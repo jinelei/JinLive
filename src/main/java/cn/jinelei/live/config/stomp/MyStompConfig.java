@@ -1,4 +1,4 @@
-package cn.jinelei.live.config;
+package cn.jinelei.live.config.stomp;
 
 import cn.jinelei.live.websocket.HandshakeInterceptor;
 import cn.jinelei.live.websocket.MyHandshakeHandler;

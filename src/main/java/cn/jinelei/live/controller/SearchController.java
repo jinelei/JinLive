@@ -19,10 +19,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
@@ -52,9 +49,9 @@ public class SearchController {
     @Value("${tomcat_server_ip}")
     private String tomcat_server_ip;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String searchPost(@RequestParam("q") String q, ModelMap model) {
-        String searchKey = String.format("%%%s%%", q);
+    @RequestMapping(value = "/key/{key}", method = RequestMethod.GET)
+    public String searchPost(@PathVariable("key") String key, ModelMap model) {
+        String searchKey = String.format("%%%s%%", key);
         logger.debug("search key: " + searchKey);
         List<ViRoomUserCategory> viRoomUserCategoryFuzzyRoomName = viRoomUserCategoryService.getAllViRoomUserCategoryFuzzyRoomName(searchKey);
         List<ViRoomUserCategory> viRoomUserCategoryFuzzyUsername = viRoomUserCategoryService.getAllViRoomUserCategoryFuzzyUsername(searchKey);
@@ -64,7 +61,7 @@ public class SearchController {
     }
 
     @ResponseBody
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/category",method = RequestMethod.GET)
     public String searchGet() {
         Gson gson = new Gson();
 

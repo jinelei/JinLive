@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!--<bean class="cn.jinelei.live.websocket.HandshakeInterceptor" id="handshakeInterceptor"/>-->
-    <!--<bean class="cn.jinelei.live.websocket.InfoSocketEndPoint" id="endPoint"/>-->
-    <!--<bean class="cn.jinelei.live.websocket.SystemWebSocketHandler" id="systemWebSocketHandler"/>-->
-    <!--<bean class="cn.jinelei.live.config.MyStompConfig" id="myStompConfig"/>-->
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <!--<task:annotation-driven/>-->
+    <!--<context:component-scan base-package="cn.jinelei.live">-->
+        <!--<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />-->
+    <!--</context:component-scan>-->
 
 </beans>

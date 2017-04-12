@@ -8,7 +8,7 @@
     <!-- Loads Spring Security config file -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:*-config.xml</param-value>
+        <param-value>classpath:spring-config.xml</param-value>
     </context-param>
 
     <filter>
@@ -25,7 +25,7 @@
     </filter>
     <filter>
         <filter-name>corsFilter</filter-name>
-        <filter-class>cn.jinelei.live.config.CORSFilter</filter-class>
+        <filter-class>cn.jinelei.live.config.filter.CORSFilter</filter-class>
     </filter>
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>

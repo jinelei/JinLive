@@ -1,4 +1,4 @@
-package cn.jinelei.live.config;
+package cn.jinelei.live.config.security;
 
 import cn.jinelei.live.service.UserService;
 import cn.jinelei.live.utils.user.MyUserDetailsService;
@@ -17,7 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private String tomcat_nginx_server_ip = "http://localhost/tomcat";
+    private String tomcat_nginx_server_ip = "http://localhost/live";
     private String application_name = "live";
 
     @Autowired

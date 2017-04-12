@@ -1,4 +1,4 @@
-package cn.jinelei.live.config;
+package cn.jinelei.live.config.security;
 
 import cn.jinelei.live.service.UserService;
 import org.slf4j.Logger;

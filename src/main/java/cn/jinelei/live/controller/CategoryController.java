@@ -29,7 +29,7 @@ public class CategoryController {
 
     @Autowired
     private Environment environment;
-    @Autowired
+    @Autowired(required = false)
     private ViRoomUserCategoryService viRoomUserCategoryService;
 
     @Value("${live_item_page_limit}")

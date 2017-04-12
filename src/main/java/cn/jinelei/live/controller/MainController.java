@@ -49,8 +49,6 @@ public class MainController {
     @Autowired
     private SimpMessagingTemplate template;
     @Autowired
-    private WebApplicationContext wac;
-    @Autowired
     private RoomService roomService;
     @Autowired
     private UserService userService;
@@ -78,8 +76,11 @@ public class MainController {
 //        String str = (String) request.getSession().getAttribute("jin");
 //        logger.debug(str);
 //        template.convertAndSend("/topic/msg","asdasdf");
-        return "fileupload";
+//        return "fileupload";
+        return "test";
     }
+
+
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
     public String roomPost(ModelMap model, @RequestParam(value = "stream_key") String streamKey) {
