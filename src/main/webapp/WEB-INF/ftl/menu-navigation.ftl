@@ -80,7 +80,7 @@
 		bottom: 0;
 		/*background-color: #0e4127;*/
 		background-color: #dee1d9;
-		border: dashed 1px red;
+		/*border: dashed 1px red;*/
 	}
 
 	#collapsing_menu_btn {
@@ -100,7 +100,7 @@
 		margin-left: -25px;
 		width: 50px;
 		margin-bottom: 40px;
-		border: dashed 1px red;
+		/*border: dashed 1px red;*/
 	}
 
 	.list-group > span {
@@ -121,7 +121,7 @@
 		display: inline-block;
 		text-align: center;
 		transition: all 0.5s;
-		border: dashed 1px red;
+		/*border: dashed 1px red;*/
 
 	}
 
@@ -164,14 +164,14 @@
 		position: absolute;
 		top: 20%;
 		right: 20%;
-		border: dashed 1px blue;
+		/*border: dashed 1px blue;*/
 	}
 
 	#userinfo_and_logout_box div:first-child, #login_and_register_box div:first-child {
 		position: absolute;
 		top: 20%;
 		left: 20%;
-		border: dashed 1px yellow;
+		/*border: dashed 1px yellow;*/
 	}
 
 	.side-menu-mini {
@@ -503,14 +503,14 @@
 			$(".side-close").show();
 			$("#collapsing_menu_btn").animate({left: '69px'}, 200);
 			$("#menu_container").animate({width: "70px"}, 200, function () {
-				$("#side_box").trigger("boxzoomin");
+				$("#menu_container").trigger("boxzoomin");
 			});
 		} else {
 			$(".side-open").show();
 			$(".side-close").hide();
 			$("#collapsing_menu_btn").animate({left: '300px'}, 200);
 			$("#menu_container").animate({width: "300px"}, 200, function () {
-				$("#side_box").trigger("boxzoomout");
+				$("#menu_container").trigger("boxzoomout");
 			});
 		}
 

@@ -175,11 +175,11 @@
 		$("#submit").click();
 	})
 
-	$("#side_box").on("boxzoomin boxzoomout", function (event) {
+	$("#menu_container").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
-			$("#room_list_container").css("margin-left", "100px");
+			$("#index_container").css("margin-left", "100px");
 		} else if (event.type == "boxzoomout") {
-			$("#room_list_container").css("margin-left", "260px");
+			$("#index_container").css("margin-left", "330px");
 		}
 	})
 
