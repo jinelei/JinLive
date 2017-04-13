@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
 	<title>Demo: play HLS video</title>
-	<script src="${nginx_server_ip}/js/sockjs.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
 	<script src="${nginx_server_ip}/js/stomp.js"></script>
+	<script src="${nginx_server_ip}/js/sockjs.min.js"></script>
 	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
 	<script src="${nginx_server_ip}/js/player/cyberplayer.js"></script>
 	<style>
@@ -33,20 +42,18 @@
 			position: relative;
 			right: 10px;
 			margin-right: 370px;
-			margin-left: 260px;
+			margin-left: 330px;
 		}
 
 	</style>
 </head>
 <body>
 <div id="main_container" class="main-contariner">
-
 <#include  "menu-navigation.ftl">
 	<div id="player_box" class="player-box player-box-chat-open player-box-side-open">
 		<div id="player"></div>
 	</div>
 <#include  "chat-box.ftl">
-
 </div>
 
 <script type="text/javascript">
@@ -72,11 +79,11 @@
 	playerBoxResize();
 
 	//	bind enter event
-	$("#side_box").on('boxzoomin boxzoomout', function (event) {
+	$("#menu_container").on('boxzoomin boxzoomout', function (event) {
 		if (event.type == 'boxzoomin') {
 			$('#player_box').animate({'margin-left': '100px'}, 200, playerBoxResize);
 		} else if (event.type == 'boxzoomout') {
-			$('#player_box').animate({'margin-left': '260px'}, 200, playerBoxResize);
+			$('#player_box').animate({'margin-left': '330px'}, 200, playerBoxResize);
 		}
 	})
 

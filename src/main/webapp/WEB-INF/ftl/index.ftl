@@ -5,11 +5,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
 	<title>freemark index</title>
-	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	        crossorigin="anonymous"></script>
@@ -175,11 +175,11 @@
 		$("#submit").click();
 	})
 
-	$("#side_box").on("boxzoomin boxzoomout", function (event) {
+	$("#menu_container").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
-			$("#room_list_container").css("margin-left", "100px");
+			$("#index_container").css("margin-left", "70px");
 		} else if (event.type == "boxzoomout") {
-			$("#room_list_container").css("margin-left", "260px");
+			$("#index_container").css("margin-left", "300px");
 		}
 	})
 
