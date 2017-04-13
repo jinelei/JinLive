@@ -148,13 +148,12 @@ public class UserController {
         return jsonObject.toString();
     }
 
-    @RequestMapping(value = "info", method = RequestMethod.GET)
-    public ModelAndView info(ModelAndView model, HttpServletRequest request) {
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public ModelAndView userinfo(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView("userinfo");
         Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addObject("user", object);
-        model.setViewName("user-info");
         logger.debug(model.toString());
         return model;
     }
-
 }

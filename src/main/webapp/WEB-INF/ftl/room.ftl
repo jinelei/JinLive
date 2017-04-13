@@ -25,7 +25,7 @@
 		#room_container {
 			margin-left: 330px;
 			margin-right: 400px;
-			background-color: #52aabb;
+			/*background-color: #52aabb;*/
 		}
 
 		#chat_box {
@@ -59,10 +59,47 @@
 
 <#include  'menu-navigation.ftl'>
 <div id="room_container">
-	asdfasdf
+<#if status == 0 && room?? >
+    <#if room.roomName??> <h2 class="text-primary">${room.roomName}</h2></#if>
+    <#if room.categoryName?? > <a style="font-size: 17px" class="text-info pull-right"
+	                              href="/category/cid/${room.categoryId}">${room.categoryName}</a></#if>
+	<hr/>
 	<div id="player_box" class="player-box player-box-chat-open player-box-side-open">
 		<div id="player"></div>
 	</div>
+	<hr/>
+    <h3 class="text-info">主播介绍</h3>
+	<table class="table table-hover">
+		<tr>
+			<td>主播昵称：</td>
+			<td>
+                <#if room.userNickname??>
+					<a class="text-info" href="/user/id/${room.userId}">${room.userNickname}</a>
+                <#else>
+					保密
+                </#if>
+			</td>
+		</tr>
+		<tr>
+			<td>性别：</td>
+			<td><#if room.userSex == 0>保密<#elseif  room.userSex == 1>男<#elseif room.userSex ==2>女</#if></td>
+		</tr>
+		<tr>
+			<td>年龄：</td>
+			<td><#if room.userAge??>${room.userAge}<#else>保密</#if></td>
+		</tr>
+		<tr>
+			<td>身高：</td>
+			<td><#if room.userHeight??>${room.userHeight}<#else>保密</#if></td>
+		</tr>
+		<tr>
+			<td>体重：</td>
+			<td><#if room.userWeight??>${room.userWeight}<#else>保密</#if></td>
+		</tr>
+	</table>
+	<hr/>
+    <#if room.roomIntroduce??> <h3 class="text-info">${room.roomIntroduce}</h3></#if>
+</#if>
 </div>
 <div id="chat_box" class="chat-box-open">
 	<a id="collapsing_chat_btn" class="collapsing-chat-btn-open"></a>
@@ -93,14 +130,9 @@
 
 <script>
 
-	var player_box = $("#player_box");
-	var chat_box = $("#chat_box");
-	var chat_textarea = $("#chat_content_area");
-	var chat_input_box = $("#chat_input_box");
+	//    init websocket
 	var webSocketUrl = "${tomcat_server_ip}" + "/" + "${application_name}" + "/msgservice";
-    <#--var webSocketUrl = "${tomcat_server_ip}" +"/live/msgservice";-->
-	var sock = SockJS(webSocketUrl);
-	var stomp = Stomp.over(sock);
+	var stomp = Stomp.over(SockJS(webSocketUrl));
 	stomp.connect({}, function (frame) {
 		stomp.subscribe("/topic/msg/" + "${stream_key}", function (message) {
 			console.log('Received: ', message);
@@ -109,8 +141,9 @@
 		setTextArea("connected");
 	});
 
-
+	//	init player
 	var live_stream_url = "${nginx_server_ip}" + "/stream/" + "${stream_key}" + "/index.m3u8";
+
 	//		初始化播放器andwebsocket
 	var player = cyberplayer("player").setup({
 		width: 854,
@@ -127,12 +160,10 @@
 		controls: true,
 		ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey
 	});
+
 	//	resize
 	playerBoxResize();
-	chat_textarea.width(chat_box.width());
-	chat_textarea.height(chat_box.height() - 100);
-	chat_input_box.width(chat_box.width());
-	chat_input_box.height(100);
+	initChatContainer();
 
 	//	bind event
 	$("#collapsing_chat_btn").on("mouseenter mouseout", ChatMouseOverAction);
@@ -155,6 +186,7 @@
 		}
 	});
 
+	//	functions
 	function ChatMouseOverAction(event) {
 //		console.log("mouse over action");
 		if (event.type == 'mouseenter') {
@@ -206,6 +238,12 @@
 		var wid = document.getElementById("room_container").clientWidth;
 		var hei = wid * 8 / 16;
 		player.resize(wid, hei);
+	}
+	function initChatContainer() {
+		$("#chat_content_area").width($("#chat_box").width());
+		$("#chat_content_area").height($("#chat_box").height() - 100);
+		$("#chat_input_box").width($("#chat_box").width());
+		$("#chat_input_box").height(100);
 	}
 
 </script>

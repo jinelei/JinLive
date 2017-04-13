@@ -1,5 +1,7 @@
 package cn.jinelei.live.controller;
 
+import cn.jinelei.live.exception.RoomException;
+import cn.jinelei.live.model.data.Room;
 import cn.jinelei.live.model.data.ViRoomUserCategory;
 import cn.jinelei.live.service.RoomService;
 import cn.jinelei.live.service.UserService;
@@ -49,10 +51,6 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/info", method = RequestMethod.GET)
-    public String test(ModelMap model) {
-        return "information";
-    }
 
     @RequestMapping(value = "/temp", method = RequestMethod.GET)
     public String template(ModelMap model) {
@@ -72,8 +70,14 @@ public class MainController {
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
     public ModelAndView roomPost(ModelAndView model, @RequestParam(value = "stream_key") String streamKey) {
-        logger.debug("stream_key: " + streamKey);
         model.addObject("stream_key", streamKey);
+        try {
+            ViRoomUserCategory room = viRoomUserCategoryService.getViRoomUserCategoryByStreamKey(streamKey.trim());
+            model.addObject("status", 0);
+            model.addObject("room", room);
+        } catch (RoomException e) {
+            model.addObject("status", 0);
+        }
         logger.debug(model.toString());
         model.setViewName("room");
         return model;

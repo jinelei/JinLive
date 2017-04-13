@@ -126,9 +126,33 @@ public class ViRoomUserCategoryServiceImpl implements ViRoomUserCategoryService 
 
 
     @Override
-    public ViRoomUserCategory getAllViRoomUserCategoryByUserId(Integer userId) throws RoomException {
+    public ViRoomUserCategory getViRoomUserCategoryByUserId(Integer userId) throws RoomException {
         ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
         example.createCriteria().andUserIdEqualTo(userId);
+        List<ViRoomUserCategory> viRoomUserCategories = viRoomUserCategoryMapper.selectByExample(example);
+        if (viRoomUserCategories.size() > 1)
+            throw new RoomException(RoomException.ROOM_NOT_UNIQUE);
+        else if (viRoomUserCategories.size() < 1)
+            throw new RoomException(RoomException.ROOM_NOT_EXIST);
+        return viRoomUserCategories.get(0);
+    }
+
+    @Override
+    public ViRoomUserCategory getViRoomUserCategoryByRoomId(Integer roomId) throws RoomException {
+        ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
+        example.createCriteria().andRoomIdEqualTo(roomId);
+        List<ViRoomUserCategory> viRoomUserCategories = viRoomUserCategoryMapper.selectByExample(example);
+        if (viRoomUserCategories.size() > 1)
+            throw new RoomException(RoomException.ROOM_NOT_UNIQUE);
+        else if (viRoomUserCategories.size() < 1)
+            throw new RoomException(RoomException.ROOM_NOT_EXIST);
+        return viRoomUserCategories.get(0);
+    }
+
+    @Override
+    public ViRoomUserCategory getViRoomUserCategoryByStreamKey(String streamKey) throws RoomException {
+        ViRoomUserCategoryExample example = new ViRoomUserCategoryExample();
+        example.createCriteria().andStreamKeyEqualTo(streamKey);
         List<ViRoomUserCategory> viRoomUserCategories = viRoomUserCategoryMapper.selectByExample(example);
         if (viRoomUserCategories.size() > 1)
             throw new RoomException(RoomException.ROOM_NOT_UNIQUE);

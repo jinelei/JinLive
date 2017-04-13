@@ -43,7 +43,11 @@ public interface ViRoomUserCategoryService {
     PageInfo<ViRoomUserCategory> getAllViRoomUserCategoryFuzzyUsernamePageInfo(String username);
 
 
-    ViRoomUserCategory getAllViRoomUserCategoryByUserId(Integer userId) throws RoomException;
+    ViRoomUserCategory getViRoomUserCategoryByUserId(Integer userId) throws RoomException;
+
+    ViRoomUserCategory getViRoomUserCategoryByRoomId(Integer roomId) throws RoomException;
+
+    ViRoomUserCategory getViRoomUserCategoryByStreamKey(String streamKey) throws RoomException;
 
 
     List<ViRoomUserCategory> getAllViRoomUserCategoryByCategory(Integer categoryId);
