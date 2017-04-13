@@ -177,9 +177,9 @@
 
 	$("#menu_container").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
-			$("#index_container").css("margin-left", "70px");
+			$("#index_container").css("margin-left", "100px");
 		} else if (event.type == "boxzoomout") {
-			$("#index_container").css("margin-left", "300px");
+			$("#index_container").css("margin-left", "330px");
 		}
 	})
 
