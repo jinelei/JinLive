@@ -2,7 +2,6 @@ package cn.jinelei.live.controller;
 
 import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.model.data.User;
-import cn.jinelei.live.model.data.ViUserSubscribe;
 import cn.jinelei.live.model.enumstatus.user.UserStatus;
 import cn.jinelei.live.service.UserService;
 import cn.jinelei.live.service.ViUserSubscribeService;
@@ -58,6 +57,86 @@ public class UserController {
 //        return "/login";
 //    }
 
+    @RequestMapping(value = "/request/{method}", method = RequestMethod.GET)
+    public ModelAndView requestAuthrize(@PathVariable(value = "method") String method) {
+        ModelAndView model = new ModelAndView("request");
+        Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (object instanceof String) {
+            model.addObject("status", 1);
+        } else {
+            model.addObject("status", 0);
+        }
+        if("anchor".equals(method)){
+            model.setViewName("roomset");
+        }
+        logger.debug(model.toString());
+        return model;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/request/{method}", method = RequestMethod.POST)
+    public String handleRequest(@PathVariable(value = "method") String method,
+                                @RequestParam(required = false, value = "phone") String phone,
+                                @RequestParam(required = false, value = "email") String email) {
+        JsonObject jsonObject = new JsonObject();
+        Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (object instanceof String) {
+            jsonObject.addProperty("status", 1);
+        } else {
+            User user = (User) object;
+            user.setUserPhone(phone);
+            user.setUserEmail(email);
+            Integer status = user.getUserStatus();
+            if ("active".equals(method)) {
+                user.setUserStatus(status ^ Integer.valueOf(UserStatus.INACTIVE.toString()) | Integer.valueOf(UserStatus.ACTIVE.toString()));
+            } else if ("lock".equals(method)) {
+                user.setUserStatus(status ^ Integer.valueOf(UserStatus.LOCKED.toString()));
+            }
+            try {
+                userService.updateUser(user);
+                jsonObject.addProperty("status", 0);
+            } catch (UserException e) {
+                jsonObject.addProperty("status", 1);
+            }
+        }
+        logger.debug(jsonObject.toString());
+        return jsonObject.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String userUpdate(@RequestParam(value = "userid", required = false) Integer userid,
+                             @RequestParam(value = "type", required = false) String type,
+                             @RequestParam(value = "value", required = false) String value) {
+        JsonObject jsonObject = new JsonObject();
+        try {
+            User user = userService.getUserInfo(userid);
+            boolean res;
+            if ("nickname".equals(type)) {
+                user.setUserNickname(value);
+            } else if ("sex".equals(type)) {
+                user.setUserSex(Integer.valueOf(value));
+            } else if ("age".equals(type)) {
+                user.setUserAge(Integer.valueOf(value));
+            } else if ("height".equals(type)) {
+                user.setUserHeight(Integer.valueOf(value));
+            } else if ("weight".equals(type)) {
+                user.setUserWeight(Integer.valueOf(value));
+            } else if ("email".equals(type)) {
+                user.setUserEmail(value);
+            } else if ("password".equals(type)) {
+                user.setUserPasswd(value);
+            } else if ("phone".equals(type)) {
+                user.setUserPhone(value);
+            }
+            res = userService.updateUser(user);
+            jsonObject.addProperty("status", res ? 0 : 1);
+        } catch (UserException e) {
+            jsonObject.addProperty("status", 1);
+        }
+        logger.debug(jsonObject.toString());
+        return jsonObject.toString();
+    }
 
     @ResponseBody
     @RequestMapping(value = "/exist/name/{name}", method = RequestMethod.GET)
@@ -152,7 +231,31 @@ public class UserController {
     public ModelAndView userinfo(HttpServletRequest request) {
         ModelAndView model = new ModelAndView("userinfo");
         Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        model.addObject("user", object);
+        try {
+            if (object instanceof String) {
+                model.addObject("status", 2);
+            } else {
+                User user = userService.getUserInfo(((User) object).getUserId());
+                model.addObject("user", user);
+                model.addObject("status", 0);
+            }
+        } catch (UserException e) {
+            model.addObject("status", 1);
+        }
+        logger.debug(model.toString());
+        return model;
+    }
+
+    @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
+    public ModelAndView userinfo(@PathVariable(value = "id") Integer userId, HttpServletRequest request) {
+        ModelAndView model = new ModelAndView("anchorinfo");
+        try {
+            User user = userService.getUserInfo(userId);
+            model.addObject("user", user);
+            model.addObject("status", 0);
+        } catch (UserException e) {
+            model.addObject("status", 1);
+        }
         logger.debug(model.toString());
         return model;
     }

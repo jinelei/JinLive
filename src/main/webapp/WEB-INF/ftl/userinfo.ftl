@@ -29,18 +29,18 @@
 
 <#include  'menu-navigation.ftl'>
 <div id="userinfo_container">
-<#if user?? && user != "anonymousUser">
+<#if status ==0 && user?? && user != "anonymousUser">
 	<input hidden id="modify_user_id" value="${user.userId}">
 	<br/>
 	<h3 class="text-info">个人信息</h3>
 	<table class="table table-hover">
 		<tr>
-			<td>主播昵称：</td>
-			<td>
+			<td>昵称：</td>
+			<td><span>
                 <#if user.userNickname??> ${user.userNickname}
                 <#else>
 					无
-                </#if>
+                </#if></span>
 				&nbsp;&nbsp;&nbsp;<a id="modify_user_nickname" class="modify_a">修改</a>
 			</td>
 			<td style="display: none;">
@@ -49,15 +49,18 @@
 					       name="nickname"
 					       placeholder="Input new Value" aria-describedby="basic-addon1">
 					<span id="modify_user_nickname_submit"
-					      class="glyphicon glyphicon-saved input-group-addon modify-user-submit-btn"
+					      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+					      aria-hidden="true"></span>
+					<span id="modify_user_nickname_cancel"
+					      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
 					      aria-hidden="true"></span>
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>性别：</td>
-			<td>
-                <#if user.userSex == 0>保密<#elseif  user.userSex == 1>男<#elseif user.userSex ==2>女</#if>
+			<td><span>
+                <#if user.userSex == 0>保密<#elseif  user.userSex == 1>男<#elseif user.userSex ==2>女</#if></span>
 				&nbsp;&nbsp;&nbsp;<a id="modify_user_sex" class="modify_a">修改</a>
 			</td>
 			<td style="display: none;">
@@ -66,15 +69,18 @@
 					       name="sex"
 					       placeholder="Input new Value" aria-describedby="basic-addon1">
 					<span id="modify_user_sex_submit"
-					      class="glyphicon glyphicon-saved input-group-addon modify-user-submit-btn"
+					      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+					      aria-hidden="true"></span>
+					<span id="modify_user_sex_cancel"
+					      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
 					      aria-hidden="true"></span>
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>年龄：</td>
-			<td>
-                <#if user.userAge??>${user.userAge}<#else>无</#if>
+			<td><span>
+                <#if user.userAge??>${user.userAge}<#else>无</#if></span>
 				&nbsp;&nbsp;&nbsp;<a id="modify_user_age" class="modify_a">修改</a>
 			</td>
 			<td style="display: none;">
@@ -83,15 +89,18 @@
 					       name="age"
 					       placeholder="Input new Value" aria-describedby="basic-addon1">
 					<span id="modify_user_age_submit"
-					      class="glyphicon glyphicon-saved input-group-addon modify-user-submit-btn"
+					      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+					      aria-hidden="true"></span>
+					<span id="modify_user_age_cancel"
+					      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
 					      aria-hidden="true"></span>
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>身高：</td>
-			<td>
-                <#if user.userHeight?? >${user.userHeight}<#else>无</#if>
+			<td><span>
+                <#if user.userHeight?? >${user.userHeight}<#else>无</#if></span>
 				&nbsp;&nbsp;&nbsp; <a id="modify_user_height" class="modify_a">修改</a>
 			</td>
 			<td style="display: none;">
@@ -100,15 +109,18 @@
 					       name="height"
 					       placeholder="Input new Value" aria-describedby="basic-addon1">
 					<span id="modify_user_height_submit"
-					      class="glyphicon glyphicon-saved input-group-addon modify-user-submit-btn"
+					      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+					      aria-hidden="true"></span>
+					<span id="modify_user_height_cancel"
+					      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
 					      aria-hidden="true"></span>
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>体重：</td>
-			<td>
-                <#if user.userWeight??>${user.userWeight}<#else>无</#if>
+			<td><span>
+                <#if user.userWeight??>${user.userWeight}<#else>无</#if></span>
 				&nbsp;&nbsp;&nbsp; <a id="modify_user_weight" class="modify_a">修改</a>
 			</td>
 			<td style="display: none;">
@@ -117,7 +129,10 @@
 					       name="weight"
 					       placeholder="Input new Value" aria-describedby="basic-addon1">
 					<span id="modify_user_weight_submit"
-					      class="glyphicon glyphicon-saved input-group-addon modify-user-submit-btn"
+					      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+					      aria-hidden="true"></span>
+					<span id="modify_user_weight_cancel"
+					      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
 					      aria-hidden="true"></span>
 				</div>
 			</td>
@@ -130,7 +145,7 @@
 		<tr>
 			<td>邮箱：</td>
 			<td>
-                <#if user.userEmail??>${user.userEmail}<#else>无</#if>
+                <#if user.userEmail??>${user.userEmail}<#else>无</#if></span>
 				&nbsp;&nbsp;&nbsp; <a id="modify_user_email" class="modify_a">修改</a>
 			</td>
 			<td style="display: none;">
@@ -139,15 +154,18 @@
 					       name="email"
 					       placeholder="Input new Value" aria-describedby="basic-addon1">
 					<span id="modify_user_email_submit"
-					      class="glyphicon glyphicon-saved input-group-addon modify-user-submit-btn"
+					      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+					      aria-hidden="true"></span>
+					<span id="modify_user_email_cancel"
+					      class="glyphicon glyphicon-remove input-group-addon modify-user-remove-btn"
 					      aria-hidden="true"></span>
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>手机号：</td>
-			<td>
-                <#if user.userPhone??>${user.userPhone}<#else>无</#if>
+			<td><span>
+                <#if user.userPhone??>${user.userPhone}<#else>无</#if></span>
 				&nbsp;&nbsp;&nbsp;<a id="modify_user_phone" class="modify_a">修改</a>
 			</td>
 			<td style="display: none;">
@@ -156,7 +174,10 @@
 					       name="phone"
 					       placeholder="Input new Value" aria-describedby="basic-addon1">
 					<span id="modify_user_phone_submit"
-					      class="glyphicon glyphicon-saved input-group-addon modify-user-submit-btn"
+					      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+					      aria-hidden="true"></span>
+					<span id="modify_user_phone_cancel"
+					      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
 					      aria-hidden="true"></span>
 				</div>
 			</td>
@@ -166,20 +187,42 @@
 	<h3 class="text-info">帐号信息</h3>
 	<table class="table table-hover">
 		<tr>
-			<td>财富值：</td>
+			<td>密码：</td>
 			<td>
-                <#if user.userTreasure??>${user.userTreasure}<#else>无</#if>
-				&nbsp;&nbsp;&nbsp; <a id="modify_user_treasure" class="modify_a">修改</a>
+				<span>********</span>
+				&nbsp;&nbsp;&nbsp;<a id="modify_user_password" class="modify_a">修改</a>
 			</td>
 			<td style="display: none;">
 				<div class="input-group">
-					<input id="modify_user_treasure_input" type="text" class="form-control modify-user-input"
-					       name="treasure"
+					<input id="modify_user_password_input" type="passwor" class="form-control modify-user-input"
+					       name="password"
 					       placeholder="Input new Value" aria-describedby="basic-addon1">
-					<span id="modify_user_treasure_submit"
-					      class="glyphicon glyphicon-saved input-group-addon modify-user-submit-btn"
+					<span id="modify_user_password_submit"
+					      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+					      aria-hidden="true"></span>
+					<span id="modify_user_password_cancel"
+					      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
 					      aria-hidden="true"></span>
 				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>用户状态：</td>
+			<td>
+                <#if user.userStatus??><input hidden id="user_status" value="${user.userStatus}"></#if>
+				<span id="user_status_disp"></span>
+			</td>
+		</tr>
+		<tr hidden>
+			<td>房间号：</td>
+			<td>
+				<span id="user_room_key"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>财富值：</td>
+			<td><span>
+                <#if user.userTreasure??>${user.userTreasure}<#else>无</#if></span>
 			</td>
 		</tr>
 	</table>
@@ -202,29 +245,103 @@
 		$(this).parent('td').hide();
 	})
 	$(".modify-user-input").on('blur', function () {
-		var type = $(this).attr('name');
-		var userid = $("#modify_user_id").val();
-		var value = $(this).val();
+		if ($(this).val().length != 0) {
+			var res = confirm("是否提交");
+			if (res) {
+				$(this).next('span').trigger('click');
+			} else {
+				$(this).next('span').next('span').trigger('click');
+			}
+		} else {
+//		    触发取消按钮
+			$(this).next('span').next('span').trigger('click');
+		}
+	})
+	$(".modify-user-submit-btn").on('click', function () {
+		var newVal = $(this).prev('input').val();
+		var oldVal = $(this).parent('div').parent('td').prev('td').children('span').text().trim();
+		console.log(oldVal);
+		if (newVal == oldVal) {
+			alert("与原数据一致");
+			$(this).parent('div').addClass('has-error');
+		} else if (newVal.length == 0) {
+			alert("输入为空");
+			$(this).parent('div').addClass('has-error');
+		} else {
+			modifyUserInfoSubmit(this);
+			openOrCloseInput(this, 'close');
+		}
+	})
+	$(".modify-user-cancel-btn").on('click', function () {
+		openOrCloseInput(this, 'close');
+	})
+
+	$("#menu_container").on("boxzoomin boxzoomout", function (event) {
+		if (event.type == "boxzoomin") {
+			$("#userinfo_container").css("margin-left", "100px");
+		} else if (event.type == "boxzoomout") {
+			$("#userinfo_container").css("margin-left", "330px");
+		}
+	})
+
+	setUserStatus();
+
+	function setUserStatus() {
+		var status = parseInt($("#user_status").val().trim());
+		console.log(status);
+		if ((status & 1) > 0) {
+			console.log("inactive")
+			$("<a href='/live/user/request/active'>&nbsp;申请激活&nbsp;</a>").appendTo($("#user_status_disp"));
+		}
+		if ((status & 256) > 0) {
+			console.log("locked")
+			$("<a href='/live/user/request/lock'>&nbsp;申请解锁&nbsp;</a>").appendTo($("#user_status_disp"));
+		}
+		if ((status & 32 ) == 0) {
+			console.log("anchor")
+			$("<a href='/live/user/request/anchor'>&nbsp;申请成为主播&nbsp;</a>").appendTo($("#user_status_disp"));
+		} else {
+			$("#user_room_key").parent('td').parent('tr').show();
+			$.get("/live/room/stream_key", function (data) {
+				var res = JSON.parse(data);
+				if (res.status == 0) {
+					console.log(res.stream_key);
+					$("<span class='text-primary'>"+ res.stream_key + "</span>").appendTo($("#user_room_key"));
+				} else {
+					console.log("该用户不是主播");
+				}
+			})
+		}
+	}
+	function modifyUserInfoSubmit(ele) {
+		var type = $(ele).prev('input').attr('name').trim();
+		var userid = $("#modify_user_id").val().trim();
+		var value = $(ele).prev('input').val().trim();
 		console.log(type);
 		console.log(userid);
 		console.log(value);
 
-		checkInputEmpty(this);
-
-		$.post("/user/update", {
+		$.post("/live/user/update", {
 			userid: userid,
 			type: type,
 			value: value,
-		}, function (data, status) {
-			console.log(data);
-			console.log(status);
+		}, function (data) {
+			var res = JSON.parse(data);
+			if (res.status == 0) {
+//				alert("更新成功");
+				location.reload(false);
+			} else {
+				alert("更新失败,请重试");
+			}
 		});
-	})
-
-	function checkInputEmpty(ele) {
-	    if ($(ele).val().length ==0){
-	        $(ele).parent('div').addClass("has-error");
-//	        inputShake(ele);
+	}
+	function openOrCloseInput(ele, type) {
+		if (type == 'open' || type == 0) {
+			$(ele).parent('div').parent('td').show();
+			$(ele).parent('div').parent('td').prev('td').hide();
+		} else {
+			$(ele).parent('div').parent('td').hide();
+			$(ele).parent('div').parent('td').prev('td').show();
 		}
 	}
 

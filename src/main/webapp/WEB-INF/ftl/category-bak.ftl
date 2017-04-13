@@ -11,6 +11,21 @@
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+
+<#--#room_list_container {-->
+<#--margin-left: 250px;-->
+<#--padding: 5px;-->
+<#--}-->
+
+	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	        crossorigin="anonymous"></script>
 	<style>
@@ -120,7 +135,7 @@
 <body>
 
 <#include  'menu-navigation.ftl'>
-<div id="room_container">
+<div id="room_list_container">
 <#if byCategoryId ??>
 	<h4>${categoryName}</h4>
     <#list byCategoryId as room>
@@ -195,11 +210,11 @@
 		$("#submit").click();
 	})
 
-	$("#menu_container").on("boxzoomin boxzoomout", function (event) {
+	$("#side_box").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
 			$("#room_container").css("margin-left", "100px");
 		} else if (event.type == "boxzoomout") {
-			$("#room_container").css("margin-left", "330px");
+			$("#room_container").css("margin-left", "260px");
 		}
 	})
 

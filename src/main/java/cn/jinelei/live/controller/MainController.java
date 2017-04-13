@@ -1,11 +1,14 @@
 package cn.jinelei.live.controller;
 
 import cn.jinelei.live.exception.RoomException;
+import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.model.data.Room;
+import cn.jinelei.live.model.data.User;
 import cn.jinelei.live.model.data.ViRoomUserCategory;
 import cn.jinelei.live.service.RoomService;
 import cn.jinelei.live.service.UserService;
 import cn.jinelei.live.service.ViRoomUserCategoryService;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,22 +66,6 @@ public class MainController {
 //        template.convertAndSend("/topic/msg","asdasdf");
 //        return "fileupload";
         return "test";
-    }
-
-
-    @RequestMapping(value = "/room", method = RequestMethod.POST)
-    public ModelAndView roomPost(ModelAndView model, @RequestParam(value = "stream_key") String streamKey) {
-        model.addObject("stream_key", streamKey);
-        try {
-            ViRoomUserCategory room = viRoomUserCategoryService.getViRoomUserCategoryByStreamKey(streamKey.trim());
-            model.addObject("status", 0);
-            model.addObject("room", room);
-        } catch (RoomException e) {
-            model.addObject("status", 0);
-        }
-        logger.debug(model.toString());
-        model.setViewName("room");
-        return model;
     }
 
 

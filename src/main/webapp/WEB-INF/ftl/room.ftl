@@ -74,7 +74,7 @@
 			<td>主播昵称：</td>
 			<td>
                 <#if room.userNickname??>
-					<a class="text-info" href="/user/id/${room.userId}">${room.userNickname}</a>
+					<span>${room.userNickname}</span>
                 <#else>
 					保密
                 </#if>
