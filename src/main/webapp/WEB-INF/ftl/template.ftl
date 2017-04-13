@@ -19,7 +19,7 @@
 			margin: 0;
 		}
 
-		#template_container {
+		#room_container {
 			margin-left: 330px;
 		}
 

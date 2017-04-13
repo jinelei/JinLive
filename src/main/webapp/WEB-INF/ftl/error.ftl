@@ -12,7 +12,7 @@
 			background-color: #d4d4d4;
 		}
 
-		#template_container {
+		#room_container {
 			margin-left: 250px;
 			padding: 5px;
 		}
@@ -162,9 +162,9 @@
 
 	$("#side_box").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
-			$("#template_container").css("margin-left", "100px");
+			$("#room_container").css("margin-left", "100px");
 		} else if (event.type == "boxzoomout") {
-			$("#template_container").css("margin-left", "260px");
+			$("#room_container").css("margin-left", "260px");
 		}
 	})
 

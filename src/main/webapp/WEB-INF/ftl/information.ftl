@@ -1,7 +1,7 @@
 <div id="header">
     <h2>FreeMarker Spring MVC Hello World</h2>
 </div>
-<div id="template_container">
+<div id="room_container">
     <#--<table>-->
         <#--<tr>-->
             <#--<td>nginx_version</td>-->

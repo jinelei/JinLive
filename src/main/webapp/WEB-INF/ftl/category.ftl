@@ -34,7 +34,7 @@
 			margin: 0;
 		}
 
-		#template_container {
+		#room_container {
 			margin-left: 330px;
 		}
 
@@ -212,9 +212,9 @@
 
 	$("#side_box").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
-			$("#template_container").css("margin-left", "100px");
+			$("#room_container").css("margin-left", "100px");
 		} else if (event.type == "boxzoomout") {
-			$("#template_container").css("margin-left", "260px");
+			$("#room_container").css("margin-left", "260px");
 		}
 	})
 

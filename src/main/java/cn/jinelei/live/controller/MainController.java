@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -70,11 +71,12 @@ public class MainController {
 
 
     @RequestMapping(value = "/room", method = RequestMethod.POST)
-    public String roomPost(ModelMap model, @RequestParam(value = "stream_key") String streamKey) {
+    public ModelAndView roomPost(ModelAndView model, @RequestParam(value = "stream_key") String streamKey) {
         logger.debug("stream_key: " + streamKey);
-        model.addAttribute("stream_key", streamKey);
+        model.addObject("stream_key", streamKey);
         logger.debug(model.toString());
-        return "room-bak";
+        model.setViewName("room");
+        return model;
     }
 
 
