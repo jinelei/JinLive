@@ -130,6 +130,9 @@
 				<li>
 					<a href="#" data-for="user_subscribe_disp">我的关注</a>
 				</li>
+				<li style="display: none;" id="nav_room_setting">
+					<a href="#" data-for="room_setting_disp">直播间</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -405,12 +408,87 @@
     <#else>
 		<h4 class="text-primary">尚未关注主播，赶紧去关注吧</h4>
     </#if>
-	    <div hidden>
-		    <form action="${tomcat_proxy_server_ip}/${application_name}/room" method="post">
-			    <input type="text" id="stream_key" name="stream_key"/>
-			    <input type="submit" id="submit"/>
-		    </form>
-	    </div>
+		<div hidden>
+			<form action="${tomcat_proxy_server_ip}/${application_name}/room" method="post">
+				<input type="text" id="stream_key" name="stream_key"/>
+				<input type="submit" id="submit"/>
+			</form>
+		</div>
+	</div>
+
+	<div class="nav-toggle-panel" id="room_setting_disp" style="display: none;">
+		<h3 class="text-info">直播间</h3>
+		<table class="table table-hover">
+
+			<tr>
+				<td>名称：</td>
+				<td>
+					<span id="set_room_name"></span>
+					&nbsp;&nbsp;&nbsp;<a id="modify_room_name" class="modify_a">修改</a>
+				</td>
+				<td style="display: none;">
+					<div class="input-group">
+						<input id="modify_room_name_input" type="text" class="form-control modify-room-input"
+						       name="name"
+						       placeholder="Input new Value" aria-describedby="basic-addon1">
+						<span id="modify_room_name_submit"
+						      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
+						      aria-hidden="true"></span>
+						<span id="modify_room_name_cancel"
+						      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
+						      aria-hidden="true"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>流密钥：</td>
+				<td>
+					<span id="set_room_stream_key"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>分类：</td>
+				<td>
+					<span id="set_room_category"></span>
+					&nbsp;&nbsp;&nbsp;<a id="modify_room_category" class="modify_a">修改</a>
+				</td>
+				<td style="display: none;">
+					<div class="input-group">
+						<select class="form-control" id="modify_room_category_select" name="category">
+						</select>
+                    <#--<input id="modify_room_category_input" type="text" class="form-control modify-room-input"-->
+                    <#--name="category"-->
+                    <#--placeholder="Input new Value" aria-describedby="basic-addon1">-->
+						<span id="modify_room_category_submit"
+						      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
+						      aria-hidden="true"></span>
+						<span id="modify_room_category_cancel"
+						      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
+						      aria-hidden="true"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>简介：</td>
+				<td>
+					<span id="set_room_introduce"></span>
+					&nbsp;&nbsp;&nbsp;<a id="modify_room_introduce" class="modify_a">修改</a>
+				</td>
+				<td style="display: none;">
+					<div class="input-group">
+						<input id="modify_room_introduce_input" type="text" class="form-control modify-room-input"
+						       name="introduce"
+						       placeholder="Input new Value" aria-describedby="basic-addon1">
+						<span id="modify_room_introduce_submit"
+						      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
+						      aria-hidden="true"></span>
+						<span id="modify_room_introduce_cancel"
+						      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
+						      aria-hidden="true"></span>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</div>
 
 </div>
@@ -428,7 +506,7 @@
 		$(this).parent('td').parent('tr').children('td:last').show();
 		$(this).parent('td').hide();
 	})
-	$(".modify-user-input").on('blur', function () {
+	$(".modify-user-input,.modify-room-input").on('blur', function () {
 		if ($(this).val().length != 0) {
 			var res = confirm("是否提交");
 			if (res) {
@@ -456,7 +534,22 @@
 			openOrCloseInput(this, 'close');
 		}
 	})
-	$(".modify-user-cancel-btn").on('click', function () {
+	$(".modify-room-submit-btn").on('click', function () {
+		var newVal = $(this).prev('input').val() || $(this).prev('select').attr('name');
+		var oldVal = $(this).parent('div').parent('td').prev('td').children('span').text().trim();
+		console.log(oldVal);
+		if (newVal == oldVal) {
+			alert("与原数据一致");
+			$(this).parent('div').addClass('has-error');
+		} else if (newVal.length == 0) {
+			alert("输入为空");
+			$(this).parent('div').addClass('has-error');
+		} else {
+			modifyRoomInfoSubmit(this);
+			openOrCloseInput(this, 'close');
+		}
+	})
+	$(".modify-user-cancel-btn,.modify-room-cancel-btn").on('click', function () {
 		openOrCloseInput(this, 'close');
 	})
 	$(".nav-tabs>li>a").on('click', function () {
@@ -481,7 +574,7 @@
 
 
 	function setUserStatus() {
-		var status = parseInt($("#user_status").val().trim());
+		var status = parseInt($("#user_status").val());
 		console.log(status);
 		if ((status & 1) > 0) {
 			console.log("inactive")
@@ -496,16 +589,53 @@
 			$("<a href='/live/user/request/anchor'>&nbsp;申请成为主播&nbsp;</a>").appendTo($("#user_status_disp"));
 		} else {
 			$("#user_room_key").parent('td').parent('tr').show();
-			$.get("/live/room/stream_key", function (data) {
+			$.get("/live/room/info", function (data) {
 				var res = JSON.parse(data);
+				console.log(res);
 				if (res.status == 0) {
-					console.log(res.stream_key);
-					$("<span class='text-primary'>" + res.stream_key + "</span>").appendTo($("#user_room_key"));
+					$("#nav_room_setting").show();
+					var room = JSON.parse(res.room);
+					console.log(room)
+					$("#set_room_name").text(room.roomName);
+					$("#set_room_stream_key").text(room.streamKey);
+					$("#set_room_category").text(room.categoryName);
+					$("#set_room_introduce").text(room.roomIntroduce);
 				} else {
+					$("#nav_room_setting").hide();
 					console.log("该用户不是主播");
 				}
 			})
+			$.get("/live/category/list/json",function (data) {
+				var res = JSON.parse(data);
+				for(var index in res.list){
+				    console.log(res.list[index]);
+				    var tmp = res.list[index];
+				    $("<option data-for='"+tmp.categoryId+"'>"+tmp.categoryName+"</option>").appendTo($("#modify_room_category_select"));
+				}
+			})
 		}
+	}
+	function modifyRoomInfoSubmit(ele) {
+		var type = $(ele).prev('input').attr('name') || $(ele).prev('select').attr('name');
+		var userid = $("#modify_user_id").val().trim();
+		var value = $(ele).prev('input').val() || $(ele).prev('select').children('option:selected').attr('data-for');
+		console.log(type);
+		console.log(userid);
+		console.log(value);
+
+		$.post("/live/room/update", {
+			userid: userid,
+			type: type,
+			value: value,
+		}, function (data) {
+			var res = JSON.parse(data);
+			if (res.status == 0) {
+				alert("更新成功");
+				location.reload(false);
+			} else {
+				alert("更新失败,请重试");
+			}
+		});
 	}
 	function modifyUserInfoSubmit(ele) {
 		var type = $(ele).prev('input').attr('name').trim();

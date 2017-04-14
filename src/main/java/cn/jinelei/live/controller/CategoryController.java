@@ -1,9 +1,13 @@
 package cn.jinelei.live.controller;
 
+import cn.jinelei.live.model.data.Category;
 import cn.jinelei.live.model.data.ViRoomUserCategory;
 import cn.jinelei.live.model.enumstatus.room.RoomStatus;
+import cn.jinelei.live.service.CategoryService;
 import cn.jinelei.live.service.ViRoomUserCategoryService;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +33,9 @@ public class CategoryController {
 
     @Autowired
     private Environment environment;
-    @Autowired(required = false)
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
     private ViRoomUserCategoryService viRoomUserCategoryService;
 
     @Value("${live_item_page_limit}")
@@ -61,4 +67,13 @@ public class CategoryController {
         return model;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/list/json", method = RequestMethod.GET)
+    public String getCategoryListJson() {
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+        List<Category> categoryList = categoryService.getCategoryAll();
+        jsonObject.add("list", gson.toJsonTree(categoryList));
+        return jsonObject.toString();
+    }
 }

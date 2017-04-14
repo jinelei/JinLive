@@ -111,10 +111,10 @@
 
 	.category-name-item {
 		width: 40%;
-		height: 27px;
+		height: 30px;
 		overflow: hidden;
 		padding: 5px 1px;
-		background: #262b29;
+		background: #808080;
 		font-size: 13px;
 		color: white;
 		margin: 5px;
@@ -122,11 +122,18 @@
 		text-align: center;
 		transition: all 0.5s;
 		/*border: dashed 1px red;*/
+        box-shadow: 0 0 1px 1px #6e6e6e;
+		border-radius: 2px;
 
 	}
 
 	.category-name-item:hover {
-		background-color: #76171e;
+		background-color: #3b383c;
+	}
+
+	#category_list{
+		overflow-y: auto;
+		height: 75%;
 	}
 
 	#user_box {
@@ -134,7 +141,7 @@
 		bottom: 0;
 		right: 0;
 		left: 0;
-		height: 80px;
+		height: 8%;
 		background-color: #525b57;
 	}
 
@@ -142,8 +149,9 @@
 		color: white;
 		padding: 4px 10px;
 		margin: 4px 10px;
-		background-color: #346b76;
-		border: solid 1px #52aabb;
+        font-size: 15px;
+		background-color: #1b7604;
+		border: solid 1px #125203;
 		border-radius: 4px;
 		display: inline-block;
 		transition: all 200ms;
@@ -151,8 +159,9 @@
 	}
 
 	.user-action-item:hover {
-		background-color: #183237;
+		background-color: #193711;
 		border: solid 1px #2e606a;
+        box-shadow: 0 0 10px 1px dimgrey;
 	}
 
 	#userinfo_and_logout_box, #login_and_register_box {
@@ -237,7 +246,7 @@
 		<div id="userinfo_and_logout_box">
             <@security.authentication property="principal" var="user"/>
 			<div class="user-action-item side-open">
-				<a id="user_info_btn" href="/live/user/info"> ${user.userName} </a>
+				<a id="user_info_btn" style="color: #fff; text-decoration: none" href="/live/user/info"> ${user.userName} </a>
 			</div>
 			<div class="side-close" style="display: none;padding: 0 8px;">
 				<a id="user_info_btn" href="/live/user/info">
@@ -252,14 +261,14 @@
     <@security.authorize access="!hasAnyRole('USER')">
 		<div id="login_and_register_box">
 			<div id="user_login_btn" class="user-action-item side-open" data-whatever="login" data-toggle="modal" data-target="#user_modal"
-			     role="button">Login
+			     role="button">登录
 			</div>
 			<div class="side-close" style="display: none;color: #fff;">
-				<div data-whatever="login" data-toggle="modal" data-target="#user_modal" role="button">Login</div>
+				<div data-whatever="login" data-toggle="modal" data-target="#user_modal" role="button">登录</div>
 			</div>
 			<div class="user-action-item side-open" data-whatever="register" data-toggle="modal"
 			     data-target="#user_modal"
-			     role="button">Register
+			     role="button">注册
 			</div>
 		</div>
     </@security.authorize>

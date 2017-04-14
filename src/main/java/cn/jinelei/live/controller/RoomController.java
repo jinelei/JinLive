@@ -1,17 +1,17 @@
 package cn.jinelei.live.controller;
 
+import cn.jinelei.live.exception.RoomCategoryException;
 import cn.jinelei.live.exception.RoomException;
 import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.exception.UserSubscribeException;
 import cn.jinelei.live.model.data.Room;
 import cn.jinelei.live.model.data.User;
-import cn.jinelei.live.model.data.UserSubscribe;
 import cn.jinelei.live.model.data.ViRoomUserCategory;
 import cn.jinelei.live.model.enumstatus.room.RoomStatus;
 import cn.jinelei.live.model.enumstatus.user.UserStatus;
 import cn.jinelei.live.service.*;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import jdk.nashorn.internal.scripts.JO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,6 +39,8 @@ public class RoomController {
     @Autowired
     private SimpMessagingTemplate template;
     @Autowired
+    private RoomCategoryService roomCategoryService;
+    @Autowired
     private RoomService roomService;
     @Autowired
     private UserService userService;
@@ -50,6 +50,8 @@ public class RoomController {
     private ViUserSubscribeService viUserSubscribeService;
     @Autowired
     private UserSubscribeService userSubscribeService;
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView roomPost(ModelAndView model, @RequestParam(value = "stream_key") String streamKey) {
@@ -104,7 +106,7 @@ public class RoomController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/stream_key")
+    @RequestMapping(value = "/info")
     public String getStreamKey() {
         JsonObject jsonObject = new JsonObject();
         try {
@@ -115,10 +117,45 @@ public class RoomController {
             } else {
                 ViRoomUserCategory roomUserCategory = viRoomUserCategoryService.getViRoomUserCategoryByUserId(((User) object).getUserId());
                 jsonObject.addProperty("status", 0);
-                jsonObject.addProperty("stream_key", roomUserCategory.getStreamKey());
+                jsonObject.addProperty("room", new Gson().toJson(roomUserCategory));
             }
         } catch (RoomException e) {
             jsonObject.addProperty("status", 1);
+        }
+        logger.debug(jsonObject.toString());
+        return jsonObject.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String roomUpdate(@RequestParam(value = "userid", required = false) Integer userid,
+                             @RequestParam(value = "type", required = false) String type,
+                             @RequestParam(value = "value", required = false) String value) {
+        JsonObject jsonObject = new JsonObject();
+        List<Room> rooms = roomService.getAllRoomByUser(userid);
+        if (rooms.size() != 1)
+            jsonObject.addProperty("status", 1);
+        else {
+            Room updateRoom = rooms.get(0);
+            boolean flag = false;
+            if ("name".equals(type)) {
+                updateRoom.setRoomName(value.trim());
+                flag=true;
+            } else if ("introduce".equals(type)) {
+                updateRoom.setRoomIntroduce(value);
+                flag=true;
+            } else if ("category".equals(type)) {
+                boolean res = roomCategoryService.insertOrUpdateRoomCategory(updateRoom.getRoomId(), Integer.valueOf(value));
+                jsonObject.addProperty("status", res ? 0 : 1);
+            }
+            if (flag){
+                try {
+                    roomService.updateRoom(updateRoom);
+                    jsonObject.addProperty("status", 0);
+                } catch (RoomException e) {
+                    jsonObject.addProperty("status", 1);
+                }
+            }
         }
         logger.debug(jsonObject.toString());
         return jsonObject.toString();

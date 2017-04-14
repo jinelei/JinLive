@@ -34,13 +34,18 @@ public class RoomCategoryServiceImpl implements RoomCategoryService {
 
     @Override
     public RoomCategory insertRoomCategory(Integer roomId, Integer categoryId) throws RoomCategoryException {
-        RoomCategory roomCategory = getRoomCategory(roomId, categoryId);
-        if (roomCategory != null)
-            throw new RoomCategoryException(RoomCategoryException.ROOMCATEGORY_WAS_EXIST);
-        roomCategory = new RoomCategory();
-        roomCategory.setCategoryId(categoryId);
-        roomCategory.setRoomId(roomId);
-        int res = roomCategoryMapper.insertSelective(roomCategory);
+        RoomCategory roomCategory = null;
+        int res = 0;
+        try {
+            roomCategory = getRoomCategory(roomId, categoryId);
+        } catch (RoomCategoryException e) {
+            if (e.getMessage().equals(RoomCategoryException.ROOMCATEGORY_NOT_EXIST)) {
+                roomCategory = new RoomCategory();
+                roomCategory.setCategoryId(categoryId);
+                roomCategory.setRoomId(roomId);
+                res = roomCategoryMapper.insertSelective(roomCategory);
+            }
+        }
         if (res != 1)
             throw new RoomCategoryException(RoomCategoryException.ROOMCATEGORY_INSERT_FAILED);
         return getRoomCategory(roomId, categoryId);
@@ -49,6 +54,16 @@ public class RoomCategoryServiceImpl implements RoomCategoryService {
     @Override
     public boolean deleteRoomCateGory(Room room, Category category) throws RoomCategoryException {
         return deleteRoomCateGory(room.getRoomId(), category.getCategoryId());
+    }
+
+    @Override
+    public boolean deleteRoomCateGoryByRoomId(Integer roomId) throws RoomCategoryException {
+        RoomCategoryExample example = new RoomCategoryExample();
+        example.createCriteria().andRoomIdEqualTo(roomId);
+        int res = roomCategoryMapper.deleteByExample(example);
+        if (res != 1)
+            throw new RoomCategoryException(RoomCategoryException.ROOMCATEGORY_DELETE_FAILED);
+        return true;
     }
 
     @Override
@@ -111,5 +126,19 @@ public class RoomCategoryServiceImpl implements RoomCategoryService {
         RoomCategoryExample example = new RoomCategoryExample();
         example.createCriteria().andCategoryIdEqualTo(categoryId);
         return roomCategoryMapper.selectByExample(example);
+    }
+
+    @Override
+    public boolean insertOrUpdateRoomCategory(Integer roomId, Integer userId) {
+        boolean result = true;
+        try {
+            if (getRoomCategoryByRoomId(roomId).size() != 0) {
+                deleteRoomCateGoryByRoomId(roomId);
+            }
+            insertRoomCategory(roomId, userId);
+        } catch (RoomCategoryException e) {
+            result = false;
+        }
+        return result;
     }
 }

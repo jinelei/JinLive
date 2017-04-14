@@ -16,6 +16,8 @@ public interface RoomCategoryService {
 
     RoomCategory insertRoomCategory(Integer roomId, Integer categoryId) throws RoomCategoryException;
 
+    boolean deleteRoomCateGoryByRoomId(Integer roomId) throws RoomCategoryException;
+
     boolean deleteRoomCateGory(Room room, Category category) throws RoomCategoryException;
 
     boolean deleteRoomCateGory(Integer roomId, Integer categoryId) throws RoomCategoryException;
@@ -32,4 +34,5 @@ public interface RoomCategoryService {
 
     List<RoomCategory> getRoomCategoryByCategoryId(Integer categoryId);
 
+    boolean insertOrUpdateRoomCategory(Integer roomId, Integer integer);
 }

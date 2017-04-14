@@ -61,7 +61,7 @@ public class SearchController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/category",method = RequestMethod.GET)
+    @RequestMapping(value = "/category", method = RequestMethod.GET)
     public String searchGet() {
         Gson gson = new Gson();
 
@@ -77,7 +77,7 @@ public class SearchController {
             JsonArray array = new JsonArray();
             tagCategoryService.getTagCategoryByTagId(tag.getTagId()).forEach(tagCategory -> {
                 try {
-                    Category category = categoryService.getCategory(tagCategory.getTagCategoryId());
+                    Category category = categoryService.getCategory(tagCategory.getCategoryId());
                     array.add(gson.toJson(category));
                 } catch (CategoryException e) {
                     e.printStackTrace();
