@@ -5,12 +5,28 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="room_id" jdbcType="INTEGER" property="roomId" />
     <result column="room_name" jdbcType="VARCHAR" property="roomName" />
-    <result column="user_subscribe_id" jdbcType="INTEGER" property="userSubscribeId" />
-    <result column="anchor_id" jdbcType="INTEGER" property="anchorId" />
+    <result column="room_status" jdbcType="INTEGER" property="roomStatus" />
+    <result column="room_screenshot" jdbcType="VARCHAR" property="roomScreenshot" />
+    <result column="room_introduce" jdbcType="VARCHAR" property="roomIntroduce" />
+    <result column="stream_key" jdbcType="VARCHAR" property="streamKey" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="category_introduce" jdbcType="VARCHAR" property="categoryIntroduce" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname" />
+    <result column="user_sex" jdbcType="INTEGER" property="userSex" />
+    <result column="user_age" jdbcType="INTEGER" property="userAge" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_height" jdbcType="INTEGER" property="userHeight" />
+    <result column="user_weight" jdbcType="INTEGER" property="userWeight" />
+    <result column="user_area" jdbcType="INTEGER" property="userArea" />
+    <result column="user_status" jdbcType="INTEGER" property="userStatus" />
+    <result column="user_treasure" jdbcType="INTEGER" property="userTreasure" />
+    <result column="subscriber_id" jdbcType="INTEGER" property="subscriberId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -80,7 +96,10 @@
     <!--
       WARNING - @mbg.generated
     -->
-    user_id, user_name, room_id, room_name, user_subscribe_id, anchor_id
+    room_id, room_name, room_status, room_screenshot, room_introduce, stream_key, category_id, 
+    category_name, category_introduce, user_id, user_name, user_nickname, user_sex, user_age, 
+    user_phone, user_email, user_height, user_weight, user_area, user_status, user_treasure, 
+    subscriber_id
   </sql>
   <select id="selectByExample" parameterType="cn.jinelei.live.model.data.ViUserSubscribeExample" resultMap="BaseResultMap">
     <!--
@@ -123,23 +142,71 @@
     -->
     update vi_user_subscribe
     <set>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-      <if test="record.userName != null">
-        user_name = #{record.userName,jdbcType=VARCHAR},
-      </if>
       <if test="record.roomId != null">
         room_id = #{record.roomId,jdbcType=INTEGER},
       </if>
       <if test="record.roomName != null">
         room_name = #{record.roomName,jdbcType=VARCHAR},
       </if>
-      <if test="record.userSubscribeId != null">
-        user_subscribe_id = #{record.userSubscribeId,jdbcType=INTEGER},
+      <if test="record.roomStatus != null">
+        room_status = #{record.roomStatus,jdbcType=INTEGER},
       </if>
-      <if test="record.anchorId != null">
-        anchor_id = #{record.anchorId,jdbcType=INTEGER},
+      <if test="record.roomScreenshot != null">
+        room_screenshot = #{record.roomScreenshot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roomIntroduce != null">
+        room_introduce = #{record.roomIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.streamKey != null">
+        stream_key = #{record.streamKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryName != null">
+        category_name = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryIntroduce != null">
+        category_introduce = #{record.categoryIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNickname != null">
+        user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSex != null">
+        user_sex = #{record.userSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAge != null">
+        user_age = #{record.userAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.userPhone != null">
+        user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEmail != null">
+        user_email = #{record.userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userHeight != null">
+        user_height = #{record.userHeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.userWeight != null">
+        user_weight = #{record.userWeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.userArea != null">
+        user_area = #{record.userArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.userStatus != null">
+        user_status = #{record.userStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userTreasure != null">
+        user_treasure = #{record.userTreasure,jdbcType=INTEGER},
+      </if>
+      <if test="record.subscriberId != null">
+        subscriber_id = #{record.subscriberId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -151,12 +218,28 @@
       WARNING - @mbg.generated
     -->
     update vi_user_subscribe
-    set user_id = #{record.userId,jdbcType=INTEGER},
-      user_name = #{record.userName,jdbcType=VARCHAR},
-      room_id = #{record.roomId,jdbcType=INTEGER},
+    set room_id = #{record.roomId,jdbcType=INTEGER},
       room_name = #{record.roomName,jdbcType=VARCHAR},
-      user_subscribe_id = #{record.userSubscribeId,jdbcType=INTEGER},
-      anchor_id = #{record.anchorId,jdbcType=INTEGER}
+      room_status = #{record.roomStatus,jdbcType=INTEGER},
+      room_screenshot = #{record.roomScreenshot,jdbcType=VARCHAR},
+      room_introduce = #{record.roomIntroduce,jdbcType=VARCHAR},
+      stream_key = #{record.streamKey,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      category_name = #{record.categoryName,jdbcType=VARCHAR},
+      category_introduce = #{record.categoryIntroduce,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      user_sex = #{record.userSex,jdbcType=INTEGER},
+      user_age = #{record.userAge,jdbcType=INTEGER},
+      user_phone = #{record.userPhone,jdbcType=VARCHAR},
+      user_email = #{record.userEmail,jdbcType=VARCHAR},
+      user_height = #{record.userHeight,jdbcType=INTEGER},
+      user_weight = #{record.userWeight,jdbcType=INTEGER},
+      user_area = #{record.userArea,jdbcType=INTEGER},
+      user_status = #{record.userStatus,jdbcType=INTEGER},
+      user_treasure = #{record.userTreasure,jdbcType=INTEGER},
+      subscriber_id = #{record.subscriberId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

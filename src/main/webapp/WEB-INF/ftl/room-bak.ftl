@@ -2,10 +2,10 @@
 <html>
 <head>
 	<title>Demo: play HLS video</title>
-	<script src="${nginx_server_ip}/js/sockjs.min.js"></script>
-	<script src="${nginx_server_ip}/js/stomp.js"></script>
-	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
-	<script src="${nginx_server_ip}/js/player/cyberplayer.js"></script>
+	<script src="/js/sockjs.min.js"></script>
+	<script src="/js/stomp.js"></script>
+	<script src="/js/jquery-3.2.0.min.js"></script>
+	<script src="/js/player/cyberplayer.js"></script>
 	<style>
 		* {
 			margin: 0;
@@ -51,7 +51,7 @@
 
 <script type="text/javascript">
 
-	var live_stream_url = "${nginx_server_ip}" + "/stream/" + "${stream_key}" + "/index.m3u8";
+	var live_stream_url = "" + "/stream/" + "${stream_key}" + "/index.m3u8";
 	//		初始化播放器andwebsocket
 	var player = cyberplayer("player").setup({
 		width: 854,

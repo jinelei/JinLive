@@ -2,6 +2,8 @@ package cn.jinelei.live.controller;
 
 import cn.jinelei.live.exception.UserException;
 import cn.jinelei.live.model.data.User;
+import cn.jinelei.live.model.data.ViUserSubscribe;
+import cn.jinelei.live.model.enumstatus.room.RoomStatus;
 import cn.jinelei.live.model.enumstatus.user.UserStatus;
 import cn.jinelei.live.service.UserService;
 import cn.jinelei.live.service.ViUserSubscribeService;
@@ -24,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -66,7 +69,7 @@ public class UserController {
         } else {
             model.addObject("status", 0);
         }
-        if("anchor".equals(method)){
+        if ("anchor".equals(method)) {
             model.setViewName("roomset");
         }
         logger.debug(model.toString());
@@ -237,6 +240,21 @@ public class UserController {
             } else {
                 User user = userService.getUserInfo(((User) object).getUserId());
                 model.addObject("user", user);
+                List<ViUserSubscribe> data = viUserSubscribeService.getAllViUserSubscribeBySubscriberId(user.getUserId());
+                if (data != null) {
+                    List<ViUserSubscribe> online = new ArrayList<>();
+                    List<ViUserSubscribe> offline = new ArrayList<>();
+                    for (ViUserSubscribe viUserSubscribe : data) {
+                        if (viUserSubscribe.getRoomStatus().equals(RoomStatus.ONLINE))
+                            online.add(viUserSubscribe);
+                        else
+                            offline.add(viUserSubscribe);
+                    }
+                    if (online.size() > 0)
+                        model.addObject("online", online);
+                    if (offline.size() > 0)
+                        model.addObject("offline", offline);
+                }
                 model.addObject("status", 0);
             }
         } catch (UserException e) {

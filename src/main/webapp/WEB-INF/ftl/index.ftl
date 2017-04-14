@@ -9,7 +9,7 @@
 	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
+	<script src="/js/jquery-3.2.0.min.js"></script>
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	        crossorigin="anonymous"></script>
@@ -129,13 +129,13 @@
 			<div class="col-lg-3">
 				<div class="item" id="${room.streamKey}">
 					<div class="item_content_mask_layer">
-						<img class="item_content_mask_layer_img" src="${nginx_server_ip}/images/play-button.png"/>
+						<img class="item_content_mask_layer_img" src="/images/play-button.png"/>
 					</div>
 					<div class="item_screenshot">
                         <#if room.roomScreenshot ?? >
 							<h2>asdf</h2>
                         <#else>
-							<img src="${nginx_server_ip}/images/default-screenshot.png">
+							<img src="/images/default-screenshot.png">
                         </#if>
 					</div>
 					<div class="item_info_room_status">

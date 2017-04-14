@@ -5,9 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
 	<title>room</title>
-	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
-	<script src="${nginx_server_ip}/js/sockjs.min.js"></script>
-	<script src="${nginx_server_ip}/js/stomp.js"></script>
+	<script src="/js/jquery-3.2.0.min.js"></script>
+	<script src="/js/sockjs.min.js"></script>
+	<script src="/js/stomp.js"></script>
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -15,7 +15,7 @@
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	        crossorigin="anonymous"></script>
-	<script src="${nginx_server_ip}/js/player/cyberplayer.js"></script>
+	<script src="/js/player/cyberplayer.js"></script>
 	<style>
 		* {
 			padding: 0;
@@ -53,6 +53,99 @@
 			height: 100px;
 			padding: 30px 2px;
 		}
+
+		.item {
+			width: 300px;
+			display: inline-block;
+			background-color: white;
+			box-shadow: 0px 0px 6px 3px #4c4948;
+			margin: 4px;
+			position: relative;
+			transition: all 550ms;
+		}
+
+		.item_screenshot {
+			width: 300px;
+			height: 170px;
+			display: inline-block;
+			background-color: darkslategrey;
+		}
+
+		.item_content_mask_layer {
+			width: 300px;;
+			height: 170px;
+			position: absolute;
+			z-index: 1000;
+			opacity: 0;
+			transition: background 0.9s;
+		}
+
+		.item_content_mask_layer_img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-left: -32px;
+			margin-top: -32px;
+			opacity: 0;
+			transition: all 0.5s;
+		}
+
+		.item:hover .item_content_mask_layer {
+			background: black;
+			opacity: 0.6;
+		}
+
+		.item:hover .item_content_mask_layer_img {
+			opacity: 0.5;
+			transform: scale(1.5, 1.5);
+		}
+
+		.item:hover .item_content_mask_layer_img {
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-left: -32px;
+			margin-top: -32px;
+			opacity: 1;
+			/*transition: all ease-out 250ms;*/
+		}
+
+		.item_info {
+			width: 300px;
+			height: 50px;
+			background-color: #dddedb;
+			position: relative;
+		}
+
+		.item_info_room_name {
+			text-align: center;
+			font-size: 15px;;
+			margin: 0;
+			padding: 3px 5px;
+			position: relative;
+		}
+
+		.item_info_user_name {
+			background: url(http://127.0.0.1/images/anchors.png) 0 3px no-repeat;
+			text-align: left;
+			font-size: 12px;;
+			padding: 1px 3px 1px 14px;
+			margin: 0;
+			position: absolute;
+			left: 5px;
+			top: 25px;
+		}
+
+		.item_info_room_status {
+			position: absolute;
+			top: 50px;
+			right: 1px;
+			background-color: #295680;
+			padding: 3px 5px;
+			box-shadow: 0px 0px 3px 2px #0e4127;
+			color: white;
+		}
 	</style>
 </head>
 <body>
@@ -61,6 +154,20 @@
 <div id="room_container">
 <#if status == 0 && room?? >
     <#if room.roomName??> <h2 class="text-primary">${room.roomName}</h2></#if>
+    <#if room.roomId??> <span class="text-info pull-left" style="font-size: 20px">房间号：&nbsp;${room.roomId?string('0.##')}&nbsp;&nbsp;&nbsp;</span></#if>
+    <#if subscribeStatus?? >
+        <#if subscribeStatus == 0>
+			<span data-for="${subscribeStatus}" class="subscribe-btn glyphicon glyphicon-eye-open pull-left"
+			      style="font-size: 20px"></span>
+			<label data-for="${subscribeStatus}" style="font-size: 17px"
+			       class="subscribe-btn text-info pull-left">已关注</label>
+        <#else>
+			<span data-for="${subscribeStatus}" class="subscribe-btn glyphicon glyphicon-eye-close pull-left"
+			      style="font-size: 20px"></span>
+			<label data-for="${subscribeStatus}" style="font-size: 17px"
+			       class="subscribe-btn text-info pull-left">关注</label>
+        </#if>
+    </#if>
     <#if room.categoryName?? > <a style="font-size: 17px" class="text-info pull-right"
 	                              href="/category/cid/${room.categoryId}">${room.categoryName}</a></#if>
 	<hr/>
@@ -68,7 +175,7 @@
 		<div id="player"></div>
 	</div>
 	<hr/>
-    <h3 class="text-info">主播介绍</h3>
+	<h3 class="text-info">主播介绍</h3>
 	<table class="table table-hover">
 		<tr>
 			<td>主播昵称：</td>
@@ -142,7 +249,7 @@
 	});
 
 	//	init player
-	var live_stream_url = "${nginx_server_ip}" + "/stream/" + "${stream_key}" + "/index.m3u8";
+	var live_stream_url = "/stream/" + "${stream_key}" + "/index.m3u8";
 
 	//		初始化播放器andwebsocket
 	var player = cyberplayer("player").setup({
@@ -185,8 +292,44 @@
 			$('#room_container').animate({'margin-right': '400px'}, 100, playerBoxResize);
 		}
 	});
+	$(".subscribe-btn").on('click', function () {
+		var status = $(this).attr('data-for');
+		console.log(status);
+    <#--var roomId = parseInt(${room.roomId});-->
+		var roomId = ${room.roomId?string('0.##')}
+		if (status == 2) {
+//		    触发登录
+			$("#user_login_btn").trigger('click');
+		} else if (status == 1) {
+//		    请求关注
+			var url = "/live/room/subscribe/confirm/roomid/" + roomId;
+			$.post(url, function (data) {
+				var res = JSON.parse(data);
+				if (res.status == 0) {
+					alert("关注成功");
+					location.reload(true);
+				}
+			})
+		} else if (status == 0) {
+//		    解除关注
+			var url = "/live/room/subscribe/cancel/roomid/" + roomId;
+			$.post(url, function (data) {
+				var res = JSON.parse(data);
+				if (res.status == 0) {
+					alert("解除关注成功");
+					location.reload(true);
+				}
+			})
+		}
+	})
 
 	//	functions
+	//    function ToggleSubscribeIcon(status) {
+	//	    if (status ==0){
+	//
+	//		}
+	//
+	//    }
 	function ChatMouseOverAction(event) {
 //		console.log("mouse over action");
 		if (event.type == 'mouseenter') {

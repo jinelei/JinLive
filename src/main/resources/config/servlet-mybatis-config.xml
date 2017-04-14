@@ -73,6 +73,11 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
+    <bean id="userSubscribeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="cn.jinelei.live.dao.UserSubscribeMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
     <bean id="viRoomUserCategoryMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="cn.jinelei.live.dao.ViRoomUserCategoryMapper"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>

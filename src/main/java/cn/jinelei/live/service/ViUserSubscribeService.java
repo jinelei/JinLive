@@ -2,10 +2,7 @@ package cn.jinelei.live.service;
 
 import cn.jinelei.live.exception.CategoryException;
 import cn.jinelei.live.exception.RoomException;
-import cn.jinelei.live.model.data.Category;
-import cn.jinelei.live.model.data.Room;
-import cn.jinelei.live.model.data.ViRoomUserCategory;
-import cn.jinelei.live.model.data.ViUserSubscribe;
+import cn.jinelei.live.model.data.*;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -55,5 +52,20 @@ public interface ViUserSubscribeService {
     List<ViUserSubscribe> getAllViUserSubscribeByAnchorIdLimit(Integer anchorId, Integer offset, Integer limit);
 
     PageInfo<ViUserSubscribe> getAllViUserSubscribeByAnchorIdPageInfo(Integer anchorId);
+
+
+    List<ViUserSubscribe> getAllViUserSubscribeBySubscriberId(Integer subscriberId);
+
+    List<ViUserSubscribe> getAllViUserSubscribeBySubscriberIdLimit(Integer subscriberId, Integer offset, Integer limit);
+
+    PageInfo<ViUserSubscribe> getAllViUserSubscribeBySubscriberIdPageInfo(Integer subscriberId);
+
+
+    List<ViUserSubscribe> getAllViUserSubscribeByRoomStatus(Integer roomStatus);
+
+    List<ViUserSubscribe> getAllViUserSubscribeByRoomStatusLimit(Integer roomStatus, Integer offset, Integer limit);
+
+    PageInfo<ViUserSubscribe> getAllViUserSubscribeByRoomStatusPageInfo(Integer roomStatus);
+
 
 }

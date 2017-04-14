@@ -5,9 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
 	<title>test</title>
-	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
-	<script src="${nginx_server_ip}/bootstrap/js/bootstrap.min.js"></script>
-	<link href="${nginx_server_ip}/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/js/jquery-3.2.0.min.js"></script>
+	<script src="/bootstrap/js/bootstrap.min.js"></script>
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
 

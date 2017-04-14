@@ -2,15 +2,16 @@ package cn.jinelei.live.controller;
 
 import cn.jinelei.live.exception.RoomException;
 import cn.jinelei.live.exception.UserException;
+import cn.jinelei.live.exception.UserSubscribeException;
 import cn.jinelei.live.model.data.Room;
 import cn.jinelei.live.model.data.User;
+import cn.jinelei.live.model.data.UserSubscribe;
 import cn.jinelei.live.model.data.ViRoomUserCategory;
 import cn.jinelei.live.model.enumstatus.room.RoomStatus;
 import cn.jinelei.live.model.enumstatus.user.UserStatus;
-import cn.jinelei.live.service.RoomService;
-import cn.jinelei.live.service.UserService;
-import cn.jinelei.live.service.ViRoomUserCategoryService;
+import cn.jinelei.live.service.*;
 import com.google.gson.JsonObject;
+import jdk.nashorn.internal.scripts.JO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,27 @@ public class RoomController {
     private UserService userService;
     @Autowired
     private ViRoomUserCategoryService viRoomUserCategoryService;
+    @Autowired
+    private ViUserSubscribeService viUserSubscribeService;
+    @Autowired
+    private UserSubscribeService userSubscribeService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView roomPost(ModelAndView model, @RequestParam(value = "stream_key") String streamKey) {
         model.addObject("stream_key", streamKey);
         try {
             ViRoomUserCategory room = viRoomUserCategoryService.getViRoomUserCategoryByStreamKey(streamKey.trim());
-            model.addObject("status", 0);
             model.addObject("room", room);
+            model.addObject("status", 0);
+            Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            logger.debug(object.toString());
+            if (object instanceof String) {
+                model.addObject("subscribeStatus", 2);
+            } else {
+                User user = (User) object;
+                boolean res = viUserSubscribeService.getAllViUserSubscribeByRoomId(room.getRoomId()).stream().anyMatch(viUserSubscribe -> viUserSubscribe.getSubscriberId().equals(user.getUserId()));
+                model.addObject("subscribeStatus", res ? 0 : 1);
+            }
         } catch (RoomException e) {
             model.addObject("status", 0);
         }
@@ -107,6 +121,57 @@ public class RoomController {
             jsonObject.addProperty("status", 1);
         }
         logger.debug(jsonObject.toString());
+        return jsonObject.toString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/subscribe/{method}/roomid/{roomid}", method = RequestMethod.POST)
+    public String handleSubscribeEvent(@PathVariable(value = "method") String method,
+                                       @PathVariable(value = "roomid") Integer roomId) {
+        JsonObject jsonObject = new JsonObject();
+        Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        logger.debug(object.toString());
+        if (object instanceof String) {
+            jsonObject.addProperty("status", 1);
+        } else {
+            User user = (User) object;
+            if ("confirm".equals(method)) {
+                boolean res = false;
+                try {
+                    try {
+                        res = userSubscribeService.addSubscribe(user.getUserId(), roomId);
+                        if (res)
+                            jsonObject.addProperty("status", 0);
+                        else
+                            jsonObject.addProperty("status", 1);
+                    } catch (RoomException e) {
+                        jsonObject.addProperty("status", 2);
+                    } catch (UserException e) {
+                        jsonObject.addProperty("status", 3);
+                    }
+                } catch (UserSubscribeException e) {
+                    jsonObject.addProperty("status", 1);
+                }
+            } else if ("cancel".equals(method)) {
+                boolean res = false;
+                try {
+                    res = userSubscribeService.removeSubscribe(user.getUserId(), roomId);
+                    if (res)
+                        jsonObject.addProperty("status", 0);
+                    else
+                        jsonObject.addProperty("status", 1);
+
+                } catch (UserSubscribeException e) {
+                    jsonObject.addProperty("status", 1);
+                } catch (RoomException e) {
+                    jsonObject.addProperty("status", 2);
+                } catch (UserException e) {
+                    jsonObject.addProperty("status", 3);
+                }
+            } else {
+                jsonObject.addProperty("status", 1);
+            }
+        }
         return jsonObject.toString();
     }
 

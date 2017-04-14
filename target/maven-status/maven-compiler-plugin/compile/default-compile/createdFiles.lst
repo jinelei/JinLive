@@ -39,6 +39,9 @@ cn/jinelei/live/utils/live/LiveUtils.class
 cn/jinelei/live/model/data/UserSubscribeExample$Criteria.class
 cn/jinelei/live/service/impl/CategoryServiceImpl.class
 cn/jinelei/live/dao/RoomCategoryMapper.class
+cn/jinelei/live/exception/UserSubscribeException.class
+cn/jinelei/live/service/impl/UserSubscribeServiceImpl.class
+cn/jinelei/live/service/UserSubscribeService.class
 cn/jinelei/live/service/ViUserSubscribeService.class
 cn/jinelei/live/exception/CategoryException.class
 cn/jinelei/live/controller/RoomController.class

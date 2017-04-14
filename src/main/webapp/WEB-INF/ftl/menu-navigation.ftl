@@ -196,7 +196,7 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<div id="icon_box">
-				<img onclick="reloadIndex()" class="img-circle" src="${nginx_server_ip}/images/pacman.png"/>
+				<img onclick="reloadIndex()" class="img-circle" src="/images/pacman.png"/>
 			</div>
 		</div>
 	</div>
@@ -218,13 +218,13 @@
 <#--side box close display-->
 	<div class="side-close row ">
 		<div id="category_all" class="side-close span12 side-menu-mini">
-			<img width="50px" height="50px" src="${nginx_server_ip}/images/computer.png"/>
+			<img width="50px" height="50px" src="/images/computer.png"/>
 		</div>
 		<div id="category_category" class="side-close span12 side-menu-mini">
-			<img width="50px" height="50px" src="${nginx_server_ip}/images/menu.png"/>
+			<img width="50px" height="50px" src="/images/menu.png"/>
 		</div>
 		<div class="side-close side-menu-mini span12">
-			<img width="50px" height="50px" src="${nginx_server_ip}/images/computer.png"/>
+			<img width="50px" height="50px" src="/images/computer.png"/>
 		</div>
 	</div>
 <#--category list-->
@@ -241,7 +241,7 @@
 			</div>
 			<div class="side-close" style="display: none;padding: 0 8px;">
 				<a id="user_info_btn" href="/live/user/info">
-					<img width="50px" height="50px" src="${nginx_server_ip}/images/computer.png"/>
+					<img width="50px" height="50px" src="/images/computer.png"/>
 				</a>
 			</div>
 			<div class="user-action-item side-open" data-whatever="logout" data-toggle="modal" data-target="#user_modal"
@@ -251,7 +251,7 @@
     </@security.authorize>
     <@security.authorize access="!hasAnyRole('USER')">
 		<div id="login_and_register_box">
-			<div class="user-action-item side-open" data-whatever="login" data-toggle="modal" data-target="#user_modal"
+			<div id="user_login_btn" class="user-action-item side-open" data-whatever="login" data-toggle="modal" data-target="#user_modal"
 			     role="button">Login
 			</div>
 			<div class="side-close" style="display: none;color: #fff;">
@@ -270,8 +270,8 @@
 	</div>
 </div>
 
-<#--<script src="${nginx_server_ip}/js/sockjs.min.js"></script>-->
-<#--<script src="${nginx_server_ip}/js/stomp.js"></script>-->
+<#--<script src="/js/sockjs.min.js"></script>-->
+<#--<script src="/js/stomp.js"></script>-->
 <script type="text/javascript">
 
 
@@ -370,7 +370,7 @@
 		var sex = $("#modal_register_user_sex option:selected").index();
 		$(".register > .form-group > input").trigger('blur');
 		if ($(".register>.has-error").length == 0) {
-			$.post("http://localhost/live/user/registerAjax", {
+			$.post("/live/user/registerAjax", {
 				username: username,
 				password: password,
 				phone: phone,
@@ -408,7 +408,7 @@
 		$(".login> .form-group > input").trigger('blur');
 		if ($(".login>.has-error").length == 0) {
 			if (username != null && password != null) {
-				$.post("http://localhost/live/user/loginAjax", {username: username, password: password},
+				$.post("/live/user/loginAjax", {username: username, password: password},
 						function (result) {
 							var res = JSON.parse(result);
 							if (res.status == 0) {
@@ -427,13 +427,13 @@
 
 	//	load category data
 	function requestUsernameIsExist(name) {
-		$.get("${tomcat_proxy_server_ip}/${application_name}/user/exist/name/" + name, function (data) {
+		$.get("/live/user/exist/name/" + name, function (data) {
 			var res = JSON.parse(data);
 			console.log(res);
 			errorShowController($("#modal_register_user_name"), res.status, "User already exist");
 		});
 	}
-	$.get("${tomcat_proxy_server_ip}/${application_name}/search/category", processCategoryData);
+	$.get("/live/search/category", processCategoryData);
 
 	function processCategoryData(data) {
 		var tmp = JSON.parse(data);
@@ -446,7 +446,7 @@
 				var category_item = $("<div class='category-name-item' id='" + t.categoryId + "'>" + t.categoryName + "</div>").appendTo($(item_tag_category));
 				$(category_item).on('click', function () {
 					var category_id = $(this).attr("id");
-					window.location.href = "${tomcat_proxy_server_ip}/${application_name}/category/cid/" + category_id;
+					window.location.href = "/live/category/cid/" + category_id;
 				})
 			})
 		})
@@ -454,12 +454,12 @@
 	function searchSubmit() {
 		var key = $("#search_input").val();
 		if (key != "") {
-			location.href = "${tomcat_proxy_server_ip}/${application_name}/search/key/" + key;
+			location.href = "/live/search/key/" + key;
 		}
 
 	}
 	function reloadIndex() {
-		location.href = "${tomcat_proxy_server_ip}/${application_name}/index";
+		location.href = "/live/index";
 	}
 	function modalShowAction(event) {
 		var button = $(event.relatedTarget);

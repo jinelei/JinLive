@@ -142,7 +142,7 @@ public class ViUserSubscribeServiceImpl implements ViUserSubscribeService {
     @Override
     public List<ViUserSubscribe> getAllViUserSubscribeByAnchorId(Integer anchorId) {
         ViUserSubscribeExample example = new ViUserSubscribeExample();
-        example.createCriteria().andAnchorIdEqualTo(anchorId);
+        example.createCriteria().andUserIdEqualTo(anchorId);
         return viUserSubscribeMapper.selectByExample(example);
     }
 
@@ -150,7 +150,7 @@ public class ViUserSubscribeServiceImpl implements ViUserSubscribeService {
     public List<ViUserSubscribe> getAllViUserSubscribeByAnchorIdLimit(Integer anchorId, Integer offset, Integer limit) {
         PageInfo<ViUserSubscribe> pageInfo = PageHelper.offsetPage(offset, limit).doSelectPageInfo(() -> {
             ViUserSubscribeExample example = new ViUserSubscribeExample();
-            example.createCriteria().andAnchorIdEqualTo(anchorId);
+            example.createCriteria().andUserIdEqualTo(anchorId);
             viUserSubscribeMapper.selectByExample(example);
         });
         return pageInfo.getList();
@@ -159,10 +159,58 @@ public class ViUserSubscribeServiceImpl implements ViUserSubscribeService {
     @Override
     public PageInfo<ViUserSubscribe> getAllViUserSubscribeByAnchorIdPageInfo(Integer anchorId) {
         ViUserSubscribeExample example = new ViUserSubscribeExample();
-        example.createCriteria().andAnchorIdEqualTo(anchorId);
+        example.createCriteria().andUserIdEqualTo(anchorId);
         return new PageInfo<ViUserSubscribe>(viUserSubscribeMapper.selectByExample(example));
     }
 
+
+    @Override
+    public List<ViUserSubscribe> getAllViUserSubscribeBySubscriberId(Integer subscriberId) {
+        ViUserSubscribeExample example = new ViUserSubscribeExample();
+        example.createCriteria().andSubscriberIdEqualTo(subscriberId);
+        return viUserSubscribeMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<ViUserSubscribe> getAllViUserSubscribeBySubscriberIdLimit(Integer subscriberId, Integer offset, Integer limit) {
+        PageInfo<ViUserSubscribe> pageInfo = PageHelper.offsetPage(offset, limit).doSelectPageInfo(() -> {
+            ViUserSubscribeExample example = new ViUserSubscribeExample();
+            example.createCriteria().andSubscriberIdEqualTo(subscriberId);
+            viUserSubscribeMapper.selectByExample(example);
+        });
+        return pageInfo.getList();
+    }
+
+    @Override
+    public PageInfo<ViUserSubscribe> getAllViUserSubscribeBySubscriberIdPageInfo(Integer subscriberId) {
+        ViUserSubscribeExample example = new ViUserSubscribeExample();
+        example.createCriteria().andSubscriberIdEqualTo(subscriberId);
+        return new PageInfo<ViUserSubscribe>(viUserSubscribeMapper.selectByExample(example));
+    }
+
+    @Override
+    public List<ViUserSubscribe> getAllViUserSubscribeByRoomStatus(Integer roomStatus) {
+        ViUserSubscribeExample example = new ViUserSubscribeExample();
+        example.createCriteria().andRoomStatusEqualTo(roomStatus);
+        return viUserSubscribeMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<ViUserSubscribe> getAllViUserSubscribeByRoomStatusLimit(Integer roomStatus, Integer offset, Integer limit) {
+        PageInfo<ViUserSubscribe> pageInfo = PageHelper.offsetPage(offset, limit).doSelectPageInfo(() -> {
+            ViUserSubscribeExample example = new ViUserSubscribeExample();
+            example.createCriteria().andRoomStatusEqualTo(roomStatus);
+            viUserSubscribeMapper.selectByExample(example);
+        });
+        return pageInfo.getList();
+    }
+
+    @Override
+    public PageInfo<ViUserSubscribe> getAllViUserSubscribeByRoomStatusPageInfo(Integer roomStatus) {
+        ViUserSubscribeExample example = new ViUserSubscribeExample();
+        example.createCriteria().andRoomStatusEqualTo(roomStatus);
+        return new PageInfo<ViUserSubscribe>(viUserSubscribeMapper.selectByExample(example));
+    }
 }
 
 
