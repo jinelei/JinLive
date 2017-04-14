@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -50,14 +51,15 @@ public class SearchController {
     private String tomcat_server_ip;
 
     @RequestMapping(value = "/key/{key}", method = RequestMethod.GET)
-    public String searchPost(@PathVariable("key") String key, ModelMap model) {
+    public ModelAndView searchPost(@PathVariable("key") String key) {
+        ModelAndView model = new ModelAndView("search");
         String searchKey = String.format("%%%s%%", key);
         logger.debug("search key: " + searchKey);
         List<ViRoomUserCategory> viRoomUserCategoryFuzzyRoomName = viRoomUserCategoryService.getAllViRoomUserCategoryFuzzyRoomName(searchKey);
         List<ViRoomUserCategory> viRoomUserCategoryFuzzyUsername = viRoomUserCategoryService.getAllViRoomUserCategoryFuzzyUsername(searchKey);
-        model.addAttribute("fuzzyUserName", viRoomUserCategoryFuzzyUsername);
-        model.addAttribute("fuzzyRoomName", viRoomUserCategoryFuzzyRoomName);
-        return "search";
+        model.addObject("fuzzyUserName", viRoomUserCategoryFuzzyUsername);
+        model.addObject("fuzzyRoomName", viRoomUserCategoryFuzzyRoomName);
+        return model;
     }
 
     @ResponseBody

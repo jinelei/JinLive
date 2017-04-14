@@ -104,7 +104,7 @@
 	}
 
 	.list-group > span {
-		font-size: 20px;
+		font-size: 15px;
 		/*color: gray;*/
 		/*border: dashed 1px red;*/
 	}
@@ -115,7 +115,7 @@
 		overflow: hidden;
 		padding: 5px 1px;
 		background: #808080;
-		font-size: 13px;
+		font-size: 15px;
 		color: white;
 		margin: 5px;
 		display: inline-block;

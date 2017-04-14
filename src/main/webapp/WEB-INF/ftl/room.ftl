@@ -169,7 +169,7 @@
         </#if>
     </#if>
     <#if room.categoryName?? > <a style="font-size: 17px" class="text-info pull-right"
-	                              href="/category/cid/${room.categoryId}">${room.categoryName}</a></#if>
+	                              href="/live/category/cid/${room.categoryId}">${room.categoryName}</a></#if>
 	<hr/>
 	<div id="player_box" class="player-box player-box-chat-open player-box-side-open">
 		<div id="player"></div>
