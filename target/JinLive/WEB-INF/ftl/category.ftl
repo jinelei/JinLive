@@ -1,15 +1,26 @@
 <html>
 <head>
-	<title>search result</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+	<title>search result</title>
+	<script src="/js/jquery-3.2.0.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	        crossorigin="anonymous"></script>
 	<style>
-		body {
-			background-color: #d4d4d4;
+		* {
+			padding: 0;
+			margin: 0;
 		}
 
-		#room_list_container {
-			margin-left: 250px;
-			padding: 5px;
+		#room_container {
+			margin-left: 330px;
 		}
 
 		.item {
@@ -104,26 +115,52 @@
 			box-shadow: 0px 0px 3px 2px #0e4127;
 			color: white;
 		}
-
 	</style>
-	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
 </head>
 <body>
 
 <#include  'menu-navigation.ftl'>
-<div id="room_list_container">
+<div id="room_container">
 <#if byCategoryId ??>
 	<h4>${categoryName}</h4>
     <#list byCategoryId as room>
 		<div class="item" id="${room.streamKey}">
 			<div class="item_content_mask_layer">
-				<img class="item_content_mask_layer_img" src="${nginx_server_ip}/images/play-button.png"/>
+				<img class="item_content_mask_layer_img" src="/images/play-button.png"/>
 			</div>
 			<div class="item_screenshot">
                 <#if room.roomScreenshot ?? >
 					<h2>asdf</h2>
                 <#else>
-					<img src="${nginx_server_ip}/images/default-screenshot.png">
+					<img src="/images/default-screenshot.png">
+                </#if>
+			</div>
+			<div class="item_info_room_status">
+                <#if  room.roomStatus == 1 >
+					<span>Live</span>
+                <#else>
+					<span>Rest</span>
+                </#if>
+			</div>
+			<div class="item_info">
+				<span class="item_info_room_name"> ${room.roomName}</span>
+				<span class="item_info_user_name"> ${room.userName}</span>
+			</div>
+		</div>
+    </#list>
+</#if>
+<#if byOnline ??>
+	<h4>Online</h4>
+    <#list byOnline as room>
+		<div class="item" id="${room.streamKey}">
+			<div class="item_content_mask_layer">
+				<img class="item_content_mask_layer_img" src="/images/play-button.png"/>
+			</div>
+			<div class="item_screenshot">
+                <#if room.roomScreenshot ?? >
+					<h2>asdf</h2>
+                <#else>
+					<img src="/images/default-screenshot.png">
                 </#if>
 			</div>
 			<div class="item_info_room_status">
@@ -158,11 +195,11 @@
 		$("#submit").click();
 	})
 
-	$("#side_box").on("boxzoomin boxzoomout", function (event) {
+	$("#menu_container").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
-			$("#room_list_container").css("margin-left", "100px");
+			$("#room_container").css("margin-left", "100px");
 		} else if (event.type == "boxzoomout") {
-			$("#room_list_container").css("margin-left", "260px");
+			$("#room_container").css("margin-left", "330px");
 		}
 	})
 

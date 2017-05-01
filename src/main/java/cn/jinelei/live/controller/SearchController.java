@@ -47,8 +47,8 @@ public class SearchController {
     @Autowired
     private TagService tagService;
 
-    @Value("${tomcat_server_ip}")
-    private String tomcat_server_ip;
+    @Value("${tomcat_server}")
+    private String tomcat_server;
 
     @RequestMapping(value = "/key/{key}", method = RequestMethod.GET)
     public ModelAndView searchPost(@PathVariable("key") String key) {

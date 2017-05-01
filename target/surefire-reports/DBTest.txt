@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: DBTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 7.473 sec <<< FAILURE!
-registerUser(DBTest)  Time elapsed: 0.007 sec  <<< ERROR!
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 7.416 sec <<< FAILURE!
+registerUser(DBTest)  Time elapsed: 0.005 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -68,7 +68,7 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	at cn.jinelei.live.config.stomp.MyStompConfig.registerStompEndpoints(MyStompConfig.java:24)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration.registerStompEndpoints(DelegatingWebSocketMessageBrokerConfiguration.java:59)
 	at org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurationSupport.stompWebSocketHandlerMapping(WebSocketMessageBrokerConfigurationSupport.java:78)
-	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$10(<generated>)
+	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$11(<generated>)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e$$FastClassBySpringCGLIB$$a8265ab6.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:356)
@@ -80,7 +80,7 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:162)
 	... 49 more
 
-userService(DBTest)  Time elapsed: 0.001 sec  <<< ERROR!
+userService(DBTest)  Time elapsed: 0 sec  <<< ERROR!
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -146,7 +146,7 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	at cn.jinelei.live.config.stomp.MyStompConfig.registerStompEndpoints(MyStompConfig.java:24)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration.registerStompEndpoints(DelegatingWebSocketMessageBrokerConfiguration.java:59)
 	at org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurationSupport.stompWebSocketHandlerMapping(WebSocketMessageBrokerConfigurationSupport.java:78)
-	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$10(<generated>)
+	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$11(<generated>)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e$$FastClassBySpringCGLIB$$a8265ab6.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:356)

@@ -17,7 +17,7 @@
 		}
 
 	</style>
-	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
+	<script src="/js/jquery-3.2.0.min.js"></script>
 </head>
 <body>
 
@@ -34,7 +34,7 @@
 </#if>
 
 	<#--<form id="login_form" name="f" action="${tomcat_proxy_server_ip}/${application_name}/login" method="POST">-->
-    <form id="login_form" name="f" action="http://localhost/perfrom_login" method="POST">
+    <form id="login_form" name="f" action="/perfrom_login" method="POST">
 		<table>
 
 			<tr>

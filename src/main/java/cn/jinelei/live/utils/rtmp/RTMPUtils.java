@@ -9,13 +9,11 @@ import cn.jinelei.live.utils.net.HttpTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -33,13 +31,17 @@ public class RTMPUtils {
     private EntityHandler entityHandler;
     @Autowired
     private HttpTools httpTools;
+    @Value("${nginx_server}")
+    private String nginx_server;
+    @Value("${tomcat_server}")
+    private String tomcat_server;
+    @Value("${application_name}")
+    private String application_name;
 
     private static ExecutorService executor = Executors.newCachedThreadPool();
 
     public RTMP getRTMPInfoFromServer() {
-        String url = environment.getProperty("nginx_server_ip");
-        String statUrl = String.format("%s/stat", url);
-//        logger.debug("stat url: " + statUrl);
+        String statUrl = String.format("%s/stat", nginx_server);
         RTMP rtmp = entityHandler.handleEntity(httpTools.getEntity(statUrl));
         return rtmp;
     }
@@ -56,33 +58,30 @@ public class RTMPUtils {
         return streamList;
     }
 
-    public Map<String, String> getScreenShotFromLiveStream(List<Stream> streamList) {
-        Map<String, String> streamMap = new HashMap<>(32);
-        streamList.stream().forEach((Stream stream) -> {
-            String nginx_server_ip = environment.getProperty("nginx_server_ip");
-            String tomcat_proxy_server_ip = environment.getProperty("nginx_server_ip");
-            String application_name = environment.getProperty("application_name");
-            String baseDir = "/usr/local/nginx/html/screenshot/";
-            String cmd1 = String.format("rm -rf %s%s.png", baseDir, stream.getName());
-            String cmd2 = String.format("ffmpeg -i rtmp://%s:1935/%s/%s -vframes 1 %s%s.png",
-                    nginx_server_ip, application_name, stream.getName(), baseDir, stream.getName());
-            String cmd3 = String.format("curl -F 'filename=@%s%s.png' http://%s/%s/fileupload",
-                    baseDir, stream.getName(), tomcat_proxy_server_ip,application_name );
-            executor.submit(() -> {
-                try {
-                    Runtime runtime = Runtime.getRuntime();
-                    logger.debug("save photo");
-                    runtime.exec(cmd2);
-                    logger.debug("curl");
-                    runtime.exec(cmd3);
-                    logger.debug("rm");
-                    runtime.exec(cmd1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-        });
-        return streamMap;
-    }
-
+//    public Map<String, String> getScreenShotFromLiveStream(List<Stream> streamList) {
+//        Map<String, String> streamMap = new HashMap<>(32);
+//        streamList.stream().forEach((Stream stream) -> {
+//            String baseDir = "/usr/local/nginx/html/screenshot/";
+//            String cmd1 = String.format("rm -rf %s%s.png", baseDir, stream.getName());
+//            String cmd2 = String.format("ffmpeg -i rtmp://%s:1935/%s/%s -vframes 1 %s%s.png",
+//                    nginx_server, application_name, stream.getName(), baseDir, stream.getName());
+//            String cmd3 = String.format("curl -F 'filename=@%s%s.png' http://%s/%s/fileupload",
+//                    baseDir, stream.getName(), tomcat_proxy_server_ip,application_name );
+//            executor.submit(() -> {
+//                try {
+//                    Runtime runtime = Runtime.getRuntime();
+//                    logger.debug("save photo");
+//                    runtime.exec(cmd2);
+//                    logger.debug("curl");
+//                    runtime.exec(cmd3);
+//                    logger.debug("rm");
+//                    runtime.exec(cmd1);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//        });
+//        return streamMap;
+//    }
+//
 }

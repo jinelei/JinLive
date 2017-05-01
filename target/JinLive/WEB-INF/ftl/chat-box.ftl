@@ -10,6 +10,10 @@
 		width: 355px;
 	}
 
+	#chat_content_area {
+		resize: none;
+	}
+
 	#collapsing_chat_btn {
 		width: 14px;
 		height: 120px;
@@ -21,13 +25,37 @@
 		background-position: -30px 0;
 	}
 
+	#chat_input_box {
+		height: 100px;
+		border: 1px red dashed;
+		padding: 30px 0;
+	}
+
 </style>
+<#assign security=JspTaglibs["/WEB-INF/tlds/security.tld"]/>
 <div id="chat_box" class="chat-box-open">
 	<a id="collapsing_chat_btn" class="collapsing-chat-btn-open"></a>
 	<div id="chat_content_box">
 		<textarea id="chat_content_area" readonly></textarea>
 	</div>
 	<div id="chat_input_box">
+    <#--<@security.authorize access="hasAnyRole('USER')">-->
+    <#--<@security.authentication property="principal" var="user"/>-->
+    <#--<div class="input-group">-->
+    <#--<input hidden id="username_hidden" value="${user.userName}">-->
+    <#--<input id="msg" type="text" class="form-control" name="name" onkeypress="getKey()"-->
+    <#--placeholder="Join with us" aria-describedby="basic-addon1">-->
+    <#--<span id="msg_submit" class="glyphicon glyphicon-send input-group-addon" aria-hidden="true"></span>-->
+    <#--</div>-->
+    <#--</@security.authorize>-->
+    <#--<@security.authorize access="!hasAnyRole('USER')">-->
+    <#--<div>-->
+    <#--click me-->
+    <#--<span class="user-action-item side-open" data-whatever="login" data-toggle="modal" data-target="#user_modal"-->
+    <#--role="button">login-->
+    <#--</span>-->
+    <#--</div>-->
+    <#--</@security.authorize>-->
 		<input type="text" onkeypress="getKey()" id="msg" name="name"/>
 		<input type="submit" id="msg_submit" name="Submit"/>
 	</div>
@@ -40,8 +68,8 @@
 	var chat_box = $("#chat_box");
 	var chat_textarea = $("#chat_content_area");
 	var chat_input_box = $("#chat_input_box");
-    <#--var webSocketUrl = "${tomcat_server_ip}" + "/" + "${application_name}" + "/msgservice";-->
-	var webSocketUrl = "${tomcat_server_ip}" + "/msgservice";
+	var webSocketUrl = "${tomcat_server_ip}" + "/" + "${application_name}" + "/msgservice";
+    <#--var webSocketUrl = "${tomcat_server_ip}" +"/live/msgservice";-->
 	var sock = SockJS(webSocketUrl);
 	var stomp = Stomp.over(sock);
 	stomp.connect({}, function (frame) {

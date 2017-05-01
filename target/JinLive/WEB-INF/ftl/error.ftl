@@ -12,7 +12,7 @@
 			background-color: #d4d4d4;
 		}
 
-		#room_list_container {
+		#room_container {
 			margin-left: 250px;
 			padding: 5px;
 		}
@@ -111,7 +111,7 @@
 		}
 
 	</style>
-	<script src="${nginx_server_ip}/js/jquery-3.2.0.min.js"></script>
+	<script src="/js/jquery-3.2.0.min.js"></script>
 </head>
 <body>
 
@@ -121,13 +121,13 @@
 <#list rooms as room>
 	<div class="item" id="${room.streamKey}">
 		<div class="item_content_mask_layer">
-			<img class="item_content_mask_layer_img" src="${nginx_server_ip}/images/play-button.png"/>
+			<img class="item_content_mask_layer_img" src="/images/play-button.png"/>
 		</div>
 		<div class="item_screenshot">
             <#if room.roomScreenshot ?? >
 				<h2>asdf</h2>
             <#else>
-				<img src="${nginx_server_ip}/images/default-screenshot.png">
+				<img src="/images/default-screenshot.png">
             </#if>
 		</div>
 		<div class="item_info_room_status">
@@ -162,9 +162,9 @@
 
 	$("#side_box").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
-			$("#room_list_container").css("margin-left", "100px");
+			$("#room_container").css("margin-left", "100px");
 		} else if (event.type == "boxzoomout") {
-			$("#room_list_container").css("margin-left", "260px");
+			$("#room_container").css("margin-left", "260px");
 		}
 	})
 

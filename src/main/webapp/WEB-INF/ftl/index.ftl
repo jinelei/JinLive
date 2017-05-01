@@ -96,7 +96,7 @@
 		}
 
 		.item_info_user_name {
-			background: url(http://127.0.0.1/images/anchors.png) 0 3px no-repeat;
+			background: url(/images/anchors.png) 0 3px no-repeat;
 			text-align: left;
 			font-size: 12px;;
 			padding: 1px 3px 1px 14px;

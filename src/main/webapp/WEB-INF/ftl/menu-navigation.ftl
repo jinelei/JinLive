@@ -89,7 +89,7 @@
 		position: fixed;
 		top: 40%;
 		left: 300px;
-		background: url(http://192.168.31.169/images/collapsing.png) no-repeat;
+		background: url(/images/collapsing.png) no-repeat;
 		background-position: -30px 0;
 	}
 
@@ -122,7 +122,7 @@
 		text-align: center;
 		transition: all 0.5s;
 		/*border: dashed 1px red;*/
-        box-shadow: 0 0 1px 1px #6e6e6e;
+		box-shadow: 0 0 1px 1px #6e6e6e;
 		border-radius: 2px;
 
 	}
@@ -131,7 +131,7 @@
 		background-color: #3b383c;
 	}
 
-	#category_list{
+	#category_list {
 		overflow-y: auto;
 		height: 75%;
 	}
@@ -149,7 +149,7 @@
 		color: white;
 		padding: 4px 10px;
 		margin: 4px 10px;
-        font-size: 15px;
+		font-size: 15px;
 		background-color: #1b7604;
 		border: solid 1px #125203;
 		border-radius: 4px;
@@ -161,7 +161,7 @@
 	.user-action-item:hover {
 		background-color: #193711;
 		border: solid 1px #2e606a;
-        box-shadow: 0 0 10px 1px dimgrey;
+		box-shadow: 0 0 10px 1px dimgrey;
 	}
 
 	#userinfo_and_logout_box, #login_and_register_box {
@@ -246,7 +246,8 @@
 		<div id="userinfo_and_logout_box">
             <@security.authentication property="principal" var="user"/>
 			<div class="user-action-item side-open">
-				<a id="user_info_btn" style="color: #fff; text-decoration: none" href="/live/user/info"> ${user.userName} </a>
+				<a id="user_info_btn" style="color: #fff; text-decoration: none"
+				   href="/live/user/info"> ${user.userName} </a>
 			</div>
 			<div class="side-close" style="display: none;padding: 0 8px;">
 				<a id="user_info_btn" href="/live/user/info">
@@ -260,7 +261,8 @@
     </@security.authorize>
     <@security.authorize access="!hasAnyRole('USER')">
 		<div id="login_and_register_box">
-			<div id="user_login_btn" class="user-action-item side-open" data-whatever="login" data-toggle="modal" data-target="#user_modal"
+			<div id="user_login_btn" class="user-action-item side-open" data-whatever="login" data-toggle="modal"
+			     data-target="#user_modal"
 			     role="button">登录
 			</div>
 			<div class="side-close" style="display: none;color: #fff;">
@@ -434,18 +436,22 @@
 		}
 	}
 
-	//	load category data
 	function requestUsernameIsExist(name) {
-		$.get("/live/user/exist/name/" + name, function (data) {
+		var user_exist_url = location.origin + "/${application_name}/user/exist/name";
+		$.get(user_exist_url + name, function (data) {
 			var res = JSON.parse(data);
 			console.log(res);
 			errorShowController($("#modal_register_user_name"), res.status, "User already exist");
 		});
 	}
-	$.get("/live/search/category", processCategoryData);
+	//	load category data
+	var category_url = location.origin + "/${application_name}/search/category";
+	console.log("category url:" + category_url);
+	$.get(category_url, processCategoryData);
 
 	function processCategoryData(data) {
 		var tmp = JSON.parse(data);
+		console.log(tmp)
 		$.each(tmp.array, function (key, value) {
 			var row_fluid_div = $("<div class='list-group'></div>").appendTo($("#category_list"));
 			$("<span class='list-group-item text-primary'> " + value.tag.tagName.tagName + "</span>").appendTo($(row_fluid_div));
@@ -461,14 +467,15 @@
 		})
 	}
 	function searchSubmit() {
+	    console.log("search")
 		var key = $("#search_input").val();
 		if (key != "") {
-			location.href = "/live/search/key/" + key;
+			location.href = location.origin + "/${application_name}/search/key/" + key;
 		}
 
 	}
 	function reloadIndex() {
-		location.href = "/live/index";
+		location.href = location.origin + "/${application_name}";
 	}
 	function modalShowAction(event) {
 		var button = $(event.relatedTarget);

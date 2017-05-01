@@ -43,6 +43,8 @@
         <table schema="RoomCategory" tableName="room_category"></table>
         <table schema="Tag" tableName="tag"></table>
         <table schema="TagCategory" tableName="tag_category"></table>
+        <table schema="UserSubscribe" tableName="user_subscribe"></table>
+        <table schema="ViUserSubscribe" tableName="vi_user_subscribe"></table>
         <table schema="ViRoomUserCategory" tableName="vi_room_user_category"></table>
         <!--<table schema="User" tableName="user"></table>-->
         <!--<table tableName="%" >-->

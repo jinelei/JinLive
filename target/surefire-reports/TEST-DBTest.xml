@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="DBTest" time="0.008" errors="2" skipped="0">
+<testsuite tests="2" failures="0" name="DBTest" time="0.005" errors="2" skipped="0">
   <properties>
     <property name="idea.version" value="2016.3.4"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -12,7 +12,7 @@
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="idea.launcher.port" value="7544"/>
+    <property name="idea.launcher.port" value="7543"/>
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
@@ -62,7 +62,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="DBTest" name="registerUser" time="0.007">
+  <testcase classname="DBTest" name="registerUser" time="0.005">
     <error message="Failed to load ApplicationContext" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -128,7 +128,7 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	at cn.jinelei.live.config.stomp.MyStompConfig.registerStompEndpoints(MyStompConfig.java:24)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration.registerStompEndpoints(DelegatingWebSocketMessageBrokerConfiguration.java:59)
 	at org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurationSupport.stompWebSocketHandlerMapping(WebSocketMessageBrokerConfigurationSupport.java:78)
-	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$10(&lt;generated&gt;)
+	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$11(&lt;generated&gt;)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e$$FastClassBySpringCGLIB$$a8265ab6.invoke(&lt;generated&gt;)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:356)
@@ -141,11 +141,11 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	... 49 more
 </error>
     <system-out>Hibernate init -------------------------
-22:47:48 DEBUG MyStompConfig:31 - registry
+22:49:04 DEBUG MyStompConfig:31 - registry
 myserdetailsservice construct: cn.jinelei.live.service.impl.UserServiceImpl@5177e388
 myserdetailsservice construct: cn.jinelei.live.service.impl.UserServiceImpl@5177e388
-22:47:49 DEBUG MyStompConfig:22 - add endpoint
-22:47:49 ERROR TestContextManager:234 - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4acb7ecc] to prepare test instance [DBTest@2a4f5433]
+22:49:05 DEBUG MyStompConfig:22 - add endpoint
+22:49:05 ERROR TestContextManager:234 - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4acb7ecc] to prepare test instance [DBTest@2a4f5433]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -211,7 +211,7 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	at cn.jinelei.live.config.stomp.MyStompConfig.registerStompEndpoints(MyStompConfig.java:24)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration.registerStompEndpoints(DelegatingWebSocketMessageBrokerConfiguration.java:59)
 	at org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurationSupport.stompWebSocketHandlerMapping(WebSocketMessageBrokerConfigurationSupport.java:78)
-	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$10(&lt;generated&gt;)
+	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$11(&lt;generated&gt;)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e$$FastClassBySpringCGLIB$$a8265ab6.invoke(&lt;generated&gt;)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:356)
@@ -227,7 +227,7 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 log4j:ERROR Could not instantiate appender named &quot;file&quot;.
 </system-err>
   </testcase>
-  <testcase classname="DBTest" name="userService" time="0.001">
+  <testcase classname="DBTest" name="userService" time="0">
     <error message="Failed to load ApplicationContext" type="java.lang.IllegalStateException">java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -293,7 +293,7 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	at cn.jinelei.live.config.stomp.MyStompConfig.registerStompEndpoints(MyStompConfig.java:24)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration.registerStompEndpoints(DelegatingWebSocketMessageBrokerConfiguration.java:59)
 	at org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurationSupport.stompWebSocketHandlerMapping(WebSocketMessageBrokerConfigurationSupport.java:78)
-	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$10(&lt;generated&gt;)
+	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$11(&lt;generated&gt;)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e$$FastClassBySpringCGLIB$$a8265ab6.invoke(&lt;generated&gt;)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:356)
@@ -306,11 +306,11 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	... 49 more
 </error>
     <system-out>Hibernate init -------------------------
-22:47:50 DEBUG MyStompConfig:31 - registry
+22:49:07 DEBUG MyStompConfig:31 - registry
 myserdetailsservice construct: cn.jinelei.live.service.impl.UserServiceImpl@12f49ca8
 myserdetailsservice construct: cn.jinelei.live.service.impl.UserServiceImpl@12f49ca8
-22:47:51 DEBUG MyStompConfig:22 - add endpoint
-22:47:51 ERROR TestContextManager:234 - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4acb7ecc] to prepare test instance [DBTest@650c405c]
+22:49:07 DEBUG MyStompConfig:22 - add endpoint
+22:49:07 ERROR TestContextManager:234 - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4acb7ecc] to prepare test instance [DBTest@2577a95d]
 java.lang.IllegalStateException: Failed to load ApplicationContext
 	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
 	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
@@ -376,7 +376,7 @@ Caused by: java.lang.IllegalStateException: No suitable default RequestUpgradeSt
 	at cn.jinelei.live.config.stomp.MyStompConfig.registerStompEndpoints(MyStompConfig.java:24)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration.registerStompEndpoints(DelegatingWebSocketMessageBrokerConfiguration.java:59)
 	at org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurationSupport.stompWebSocketHandlerMapping(WebSocketMessageBrokerConfigurationSupport.java:78)
-	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$10(&lt;generated&gt;)
+	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e.CGLIB$stompWebSocketHandlerMapping$11(&lt;generated&gt;)
 	at org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$ed4b2c8e$$FastClassBySpringCGLIB$$a8265ab6.invoke(&lt;generated&gt;)
 	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
 	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:356)
