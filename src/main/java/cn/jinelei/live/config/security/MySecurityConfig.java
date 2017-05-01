@@ -30,8 +30,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http .requiresChannel().regexMatchers("/live/room").requiresSecure()
+                .and()
+                .authorizeRequests()
                 .regexMatchers( "/live/user/info").authenticated()
+//                .regexMatchers( "/live/user/info",
 //                        "/live/",
 //                        "/live",
 //                        "/",
@@ -45,14 +48,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
                 .anyRequest().permitAll()
                 .and().formLogin()
-//                .loginPage("/live/login")
-//                .loginProcessingUrl("/perform_login")
-//                .failureForwardUrl("/live/login")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
                 .and()
                 .logout()
-//                .logoutSuccessUrl("/live/index")
                 .and()
                 .csrf().disable();
     }

@@ -1,8 +1,7 @@
 package cn.jinelei.live.service;
 
-import cn.jinelei.live.exception.CategoryException;
-import cn.jinelei.live.exception.RoomException;
-import cn.jinelei.live.model.data.*;
+import cn.jinelei.live.model.data.Room;
+import cn.jinelei.live.model.data.ViUserSubscribe;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;

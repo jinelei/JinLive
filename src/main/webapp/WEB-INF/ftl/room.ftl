@@ -238,7 +238,8 @@
 <script>
 
 	//    init websocket
-	var webSocketUrl = "${tomcat_server_ip}" + "/" + "${application_name}" + "/msgservice";
+	<#--var webSocketUrl = "http://" + window.location.hostname + "/${application_name}" + "/msgservice";-->
+	var webSocketUrl = "msgservice";
 	var stomp = Stomp.over(SockJS(webSocketUrl));
 	stomp.connect({}, function (frame) {
 		stomp.subscribe("/topic/msg/" + "${stream_key}", function (message) {

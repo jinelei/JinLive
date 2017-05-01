@@ -344,9 +344,10 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
+                    <!--<url>http://192.168.31.31:8080/manager/text</url>-->
                     <username>admin</username>
                     <password>jin</password>
-                    <path>/live</path>
+                    <path>/livesys</path>
                 </configuration>
             </plugin>
             <plugin>

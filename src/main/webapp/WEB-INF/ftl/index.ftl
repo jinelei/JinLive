@@ -160,7 +160,7 @@
 
 
 <div hidden>
-	<form action="${tomcat_proxy_server_ip}/${application_name}/room" method="post">
+	<form action="room" method="post">
 		<input type="text" id="stream_key" name="stream_key"/>
 		<input type="submit" id="submit"/>
 	</form>

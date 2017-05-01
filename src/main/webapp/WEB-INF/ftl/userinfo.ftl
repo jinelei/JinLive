@@ -524,7 +524,7 @@
 		var oldVal = $(this).parent('div').parent('td').prev('td').children('span').text().trim();
 		console.log(oldVal);
 		if (newVal == oldVal) {
-			alert("与原数据一致");
+			alert("与同原数据一致");
 			$(this).parent('div').addClass('has-error');
 		} else if (newVal.length == 0) {
 			alert("输入为空");

@@ -1,7 +1,7 @@
 cn/jinelei/live/model/data/UserSubscribeExample.class
 cn/jinelei/live/model/data/UserSubscribeExample$GeneratedCriteria.class
-cn/jinelei/live/config/security/RedisConfig.class
 cn/jinelei/live/dao/ViUserSubscribeMapper.class
+cn/jinelei/live/config/redis/RedisConfig.class
 cn/jinelei/live/model/data/UserSubscribe.class
 cn/jinelei/live/config/viewer/MyFreeMarkerView.class
 cn/jinelei/live/exception/RoomCategoryException.class

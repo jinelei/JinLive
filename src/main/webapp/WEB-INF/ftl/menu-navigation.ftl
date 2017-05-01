@@ -1,4 +1,4 @@
-<#--user login modal-->
+<#--user login and register modal-->
 <div class="modal fade" id="user_modal" tabindex="-1" role="dialog" aria-labelledby="user_modal_label">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

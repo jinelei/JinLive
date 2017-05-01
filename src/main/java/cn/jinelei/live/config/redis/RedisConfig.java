@@ -1,4 +1,4 @@
-package cn.jinelei.live.config.security;
+package cn.jinelei.live.config.redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -15,7 +15,6 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/RoomCategoryExample.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/exception/RoomCategoryException.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/vod/Stream.java
-/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/security/RedisConfig.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/ViUserSubscribe.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/RoomService.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/filter/CORSFilter.java
@@ -67,6 +66,7 @@
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/controller/STOMPController.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/Server.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/data/UserExample.java
+/home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/config/redis/RedisConfig.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/model/nginx/vod/Vod.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/utils/net/HttpTools.java
 /home/jinelei/Projects/IdeaProjects/Web/JinLive/src/main/java/cn/jinelei/live/service/CategoryService.java
