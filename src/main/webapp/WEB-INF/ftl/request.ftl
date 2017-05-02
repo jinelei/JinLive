@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
-	<title>search result</title>
+	<title><@spring.message "web.request"/></title>
 	<script src="/js/jquery-3.2.0.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -33,16 +33,16 @@
 		<div class="span12">
         <#if status?? && status == 0>
 			<div class="form-group">
-				<label for="request_user_phone" id="request_user_phone_label">Phone:</label>
+				<label for="request_user_phone" id="request_user_phone_label"><@spring.message "web.userinfo.phone"/>:</label>
 				<input type="text" maxlength='11' class="form-control" id="request_user_phone"
 				       name="phone" onblur="checkPhone()"
-				       placeholder="Phone">
+				       placeholder="<@spring.message "web.userinfo.phone.tips"/>">
 			</div>
 			<div class="form-group">
-				<label for="request_user_email" id="request_user_email_label">Email:</label>
+				<label for="request_user_email" id="request_user_email_label"><@spring.message "web.userinfo.email"/>:</label>
 				<input type="text" maxlength='21' class="form-control" id="request_user_email"
 				       name="email" onblur="checkEmail()"
-				       placeholder="Email">
+				       placeholder="<@spring.message "web.userinfo.email.tips"/>">
 			</div>
 			<button type="submit" id="request_submit" class="btn btn-default" onclick="postSubmit()">提交</button>
         </#if>

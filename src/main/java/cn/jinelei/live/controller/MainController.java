@@ -33,7 +33,7 @@ public class MainController {
 
     private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    @Autowired
+    @Autowired(required = false)
     private SimpMessagingTemplate template;
     @Autowired
     private RoomService roomService;

@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
-	<title>search result</title>
+	<title><@spring.message "web.search.result"/></title>
 	<script src="/js/jquery-3.2.0.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -128,7 +128,7 @@
 <#include  'menu-navigation.ftl'>
 <div id="room_list_container">
 <#if fuzzyUserName ??>
-	<h4>anchors</h4>
+	<h4><@spring.message "web.search.anchor"/>:</h4>
     <#list fuzzyUserName as room>
 		<div class="item" id="${room.streamKey}">
 			<div class="item_content_mask_layer">
@@ -143,9 +143,9 @@
 			</div>
 			<div class="item_info_room_status">
                 <#if  room.roomStatus == 1 >
-					<span>Live</span>
+					<span><@spring.message "web.room.live"/></span>
                 <#else>
-					<span>Rest</span>
+					<span><@spring.message "web.room.reset"/></span>
                 </#if>
 			</div>
 			<div class="item_info">
@@ -157,7 +157,7 @@
 </#if>
 
 <#if fuzzyRoomName ??>
-	<h4>rooms</h4>
+	<h4><@spring.message "web.search.room"/>:</h4>
     <#list fuzzyRoomName as room>
 		<div class="item" id="${room.streamKey}">
 			<div class="item_content_mask_layer">
@@ -172,9 +172,9 @@
 			</div>
 			<div class="item_info_room_status">
                 <#if  room.roomStatus == 1 >
-					<span>Live</span>
+	                <span><@spring.message "web.room.live"/></span>
                 <#else>
-					<span>Rest</span>
+	                <span><@spring.message "web.room.reset"/></span>
                 </#if>
 			</div>
 			<div class="item_info">
@@ -184,7 +184,7 @@
 		</div>
     </#list>
 <#else>
-	<h4>not search any matche result, try another words</h4>
+	<h4><@spring.message "web.search.result.none"/></h4>
 </#if>
 </div>
 <div hidden>

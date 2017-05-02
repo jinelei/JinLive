@@ -1,37 +1,37 @@
 package cn.jinelei.live.config.stomp;
 
-import cn.jinelei.live.websocket.HandshakeInterceptor;
-import cn.jinelei.live.websocket.MyHandshakeHandler;
+import cn.jinelei.live.websocket.ChatHandler;
+import cn.jinelei.live.websocket.ChatHandshakeInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
-import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.socket.config.annotation.*;
 
 /**
  * Created by jinelei on 17-4-11.
  */
 @Configuration
 @EnableWebSocketMessageBroker
-public class MyStompConfig extends AbstractWebSocketMessageBrokerConfigurer {
+@EnableWebMvc
+public class MyStompConfig implements WebSocketConfigurer{
+
     private static final Logger logger = LoggerFactory.getLogger(MyStompConfig.class);
-    @Override
-    public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
-        logger.debug("add endpoint");
-        stompEndpointRegistry.addEndpoint("/msgservice")
-                .setAllowedOrigins("*")
-                .setHandshakeHandler(new MyHandshakeHandler())
-                .addInterceptors(new HandshakeInterceptor()).withSockJS();
-    }
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry registry) {
-        logger.debug("registry");
-        registry.enableSimpleBroker("/topic", "/user");
-        registry.setApplicationDestinationPrefixes("/app");
-        registry.setUserDestinationPrefix("/user/");
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
+        webSocketHandlerRegistry.addHandler(chatHandler(), "/chat").setAllowedOrigins("*").addInterceptors(chatHandshakeInterceptor());
+        webSocketHandlerRegistry.addHandler(chatHandler(),"/sockjs/chat").setAllowedOrigins("*").addInterceptors(chatHandshakeInterceptor()).withSockJS();
     }
 
+    @Bean
+    public ChatHandler chatHandler(){
+        return new ChatHandler();
+    }
+
+    @Bean
+    public ChatHandshakeInterceptor chatHandshakeInterceptor(){
+        return new ChatHandshakeInterceptor();
+    }
 }

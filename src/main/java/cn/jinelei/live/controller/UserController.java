@@ -91,9 +91,9 @@ public class UserController {
             user.setUserEmail(email);
             Integer status = user.getUserStatus();
             if ("active".equals(method)) {
-                user.setUserStatus(status ^ Integer.valueOf(UserStatus.INACTIVE.toString()) | Integer.valueOf(UserStatus.ACTIVE.toString()));
+                user.setUserStatus(status | Integer.valueOf(UserStatus.ACTIVE.toString()));
             } else if ("lock".equals(method)) {
-                user.setUserStatus(status ^ Integer.valueOf(UserStatus.LOCKED.toString()));
+                user.setUserStatus(status | Integer.valueOf(UserStatus.LOCKED.toString()));
             }
             try {
                 userService.updateUser(user);

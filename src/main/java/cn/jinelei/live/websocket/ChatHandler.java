@@ -4,14 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
+import org.springframework.web.socket.handler.AbstractWebSocketHandler;
 
 /**
  * Created by jinelei on 17-3-30.
  */
 @Component
-public class SystemWebSocketHandler implements WebSocketHandler {
+public class ChatHandler extends AbstractWebSocketHandler{
 
-    private static final Logger logger = LoggerFactory.getLogger(SystemWebSocketHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(ChatHandler.class);
 
     @Override
     public void afterConnectionEstablished(WebSocketSession webSocketSession) throws Exception {

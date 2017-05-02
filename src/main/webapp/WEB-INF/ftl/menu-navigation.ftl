@@ -56,12 +56,12 @@
 					<div class="form-group">
 						<label for="modal_user_name"><@spring.message "web.userinfo.username"/>:</label>
 						<input type="text" class="form-control" id="modal_login_user_name"
-						       placeholder="<@spring.message "web.login.username.tips"/>">
+						       placeholder="<@spring.message "web.userinfo.username.login.tips"/>">
 					</div>
 					<div class="form-group">
 						<label for="modal_user_password"><@spring.message "web.userinfo.password"/>:</label>
 						<input type="password" class="form-control" id="modal_login_user_password"
-						       placeholder="<@spring.message "web.login.password.tips"/>">
+						       placeholder="<@spring.message "web.userinfo.password.login.tips"/>">
 					</div>
 				</form>
 			</div>

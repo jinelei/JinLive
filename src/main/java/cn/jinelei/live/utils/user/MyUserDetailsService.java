@@ -16,14 +16,14 @@ public class MyUserDetailsService implements UserDetailsService {
     private final UserService userService;
 
     public MyUserDetailsService(UserService userService) {
-        System.out.println("myserdetailsservice construct: " + userService);
+//        System.out.println("myserdetailsservice construct: " + userService);
         this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         try {
-            System.out.println(userService);
+//            System.out.println(userService);
             User user = userService.getUserInfo(s);
             System.out.println(user.toString());
             return user;

@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String userName, Integer userSex, Integer userAge, String userPasswd,String userPhone) throws UserException {
+    public User register(String userName, Integer userSex, Integer userAge, String userPasswd, String userPhone) throws UserException {
         User user = new User();
         user.setUserName(userName);
         user.setUserNickname(userName);
@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
         } catch (UserException e) {
             if (UserException.USER_NOT_EXIST.equals(e.getMessage())) {
                 if (user.getUserStatus() == null)
-                    user.setUserStatus(Integer.valueOf(UserStatus.INACTIVE.toString()));
+                    user.setUserStatus(Integer.valueOf(UserStatus.ENABLE.toString()));
                 if (user.getUserTreasure() == null)
                     user.setUserTreasure(Integer.valueOf(UserTreasure.DEFAULT.toString()));
                 userMapper.insertSelective(user);
@@ -189,7 +189,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUser(Integer userID) throws UserException {
         User user = userMapper.selectByPrimaryKey(userID);
-        user.setUserStatus(Integer.valueOf(UserStatus.DELETE.toString()));
+        user.setUserStatus(user.getUserStatus() &(Integer.MAX_VALUE ^ Integer.valueOf(UserStatus.ENABLE.toString())));
         return updateUser(user);
     }
 
@@ -216,7 +216,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUserAlive() {
-        List<User> users = getAllUser().stream().filter(user -> ((user.getUserStatus() & Integer.valueOf(UserStatus.DELETE.toString())) == 0) ? true : false)
+        List<User> users = getAllUser().stream().filter(user -> ((user.getUserStatus() & Integer.valueOf(UserStatus.ENABLE.toString())) != 0) ? true : false)
+                .collect(Collectors.toList());
+        return users;
+    }
+
+    @Override
+    public List<User> getAllUserDelete() {
+        List<User> users = getAllUser().stream().filter(user -> ((user.getUserStatus() & Integer.valueOf(UserStatus.ENABLE.toString())) == 0) ? true : false)
                 .collect(Collectors.toList());
         return users;
     }
@@ -230,7 +237,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUserOffline() {
-        List<User> users = getAllUser().stream().filter(user -> ((user.getUserStatus() & Integer.valueOf(UserStatus.OFFLINE.toString())) != 0) ? true : false)
+        List<User> users = getAllUser().stream().filter(user -> ((user.getUserStatus() & Integer.valueOf(UserStatus.ONLINE.toString())) == 0) ? true : false)
                 .collect(Collectors.toList());
         return users;
     }
@@ -244,14 +251,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUserInactive() {
-        List<User> users = getAllUser().stream().filter(user -> ((user.getUserStatus() & Integer.valueOf(UserStatus.INACTIVE.toString())) != 0) ? true : false)
-                .collect(Collectors.toList());
-        return users;
-    }
-
-    @Override
-    public List<User> getAllUserDelete() {
-        List<User> users = getAllUser().stream().filter(user -> ((user.getUserStatus() & Integer.valueOf(UserStatus.DELETE.toString())) != 0) ? true : false)
+        List<User> users = getAllUser().stream().filter(user -> ((user.getUserStatus() & Integer.valueOf(UserStatus.ACTIVE.toString())) == 0) ? true : false)
                 .collect(Collectors.toList());
         return users;
     }

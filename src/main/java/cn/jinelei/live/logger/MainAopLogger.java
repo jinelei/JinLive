@@ -28,7 +28,7 @@ public class MainAopLogger {
     }
 
     //    count connection number
-    @Pointcut(" execution(* cn.jinelei.live.websocket.SystemWebSocketHandler.afterConnectionEstablished(..)) ")
+    @Pointcut(" execution(* cn.jinelei.live.websocket.ChatHandler.afterConnectionEstablished(..)) ")
     public void websocketConnection() {
     }
 
@@ -42,7 +42,7 @@ public class MainAopLogger {
         System.out.println(String.format("<<<<<<<<<<<<<<<<<<<<<<< After \t\tClass: %s\t\tMethod: %s\n", joinPoint.getTarget().getClass().getSimpleName(), joinPoint.getSignature().getName()));
     }
 
-    @Pointcut(" execution(* cn.jinelei.live.websocket.SystemWebSocketHandler.afterConnectionClosed(..)) ")
+    @Pointcut(" execution(* cn.jinelei.live.websocket.ChatHandler.afterConnectionClosed(..)) ")
     public void websocketConnectionClosed() {
     }
 

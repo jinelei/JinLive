@@ -29,26 +29,27 @@ public class STOMPController {
 
     private static final Logger logger = LoggerFactory.getLogger(STOMPController.class);
 
-    public SimpMessagingTemplate template;
+//    public SimpMessagingTemplate template;
+//
+//    @Autowired(required = false)
+//    public STOMPController(SimpMessagingTemplate template) {
+//        this.template = template;
+//    }
 
-    @Autowired
-    public STOMPController(SimpMessagingTemplate template) {
-        this.template = template;
-    }
-
-    @MessageMapping("/msg")
-    public void handleMessage(@Headers Map<String, Object> headers, @Payload String msg) {
-        Map<String, Object> map = (Map<String, Object>) headers.get("nativeHeaders");
-        String room_id = (String) ((List<String>) map.get("room_id")).get(0);
-        logger.debug("room_id", room_id);
-        User user = (User) ((UsernamePasswordAuthenticationToken) headers.get("simpUser")).getPrincipal();
-        logger.debug(user.getUserName());
-        template.convertAndSend("/topic/msg/" + room_id, String.format("%s: %s", user.getUsername(), msg), headers);
-    }
+//    @MessageMapping("/msg")
+//    public void handleMessage(@Headers Map<String, Object> headers, @Payload String msg) {
+//        Map<String, Object> map = (Map<String, Object>) headers.get("nativeHeaders");
+//        String room_id = (String) ((List<String>) map.get("room_id")).get(0);
+//        logger.debug("room_id", room_id);
+//        User user = (User) ((UsernamePasswordAuthenticationToken) headers.get("simpUser")).getPrincipal();
+//        logger.debug(user.getUserName());
+//        template.convertAndSend("/topic/msg/" + room_id, String.format("%s: %s", user.getUsername(), msg), headers);
+//    }
 
     @MessageMapping("/message")
     @SendToUser("/message")
     public String userMessage(String msg) {
+        logger.debug(msg);
         return msg;
     }
 
