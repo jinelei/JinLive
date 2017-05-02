@@ -5,67 +5,75 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
 						aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title login" id="user_modal_label">User Login</h4>
-				<h4 class="modal-title logout" id="user_modal_label">User Logout</h4>
-				<h4 class="modal-title register" id="user_modal_label">User Register</h4>
+				<h4 class="modal-title login" id="user_modal_label"><@spring.message "web.user.login"/></h4>
+				<h4 class="modal-title logout" id="user_modal_label"><@spring.message "web.user.logout"/></h4>
+				<h4 class="modal-title register" id="user_modal_label"><@spring.message "web.user.register"/></h4>
 			</div>
 			<div class="modal-body">
-				<h4 class="logout text-primary">Confirm Logout</h4>
+				<h4 class="logout text-primary"><@spring.message "web.logout.confirm"/></h4>
 				<form class="register">
 					<div class="form-group">
-						<label for="modal_register_user_name" id="modal_register_user_name_label">Username:</label>
-						<input type="text" class="form-control" id="modal_register_user_name" placeholder="Username">
+						<label for="modal_register_user_name"
+						       id="modal_register_user_name_label"><@spring.message "web.userinfo.username"/>:</label>
+						<input type="text" class="form-control" id="modal_register_user_name"
+						       placeholder="<@spring.message "web.register.username.tips"/>">
 					</div>
 					<div class="form-group">
 						<label for="modal_register_user_password"
-						       id="modal_register_user_password_label">Password:</label>
+						       id="modal_register_user_password_label"><@spring.message "web.userinfo.password"/>:</label>
 						<input type="password" class="form-control" id="modal_register_user_password"
-						       placeholder="Password">
+						       placeholder="<@spring.message "web.register.password.tips"/>">
 					</div>
 					<div class="form-group">
 						<label for="modal_register_user_password1"
-						       id="modal_register_user_password1_label">Password:</label>
+						       id="modal_register_user_password1_label"><@spring.message "web.userinfo.password"/>:</label>
 						<input type="password" class="form-control" id="modal_register_user_password1"
-						       placeholder="Password Again">
+						       placeholder="<@spring.message "web.register.password.again.tips"/>">
 					</div>
 					<div class="form-group">
-						<label for="modal_register_user_phone" id="modal_register_user_phone_label">Phone:</label>
+						<label for="modal_register_user_phone"
+						       id="modal_register_user_phone_label"><@spring.message "web.userinfo.phone"/>:</label>
 						<input type="text" maxlength='11' class="form-control" id="modal_register_user_phone"
-						       placeholder="Phone">
+						       placeholder="<@spring.message "web.phone.tips"/>">
 					</div>
 					<div class="form-group">
-						<label for="modal_register_user_age" id="modal_register_user_age_label">Age:</label>
+						<label for="modal_register_user_age"
+						       id="modal_register_user_age_label"><@spring.message "web.userinfo.age"/>:</label>
 						<input type="number" class="form-control" id="modal_register_user_age"
-						       placeholder="Age">
+						       placeholder="<@spring.message "web.userinfo.age.tips"/>">
 					</div>
 					<div class="form-group">
-						<label for="modal_register_user_sex" id="modal_register_user_sex_label">Sex:</label>
+						<label for="modal_register_user_sex"
+						       id="modal_register_user_sex_label"><@spring.message "web.userinfo.sex"/>:</label>
 						<select class="form-control" id="modal_register_user_sex">
-							<option>screct</option>
-							<option>man</option>
-							<option>woman</option>
+							<option><@spring.message "web.screct"/></option>
+							<option><@spring.message "web.userinfo.sex.man"/></option>
+							<option><@spring.message "web.userinfo.sex.woman"/></option>
 						</select>
 					</div>
 				</form>
 				<form class="login">
 					<div class="form-group">
-						<label for="modal_user_name">Username:</label>
-						<input type="text" class="form-control" id="modal_login_user_name" placeholder="Username">
+						<label for="modal_user_name"><@spring.message "web.userinfo.username"/>:</label>
+						<input type="text" class="form-control" id="modal_login_user_name"
+						       placeholder="<@spring.message "web.login.username.tips"/>">
 					</div>
 					<div class="form-group">
-						<label for="modal_user_password">Password:</label>
+						<label for="modal_user_password"><@spring.message "web.userinfo.password"/>:</label>
 						<input type="password" class="form-control" id="modal_login_user_password"
-						       placeholder="Password">
+						       placeholder="<@spring.message "web.login.password.tips"/>">
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary login" id="user_login_submit" onclick="userLoginSubmit">
-					Login
-				</button>
-				<button type="button" class="btn btn-primary logout" id="user_logout_submit">Logout</button>
-				<button type="button" class="btn btn-primary register" id="user_register_submit">Register</button>
+				<button type="button" class="btn btn-default"
+				        data-dismiss="modal"><@spring.message "web.cancel"/></button>
+				<button type="button" class="btn btn-primary login" id="user_login_submit"
+				        onclick="userLoginSubmit"><@spring.message "web.login"/></button>
+				<button type="button" class="btn btn-primary logout"
+				        id="user_logout_submit"><@spring.message "web.logout"/></button>
+				<button type="button" class="btn btn-primary register"
+				        id="user_register_submit"><@spring.message "web.register"/></button>
 			</div>
 		</div>
 	</div>
@@ -214,7 +222,7 @@
 		<div class="span12">
 			<div class="input-group">
 				<input id="search_input" type="text" class="form-control" name="search_key"
-				       placeholder="Search Room/Anchor" aria-describedby="basic-addon1">
+				       placeholder="<@spring.message "web.search"/>" aria-describedby="basic-addon1">
 				<span id="search_btn" class="glyphicon glyphicon-search input-group-addon" aria-hidden="true"></span>
 			</div>
 		</div>
@@ -247,30 +255,29 @@
             <@security.authentication property="principal" var="user"/>
 			<div class="user-action-item side-open">
 				<a id="user_info_btn" style="color: #fff; text-decoration: none"
-				   href="/live/user/info"> ${user.userName} </a>
+				   href="${nginx_server}/${application_name}/user/info"> ${user.userName} </a>
 			</div>
 			<div class="side-close" style="display: none;padding: 0 8px;">
-				<a id="user_info_btn" href="/live/user/info">
+				<a id="user_info_btn" href="${nginx_server}/${application_name}/user/info">
 					<img width="50px" height="50px" src="/images/computer.png"/>
 				</a>
 			</div>
 			<div class="user-action-item side-open" data-whatever="logout" data-toggle="modal" data-target="#user_modal"
-			     role="button">Logout
-			</div>
+			     role="button"><@spring.message "web.logout"/></div>
 		</div>
     </@security.authorize>
     <@security.authorize access="!hasAnyRole('USER')">
 		<div id="login_and_register_box">
 			<div id="user_login_btn" class="user-action-item side-open" data-whatever="login" data-toggle="modal"
 			     data-target="#user_modal"
-			     role="button">登录
+			     role="button"><@spring.message "web.login"/>
 			</div>
 			<div class="side-close" style="display: none;color: #fff;">
 				<div data-whatever="login" data-toggle="modal" data-target="#user_modal" role="button">登录</div>
 			</div>
 			<div class="user-action-item side-open" data-whatever="register" data-toggle="modal"
 			     data-target="#user_modal"
-			     role="button">注册
+			     role="button"><@spring.message "web.register"/>
 			</div>
 		</div>
     </@security.authorize>
@@ -308,7 +315,7 @@
 		if (name == "") {
 			errorShowController(this, 1, "Not be empty");
 			inputShake(this);
-		} else if (!(/^[a-z][a-z0-9_]{5,18}$/.test(name))) {
+		} else if (!(/^[a-z][a-z0-9_]{5,17}$/.test(name))) {
 			errorShowController(this, 1, "Consist of character,number and underline, length 6-18, start with character");
 			inputShake(this);
 		} else {
@@ -381,7 +388,7 @@
 		var sex = $("#modal_register_user_sex option:selected").index();
 		$(".register > .form-group > input").trigger('blur');
 		if ($(".register>.has-error").length == 0) {
-			$.post("/live/user/registerAjax", {
+			$.post(location.origin + "/${application_name}/user/registerAjax", {
 				username: username,
 				password: password,
 				phone: phone,
@@ -407,7 +414,7 @@
 	}
 	function userLogoutSubmit() {
 		console.log("logout");
-		$.get("/live/logout", function (data, status) {
+		$.get(location.origin + "/${application_name}/logout", function (data, status) {
 			if (status == "success") {
 				location.reload(false);
 			}
@@ -419,7 +426,10 @@
 		$(".login> .form-group > input").trigger('blur');
 		if ($(".login>.has-error").length == 0) {
 			if (username != null && password != null) {
-				$.post("/live/user/loginAjax", {username: username, password: password},
+				$.post(location.origin + "/${application_name}/user/loginAjax", {
+							username: username,
+							password: password
+						},
 						function (result) {
 							var res = JSON.parse(result);
 							if (res.status == 0) {
@@ -437,17 +447,14 @@
 	}
 
 	function requestUsernameIsExist(name) {
-		var user_exist_url = location.origin + "/${application_name}/user/exist/name";
-		$.get(user_exist_url + name, function (data) {
+		$.get(location.origin + "/${application_name}/user/exist/name/" + name, function (data) {
 			var res = JSON.parse(data);
 			console.log(res);
 			errorShowController($("#modal_register_user_name"), res.status, "User already exist");
 		});
 	}
 	//	load category data
-	var category_url = location.origin + "/${application_name}/search/category";
-	console.log("category url:" + category_url);
-	$.get(category_url, processCategoryData);
+	$.get(location.origin + "/${application_name}/search/category", processCategoryData);
 
 	function processCategoryData(data) {
 		var tmp = JSON.parse(data);
@@ -461,13 +468,13 @@
 				var category_item = $("<div class='category-name-item' id='" + t.categoryId + "'>" + t.categoryName + "</div>").appendTo($(item_tag_category));
 				$(category_item).on('click', function () {
 					var category_id = $(this).attr("id");
-					window.location.href = "/live/category/cid/" + category_id;
+					window.location.href = "/${application_name}/category/cid/" + category_id;
 				})
 			})
 		})
 	}
 	function searchSubmit() {
-	    console.log("search")
+		console.log("search")
 		var key = $("#search_input").val();
 		if (key != "") {
 			location.href = location.origin + "/${application_name}/search/key/" + key;

@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
-	<title>freemark index</title>
+	<title><@spring.message "web.home"/></title>
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -160,7 +160,7 @@
 
 
 <div hidden>
-	<form action="room" method="post">
+	<form action="${nginx_server}/${application_name}/room" method="post">
 		<input type="text" id="stream_key" name="stream_key"/>
 		<input type="submit" id="submit"/>
 	</form>

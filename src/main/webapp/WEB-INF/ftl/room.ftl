@@ -303,7 +303,7 @@
 			$("#user_login_btn").trigger('click');
 		} else if (status == 1) {
 //		    请求关注
-			var url = "/live/room/subscribe/confirm/roomid/" + roomId;
+			var url = "${nginx_server}/${application_name}/room/subscribe/confirm/roomid/" + roomId;
 			$.post(url, function (data) {
 				var res = JSON.parse(data);
 				if (res.status == 0) {
@@ -313,7 +313,7 @@
 			})
 		} else if (status == 0) {
 //		    解除关注
-			var url = "/live/room/subscribe/cancel/roomid/" + roomId;
+			var url ="${nginx_server}/${application_name}/room/subscribe/cancel/roomid/" + roomId;
 			$.post(url, function (data) {
 				var res = JSON.parse(data);
 				if (res.status == 0) {

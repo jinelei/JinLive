@@ -4,7 +4,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
-	<title>search result</title>
+	<title><@spring.message "web.userinfo"/></title>
 	<script src="/js/jquery-3.2.0.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -125,13 +125,13 @@
 		<div class="span12">
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#" data-for="user_info_disp">个人信息</a>
+					<a href="#" data-for="user_info_disp"><@spring.message "web.userinfo"/></a>
 				</li>
 				<li>
-					<a href="#" data-for="user_subscribe_disp">我的关注</a>
+					<a href="#" data-for="user_subscribe_disp"><@spring.message "web.userinfo.focus"/></a>
 				</li>
 				<li style="display: none;" id="nav_room_setting">
-					<a href="#" data-for="room_setting_disp">直播间</a>
+					<a href="#" data-for="room_setting_disp"><@spring.message "web.liveroom"/></a>
 				</li>
 			</ul>
 		</div>
@@ -140,16 +140,16 @@
     <#if status ==0 && user?? && user != "anonymousUser">
 		<input hidden id="modify_user_id" value="${user.userId}">
 		<br/>
-		<h3 class="text-info">个人信息</h3>
+		<h3 class="text-info"><@spring.message "web.userinfo"/></h3>
 		<table class="table table-hover">
 			<tr>
-				<td>昵称：</td>
+				<td><@spring.message "web.userinfo.nickname"/>：</td>
 				<td><span>
                     <#if user.userNickname??> ${user.userNickname}
                     <#else>
-						无
+						<@spring.message "web.none"/>
                     </#if></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_nickname" class="modify_a">修改</a>
+					&nbsp;&nbsp;&nbsp;<a id="modify_user_nickname" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -166,10 +166,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td>性别：</td>
+				<td><@spring.message "web.userinfo.sex"/>：</td>
 				<td><span>
-                    <#if user.userSex == 0>保密<#elseif  user.userSex == 1>男<#elseif user.userSex ==2>女</#if></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_sex" class="modify_a">修改</a>
+                    <#if user.userSex == 0><@spring.message "web.screct"/><#elseif  user.userSex == 1><@spring.message "web.userinfo.sex.man"/><#elseif user.userSex ==2><@spring.message "web.userinfo.sex.woman"/></#if></span>
+					&nbsp;&nbsp;&nbsp;<a id="modify_user_sex" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -186,10 +186,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td>年龄：</td>
+				<td><@spring.message "web.userinfo.age"/>：</td>
 				<td><span>
-                    <#if user.userAge??>${user.userAge}<#else>无</#if></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_age" class="modify_a">修改</a>
+                    <#if user.userAge??>${user.userAge}<#else><@spring.message "web.none"/></#if></span>
+					&nbsp;&nbsp;&nbsp;<a id="modify_user_age" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -206,10 +206,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td>身高：</td>
+				<td><@spring.message "web.userinfo.height"/>：</td>
 				<td><span>
-                    <#if user.userHeight?? >${user.userHeight}<#else>无</#if></span>
-					&nbsp;&nbsp;&nbsp; <a id="modify_user_height" class="modify_a">修改</a>
+                    <#if user.userHeight?? >${user.userHeight}<#else><@spring.message "web.none"/></#if></span>
+					&nbsp;&nbsp;&nbsp; <a id="modify_user_height" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -226,10 +226,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td>体重：</td>
+				<td><@spring.message "web.userinfo.weight"/>：</td>
 				<td><span>
-                    <#if user.userWeight??>${user.userWeight}<#else>无</#if></span>
-					&nbsp;&nbsp;&nbsp; <a id="modify_user_weight" class="modify_a">修改</a>
+                    <#if user.userWeight??>${user.userWeight}<#else><@spring.message "web.none"/></#if></span>
+					&nbsp;&nbsp;&nbsp; <a id="modify_user_weight" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -248,13 +248,13 @@
 		</table>
 
 		<br/>
-		<h3 class="text-info">联系方式</h3>
+		<h3 class="text-info"><@spring.message "web.userinfo.contact"/></h3>
 		<table class="table table-hover">
 			<tr>
-				<td>邮箱：</td>
+				<td><@spring.message "web.userinfo.email"/>：</td>
 				<td>
-                    <#if user.userEmail??>${user.userEmail}<#else>无</#if></span>
-					&nbsp;&nbsp;&nbsp; <a id="modify_user_email" class="modify_a">修改</a>
+                    <#if user.userEmail??>${user.userEmail}<#else><@spring.message "web.none"/></#if></span>
+					&nbsp;&nbsp;&nbsp; <a id="modify_user_email" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -271,10 +271,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td>手机号：</td>
+				<td><@spring.message "web.userinfo.phone"/>：</td>
 				<td><span>
-                    <#if user.userPhone??>${user.userPhone}<#else>无</#if></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_phone" class="modify_a">修改</a>
+                    <#if user.userPhone??>${user.userPhone}<#else><@spring.message "web.none"/></#if></span>
+					&nbsp;&nbsp;&nbsp;<a id="modify_user_phone" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -292,17 +292,17 @@
 			</tr>
 		</table>
 		<br/>
-		<h3 class="text-info">帐号信息</h3>
+		<h3 class="text-info"><@spring.message "web.userinfo.account"/></h3>
 		<table class="table table-hover">
 			<tr>
-				<td>密码：</td>
+				<td><@spring.message "web.userinfo.password"/>：</td>
 				<td>
 					<span>********</span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_password" class="modify_a">修改</a>
+					&nbsp;&nbsp;&nbsp;<a id="modify_user_password" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
-						<input id="modify_user_password_input" type="passwor" class="form-control modify-user-input"
+						<input id="modify_user_password_input" type="password" class="form-control modify-user-input"
 						       name="password"
 						       placeholder="Input new Value" aria-describedby="basic-addon1">
 						<span id="modify_user_password_submit"
@@ -315,22 +315,16 @@
 				</td>
 			</tr>
 			<tr>
-				<td>用户状态：</td>
+				<td><@spring.message "web.userinfo.status"/>：</td>
 				<td>
                     <#if user.userStatus??><input hidden id="user_status" value="${user.userStatus}"></#if>
 					<span id="user_status_disp"></span>
 				</td>
 			</tr>
-			<tr hidden>
-				<td>房间号：</td>
-				<td>
-					<span id="user_room_key"></span>
-				</td>
-			</tr>
 			<tr>
-				<td>财富值：</td>
+				<td><@spring.message "web.userinfo.treasure"/>：</td>
 				<td><span>
-                    <#if user.userTreasure??>${user.userTreasure}<#else>无</#if></span>
+                    <#if user.userTreasure??>${user.userTreasure}<#else><@spring.message "web.none"/></#if></span>
 				</td>
 			</tr>
 		</table>
@@ -338,7 +332,7 @@
 		<div style="text-align: center">
 			<h4 style="padding-top: 80px">Please
 				<a class="text-primary" data-whatever="login" data-toggle="modal"
-				   data-target="#user_modal" href="#">Login</a>
+				   data-target="#user_modal" href="#"><@spring.message "web.login"/></a>
 			</h4>
 		</div>
     </#if>
@@ -346,7 +340,7 @@
 	<div class="nav-toggle-panel" id="user_subscribe_disp" style="display: none;">
     <#if online?? || offline??>
         <#if online??>
-			<h4 class="text-primary">直播中</h4>
+			<h4 class="text-primary"><@spring.message "web.room.live"/></h4>
             <#list online as room>
 				<div class="col-lg-3">
 					<div class="item" id="${room.streamKey}">
@@ -376,7 +370,7 @@
             </#list>
         </#if>
         <#if offline??>
-			<h4 class="text-primary">休息中</h4>
+			<h4 class="text-primary"><@spring.message "web.room.reset"/></h4>
             <#list offline as room>
 				<div class="col-lg-3">
 					<div class="item" id="${room.streamKey}">
@@ -406,10 +400,10 @@
             </#list>
         </#if>
     <#else>
-		<h4 class="text-primary">尚未关注主播，赶紧去关注吧</h4>
+		<h4 class="text-primary"><@spring.message "web.subscribe.none"/></h4>
     </#if>
 		<div hidden>
-			<form action="${tomcat_proxy_server_ip}/${application_name}/room" method="post">
+			<form action="${nginx_server}/${application_name}/room" method="post">
 				<input type="text" id="stream_key" name="stream_key"/>
 				<input type="submit" id="submit"/>
 			</form>
@@ -417,14 +411,14 @@
 	</div>
 
 	<div class="nav-toggle-panel" id="room_setting_disp" style="display: none;">
-		<h3 class="text-info">直播间</h3>
+		<h3 class="text-info"><@spring.message "web.liveroom"/></h3>
 		<table class="table table-hover">
 
 			<tr>
-				<td>名称：</td>
+				<td><@spring.message "web.room.name"/>：</td>
 				<td>
 					<span id="set_room_name"></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_room_name" class="modify_a">修改</a>
+					&nbsp;&nbsp;&nbsp;<a id="modify_room_name" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -441,16 +435,16 @@
 				</td>
 			</tr>
 			<tr>
-				<td>流密钥：</td>
+				<td><@spring.message "web.room.stream"/>：</td>
 				<td>
 					<span id="set_room_stream_key"></span>
 				</td>
 			</tr>
 			<tr>
-				<td>分类：</td>
+				<td><@spring.message "web.category"/>：</td>
 				<td>
 					<span id="set_room_category"></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_room_category" class="modify_a">修改</a>
+					&nbsp;&nbsp;&nbsp;<a id="modify_room_category" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -469,10 +463,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td>简介：</td>
+				<td><@spring.message "web.room.introduce"/>：</td>
 				<td>
 					<span id="set_room_introduce"></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_room_introduce" class="modify_a">修改</a>
+					&nbsp;&nbsp;&nbsp;<a id="modify_room_introduce" class="modify_a"><@spring.message "web.modify"/></a>
 				</td>
 				<td style="display: none;">
 					<div class="input-group">
@@ -578,18 +572,18 @@
 		console.log(status);
 		if ((status & 1) > 0) {
 			console.log("inactive")
-			$("<a href='/live/user/request/active'>&nbsp;申请激活&nbsp;</a>").appendTo($("#user_status_disp"));
+			$("<a href='${nginx_server}/${application_name}/user/request/active'>&nbsp;申请激活&nbsp;</a>").appendTo($("#user_status_disp"));
 		}
 		if ((status & 256) > 0) {
 			console.log("locked")
-			$("<a href='/live/user/request/lock'>&nbsp;申请解锁&nbsp;</a>").appendTo($("#user_status_disp"));
+			$("<a href='${nginx_server}/${application_name}/user/request/lock'>&nbsp;申请解锁&nbsp;</a>").appendTo($("#user_status_disp"));
 		}
 		if ((status & 32 ) == 0) {
 			console.log("anchor")
-			$("<a href='/live/user/request/anchor'>&nbsp;申请成为主播&nbsp;</a>").appendTo($("#user_status_disp"));
+			$("<a href='${nginx_server}/${application_name}/user/request/anchor'>&nbsp;申请成为主播&nbsp;</a>").appendTo($("#user_status_disp"));
 		} else {
 			$("#user_room_key").parent('td').parent('tr').show();
-			$.get("/live/room/info", function (data) {
+			$.get("${nginx_server}/${application_name}/room/info", function (data) {
 				var res = JSON.parse(data);
 				console.log(res);
 				if (res.status == 0) {
@@ -605,7 +599,7 @@
 					console.log("该用户不是主播");
 				}
 			})
-			$.get("/live/category/list/json",function (data) {
+			$.get("${nginx_server}/${application_name}/category/list/json",function (data) {
 				var res = JSON.parse(data);
 				for(var index in res.list){
 				    console.log(res.list[index]);
@@ -623,7 +617,7 @@
 		console.log(userid);
 		console.log(value);
 
-		$.post("/live/room/update", {
+		$.post("${nginx_server}/${application_name}/room/update", {
 			userid: userid,
 			type: type,
 			value: value,
@@ -645,7 +639,7 @@
 		console.log(userid);
 		console.log(value);
 
-		$.post("/live/user/update", {
+		$.post("${nginx_server}/${application_name}/user/update", {
 			userid: userid,
 			type: type,
 			value: value,
