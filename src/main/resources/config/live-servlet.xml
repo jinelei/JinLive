@@ -37,6 +37,7 @@
     <import resource="servlet-mybatis-config.xml"/>
     <import resource="servlet-viewresolver-config.xml"/>
     <import resource="servlet-aop-config.xml"/>
+    <import resource="servlet-websocket-config.xml"/>
 
 
 

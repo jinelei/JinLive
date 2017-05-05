@@ -239,10 +239,12 @@
 <script>
 
 	//    init websocket
-	var webSocketUrl ="${nginx_server}:8080/${application_name}/chat";
-	var stomp = Stomp.over(SockJS(webSocketUrl));
+    <#--var webSocketUrl ="${nginx_server}/${application_name}/chatservice";-->
+    <#--var sock = new WebSocket("ws://${nginx_server}/${application_name}/chat");-->
+	var sock = new WebSocket("ws://localhost/${application_name}/chat");
+	var stomp = Stomp.over(sock);
 	stomp.connect({}, function (frame) {
-		stomp.subscribe("/topic/msg/" + "${room.streamKey}", function (message) {
+		stomp.subscribe("/topic/msg/" + "${room.roomId}", function (message) {
 			console.log('Received: ', message);
 			setTextArea(message.body);
 		});
@@ -251,6 +253,7 @@
 
 	//	init player
 	var live_stream_url = "/stream/" + "${room.streamKey}" + "/index.m3u8";
+	<#--var live_stream_url = "rtmp://localhost:1935/stream/${room.streamKey}";-->
 
 	var room_status = "${room.roomStatus}";
 
@@ -262,11 +265,6 @@
 			stretching: "uniform",
 			file: live_stream_url,
 			autostart: true,
-//		repeat: false,
-//		rtmp: {
-//			reconnecttime: 5, // rtmp直播的重连次数
-//			bufferlength: 1 // 缓冲多少秒之后开始播放 默认1秒
-//		},
 			volume: 100,
 			controls: true,
 			ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey
@@ -369,7 +367,8 @@
 		$("#chat_content_area").val(msg);
 	}
 	function saySomething(msg) {
-		stomp.send("/app/msg", {'room_id': "${room.roomId}"}, msg);
+		var username = $("#user_info_btn").text();
+		stomp.send("/app/msg", {'room_id': "${room.roomId}", "user_name": username.trim()}, msg);
 	}
 	function submitInput() {
 		var msg = $("#msg").val();

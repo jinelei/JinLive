@@ -4,19 +4,25 @@
        xmlns:websocket="http://www.springframework.org/schema/websocket"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd         http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
 
-
-    <!--config stomp-->
-    <!--<websocket:message-broker application-destination-prefix="/app">-->
-        <!--<websocket:stomp-endpoint path="/msgservice" allowed-origins="*">-->
-            <!--<websocket:sockjs/>-->
-        <!--</websocket:stomp-endpoint>-->
-        <!--<websocket:simple-broker prefix="/topic"/>-->
-    <!--</websocket:message-broker>-->
-<!---->
-    <!--<bean class="cn.jinelei.live.websocket.ChatWSHandler" id="chatWSHandler"/>-->
-    <!---->
-    <!--<websocket:handlers>-->
-        <!--<websocket:mapping path="/msg" handler="chatWSHandler"/>-->
+    <!--<websocket:handlers allowed-origins="*">-->
+        <!--<websocket:mapping path="/chat" handler="chatHandler"/>-->
+        <!--<websocket:handshake-interceptors>-->
+            <!--<bean class="cn.jinelei.live.utils.websocket.handshake.ChatHandShake"/>-->
+        <!--</websocket:handshake-interceptors>-->
     <!--</websocket:handlers>-->
-<!---->
+
+    <websocket:message-broker application-destination-prefix="/app">
+        <websocket:stomp-endpoint path="/chat" allowed-origins="*">
+            <websocket:handshake-handler ref="chatServiceHandler"/>
+            <websocket:handshake-interceptors>
+                <bean class="cn.jinelei.live.utils.websocket.handshake.ChatServiceHandShake"/>
+            </websocket:handshake-interceptors>
+        </websocket:stomp-endpoint>
+        <websocket:simple-broker prefix="/topic, /queue"/>
+    </websocket:message-broker>
+
+
+    <!--<bean class="cn.jinelei.live.utils.websocket.handler.ChatHandler" id="chatHandler"/>-->
+    <bean class="cn.jinelei.live.utils.websocket.handler.ChatServiceHandler" id="chatServiceHandler"/>
+
 </beans>

@@ -13,7 +13,9 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -37,13 +39,14 @@ public class STOMPController {
     }
 
     @MessageMapping("/msg")
-    public void handleMessage(@Headers Map<String, Object> headers, @Payload String msg) {
+    public void handleMsg(@Headers Map<String, Object> headers, @Payload String msg) {
         Map<String, Object> map = (Map<String, Object>) headers.get("nativeHeaders");
         String room_id = (String) ((List<String>) map.get("room_id")).get(0);
-        logger.debug("room_id", room_id);
-        User user = (User) ((UsernamePasswordAuthenticationToken) headers.get("simpUser")).getPrincipal();
-        logger.debug(user.getUserName());
-        template.convertAndSend("/topic/msg/" + room_id, String.format("%s: %s", user.getUsername(), msg), headers);
+        String user_name = (String) ((List<String>) map.get("user_name")).get(0);
+        if (StringUtils.isEmpty(user_name))
+            template.convertAndSend("/topic/msg/" + room_id, String.format("Anonymous: %s", msg), headers);
+        else
+            template.convertAndSend("/topic/msg/" + room_id, String.format("%s: %s", user_name, msg), headers);
     }
 
     @MessageMapping("/message")
