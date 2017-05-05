@@ -265,11 +265,6 @@
 			stretching: "uniform",
 			file: live_stream_url,
 			autostart: true,
-//		repeat: false,
-//		rtmp: {
-//			reconnecttime: 5, // rtmp直播的重连次数
-//			bufferlength: 1 // 缓冲多少秒之后开始播放 默认1秒
-//		},
 			volume: 100,
 			controls: true,
 			ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey

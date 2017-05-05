@@ -134,9 +134,9 @@
 					</div>
 					<div class="item_screenshot">
                         <#if room.roomScreenshot ?? >
-							<h2>asdf</h2>
+	                        <img width="300" height="170" src="/screenshot/3f515267-4bae-4fcb-a08d-bbb459e93330.jpg">
                         <#else>
-							<img src="/images/default-screenshot.png">
+							<img width="300" height="170" src="/images/default-screenshot.png">
                         </#if>
 					</div>
 					<div class="item_info_room_status">

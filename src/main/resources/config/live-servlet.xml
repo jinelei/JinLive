@@ -65,8 +65,8 @@
     <bean class="cn.jinelei.live.utils.rtmp.RTMPCacheManager" id="rtmpCache" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.rtmp.RTMPUtils" id="rtmpUtils" scope="singleton"/>
     <bean class="cn.jinelei.live.utils.net.HttpTools" id="httpTools" scope="singleton"/>
-    <bean class="cn.jinelei.live.utils.handler.EntityHandler" id="jinStreamHandler" scope="singleton"/>
-    <bean class="cn.jinelei.live.utils.live.LiveUtils" id="liveUtils" scope="singleton"/>
+    <bean class="cn.jinelei.live.utils.net.handler.EntityHandler" id="jinStreamHandler" scope="singleton"/>
+    <bean class="cn.jinelei.live.utils.rtmp.LiveUtils" id="liveUtils" scope="singleton"/>
     <bean class="cn.jinelei.live.config.security.MyAuthenticationProvider" id="myAuthenticationProvider"/>
     <bean class="cn.jinelei.live.utils.user.MyUserDetailsService" id="userDetailsService">
         <constructor-arg ref="userService"/>

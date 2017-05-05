@@ -1,4 +1,4 @@
-package cn.jinelei.live.utils.handler;
+package cn.jinelei.live.utils.net.handler;
 
 import cn.jinelei.live.model.nginx.RTMP;
 import cn.jinelei.live.model.nginx.Server;
