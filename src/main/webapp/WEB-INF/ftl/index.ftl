@@ -128,6 +128,7 @@
         <#list rooms as room>
 			<div class="col-lg-3">
 				<div class="item" id="${room.streamKey}">
+					<a href="${nginx_server}/${application_name}/room/${room.roomId}"/>
 					<div class="item_content_mask_layer">
 						<img class="item_content_mask_layer_img" src="/images/play-button.png"/>
 					</div>
@@ -159,20 +160,11 @@
 </div>
 
 
-<div hidden>
-	<form action="${nginx_server}/${application_name}/room" method="post">
-		<input type="text" id="stream_key" name="stream_key"/>
-		<input type="submit" id="submit"/>
-	</form>
-</div>
-
 <script>
 
 	//	bind click event
 	$(".item").on("click", function () {
-		var id = $(this).attr("id");
-		$("#stream_key").val(id);
-		$("#submit").click();
+		$(this).children("a").trigger("click");
 	})
 
 	$("#menu_container").on("boxzoomin boxzoomout", function (event) {

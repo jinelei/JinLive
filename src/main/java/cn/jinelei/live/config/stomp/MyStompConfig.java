@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.socket.config.annotation.*;
 
@@ -14,24 +15,32 @@ import org.springframework.web.socket.config.annotation.*;
  */
 @Configuration
 @EnableWebSocketMessageBroker
-@EnableWebMvc
-public class MyStompConfig implements WebSocketConfigurer{
+public class MyStompConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     private static final Logger logger = LoggerFactory.getLogger(MyStompConfig.class);
 
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
-        webSocketHandlerRegistry.addHandler(chatHandler(), "/chat").setAllowedOrigins("*").addInterceptors(chatHandshakeInterceptor());
-        webSocketHandlerRegistry.addHandler(chatHandler(),"/sockjs/chat").setAllowedOrigins("*").addInterceptors(chatHandshakeInterceptor()).withSockJS();
-    }
-
     @Bean
-    public ChatHandler chatHandler(){
+    public ChatHandler chatHandler() {
         return new ChatHandler();
     }
 
     @Bean
-    public ChatHandshakeInterceptor chatHandshakeInterceptor(){
+    public ChatHandshakeInterceptor chatHandshakeInterceptor() {
         return new ChatHandshakeInterceptor();
     }
+
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry stompEndpointRegistry) {
+        stompEndpointRegistry.addEndpoint("/chat")
+                .setAllowedOrigins("*")
+                .addInterceptors(chatHandshakeInterceptor())
+                .withSockJS();
+    }
+
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker("/queue", "/topic");
+        registry.setApplicationDestinationPrefixes("/app");
+    }
+
 }

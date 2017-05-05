@@ -154,7 +154,8 @@
 <div id="room_container">
 <#if status == 0 && room?? >
     <#if room.roomName??> <h2 class="text-primary">${room.roomName}</h2></#if>
-    <#if room.roomId??> <span class="text-info pull-left" style="font-size: 20px">房间号：&nbsp;${room.roomId?string('0.##')}&nbsp;&nbsp;&nbsp;</span></#if>
+    <#if room.roomId??> <span class="text-info pull-left"
+	                          style="font-size: 20px">房间号：&nbsp;${room.roomId?string('0.##')}&nbsp;&nbsp;&nbsp;</span></#if>
     <#if subscribeStatus?? >
         <#if subscribeStatus == 0>
 			<span data-for="${subscribeStatus}" class="subscribe-btn glyphicon glyphicon-eye-open pull-left"
@@ -238,11 +239,10 @@
 <script>
 
 	//    init websocket
-	<#--var webSocketUrl = "http://" + window.location.hostname + "/${application_name}" + "/msgservice";-->
-	var webSocketUrl = "msgservice";
+	var webSocketUrl ="${nginx_server}:8080/${application_name}/chat";
 	var stomp = Stomp.over(SockJS(webSocketUrl));
 	stomp.connect({}, function (frame) {
-		stomp.subscribe("/topic/msg/" + "${stream_key}", function (message) {
+		stomp.subscribe("/topic/msg/" + "${room.streamKey}", function (message) {
 			console.log('Received: ', message);
 			setTextArea(message.body);
 		});
@@ -250,24 +250,30 @@
 	});
 
 	//	init player
-	var live_stream_url = "/stream/" + "${stream_key}" + "/index.m3u8";
+	var live_stream_url = "/stream/" + "${room.streamKey}" + "/index.m3u8";
 
-	//		初始化播放器andwebsocket
-	var player = cyberplayer("player").setup({
-		width: 854,
-		height: 480,
-		stretching: "uniform",
-		file: live_stream_url,
-		autostart: true,
+	var room_status = "${room.roomStatus}";
+
+	if (room_status != 0) {
+		//		初始化播放器andwebsocket
+		var player = cyberplayer("player").setup({
+			width: 854,
+			height: 480,
+			stretching: "uniform",
+			file: live_stream_url,
+			autostart: true,
 //		repeat: false,
 //		rtmp: {
 //			reconnecttime: 5, // rtmp直播的重连次数
 //			bufferlength: 1 // 缓冲多少秒之后开始播放 默认1秒
 //		},
-		volume: 100,
-		controls: true,
-		ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey
-	});
+			volume: 100,
+			controls: true,
+			ak: '7f266db038bd47eaaea92c43055153ab' // 公有云平台注册即可获得accessKey
+		});
+	} else {
+		console.log("on reset")
+	}
 
 	//	resize
 	playerBoxResize();
@@ -296,7 +302,6 @@
 	$(".subscribe-btn").on('click', function () {
 		var status = $(this).attr('data-for');
 		console.log(status);
-    <#--var roomId = parseInt(${room.roomId});-->
 		var roomId = ${room.roomId?string('0.##')}
 		if (status == 2) {
 //		    触发登录
@@ -313,7 +318,7 @@
 			})
 		} else if (status == 0) {
 //		    解除关注
-			var url ="${nginx_server}/${application_name}/room/subscribe/cancel/roomid/" + roomId;
+			var url = "${nginx_server}/${application_name}/room/subscribe/cancel/roomid/" + roomId;
 			$.post(url, function (data) {
 				var res = JSON.parse(data);
 				if (res.status == 0) {
@@ -324,13 +329,6 @@
 		}
 	})
 
-	//	functions
-	//    function ToggleSubscribeIcon(status) {
-	//	    if (status ==0){
-	//
-	//		}
-	//
-	//    }
 	function ChatMouseOverAction(event) {
 //		console.log("mouse over action");
 		if (event.type == 'mouseenter') {
@@ -371,7 +369,7 @@
 		$("#chat_content_area").val(msg);
 	}
 	function saySomething(msg) {
-		stomp.send("/app/msg", {'room_id': "${stream_key}"}, msg);
+		stomp.send("/app/msg", {'room_id': "${room.roomId}"}, msg);
 	}
 	function submitInput() {
 		var msg = $("#msg").val();

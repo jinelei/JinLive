@@ -53,11 +53,10 @@ public class RoomController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView roomPost(ModelAndView model, @RequestParam(value = "stream_key") String streamKey) {
-        model.addObject("stream_key", streamKey);
+    @RequestMapping(value = "/{roomId}",method = RequestMethod.GET)
+    public ModelAndView roomPost(ModelAndView model, @PathVariable Integer roomId) {
         try {
-            ViRoomUserCategory room = viRoomUserCategoryService.getViRoomUserCategoryByStreamKey(streamKey.trim());
+            ViRoomUserCategory room = viRoomUserCategoryService.getViRoomUserCategoryByRoomId(roomId);
             model.addObject("room", room);
             model.addObject("status", 0);
             Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
