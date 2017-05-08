@@ -125,14 +125,15 @@
 	<h4>${categoryName}</h4>
     <#list byCategoryId as room>
 		<div class="item" id="${room.streamKey}">
+			<a href="${nginx_server}/${application_name}/room/${room.roomId}"/>
 			<div class="item_content_mask_layer">
 				<img class="item_content_mask_layer_img" src="/images/play-button.png"/>
 			</div>
 			<div class="item_screenshot">
                 <#if room.roomScreenshot ?? >
-					<h2>asdf</h2>
+	                <img width="300" height="170" src="${room.roomScreenshot}">
                 <#else>
-					<img src="/images/default-screenshot.png">
+	                <img width="300" height="170" src="/images/default-screenshot.png">
                 </#if>
 			</div>
 			<div class="item_info_room_status">
@@ -179,22 +180,14 @@
 </#if>
 
 </div>
-<div hidden>
-	<form action="${tomcat_proxy_server_ip}/${application_name}/room" method="post">
-		<input type="text" id="stream_key" name="stream_key"/>
-		<input type="submit" id="submit"/>
-	</form>
-</div>
+
 
 <script>
 
 	//	bind click event
 	$(".item").on("click", function () {
-		var id = $(this).attr("id");
-		$("#stream_key").val(id);
-		$("#submit").click();
+		$(this).children("a").trigger("click");
 	})
-
 	$("#menu_container").on("boxzoomin boxzoomout", function (event) {
 		if (event.type == "boxzoomin") {
 			$("#room_container").css("margin-left", "100px");

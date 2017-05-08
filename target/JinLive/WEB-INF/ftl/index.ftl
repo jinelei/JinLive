@@ -134,7 +134,7 @@
 					</div>
 					<div class="item_screenshot">
                         <#if room.roomScreenshot ?? >
-	                        <img width="300" height="170" src="/screenshot/3f515267-4bae-4fcb-a08d-bbb459e93330.jpg">
+	                        <img width="300" height="170" src="${room.roomScreenshot}">
                         <#else>
 							<img width="300" height="170" src="/images/default-screenshot.png">
                         </#if>
