@@ -13,17 +13,7 @@
 	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	        crossorigin="anonymous"></script>
-	<style>
-		* {
-			padding: 0;
-			margin: 0;
-		}
-
-		#request_container {
-			margin-left: 330px;
-		}
-
-	</style>
+	<link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
 
