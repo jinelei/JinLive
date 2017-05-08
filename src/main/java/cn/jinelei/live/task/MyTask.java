@@ -27,7 +27,7 @@ public class MyTask {
 
     @Scheduled(cron = "*/5 * * * * ?")//每隔5秒执行一次
     public void updateRTMPCache() {
-        logger.info("定时任务： 刷新缓存：rtmpCacheManager");
+        logger.info("定时任务： 刷新缓存");
         RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
         rtmp.getServer().getApplications().stream().forEach(application -> {
             if ("live".equals(application.getName())) {
@@ -38,7 +38,7 @@ public class MyTask {
 
     @Scheduled(cron = "*/60 * * * * ?")//每隔60秒执行一次
     public void getScreenShotFromStream() {
-        logger.info("定时任务： 刷新截图： getScreenShotFromStream");
+        logger.info("定时任务： 刷新截图");
         RTMP rtmp = rtmpUtils.getRTMPInfoFromServer();
         rtmp.getServer().getApplications().stream().forEach(application -> {
             if ("live".equals(application.getName())) {

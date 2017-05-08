@@ -44,7 +44,7 @@
 			position: fixed;
 			top: 40%;
 			right: 360px;
-			background: url(http://192.168.31.169/images/collapsing.png) no-repeat;
+			background: url(/images/collapsing.png) no-repeat;
 			transform: rotate(180deg);
 			background-position: -30px 0;
 		}
@@ -170,7 +170,7 @@
         </#if>
     </#if>
     <#if room.categoryName?? > <a style="font-size: 17px" class="text-info pull-right"
-	                              href="/live/category/cid/${room.categoryId}">${room.categoryName}</a></#if>
+	                              href="/${application_name}/category/cid/${room.categoryId}">${room.categoryName}</a></#if>
 	<hr/>
 	<div id="player_box" class="player-box player-box-chat-open player-box-side-open">
 		<div id="player"></div>

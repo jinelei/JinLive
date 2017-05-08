@@ -96,7 +96,7 @@
 		}
 		
 		.item_info_user_name {
-			background: url(http://127.0.0.1/images/anchors.png) 0 3px no-repeat;
+			background: url(/images/anchors.png) 0 3px no-repeat;
 			text-align: left;
 			font-size: 12px;;
 			padding: 1px 3px 1px 14px;
@@ -344,14 +344,15 @@
             <#list online as room>
 				<div class="col-lg-3">
 					<div class="item" id="${room.streamKey}">
+						<a href="${nginx_server}/${application_name}/room/${room.roomId}"/>
 						<div class="item_content_mask_layer">
 							<img class="item_content_mask_layer_img" src="/images/play-button.png"/>
 						</div>
 						<div class="item_screenshot">
                             <#if room.roomScreenshot ?? >
-								<h2>asdf</h2>
+	                            <img width="300" height="170" src="${room.roomScreenshot}">
                             <#else>
-								<img src="/images/default-screenshot.png">
+	                            <img width="300" height="170" src="/images/default-screenshot.png">
                             </#if>
 						</div>
 						<div class="item_info_room_status">
@@ -374,14 +375,15 @@
             <#list offline as room>
 				<div class="col-lg-3">
 					<div class="item" id="${room.streamKey}">
+						<a href="${nginx_server}/${application_name}/room/${room.roomId}"/>
 						<div class="item_content_mask_layer">
 							<img class="item_content_mask_layer_img" src="/images/play-button.png"/>
 						</div>
 						<div class="item_screenshot">
                             <#if room.roomScreenshot ?? >
-								<h2>asdf</h2>
-                            <#else>
-								<img src="/images/default-screenshot.png">
+	                            <img width="300" height="170" src="${room.roomScreenshot}">
+							<#else>
+	                            <img width="300" height="170" src="/images/default-screenshot.png">
                             </#if>
 						</div>
 						<div class="item_info_room_status">
