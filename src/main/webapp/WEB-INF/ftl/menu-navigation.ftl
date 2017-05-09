@@ -20,13 +20,15 @@
 					</div>
 					<div class="form-group">
 						<label for="modal_register_user_password"
-						       id="modal_register_user_password_label"><@spring.message "web.userinfo.password"/>:</label>
+						       id="modal_register_user_password_label"><@spring.message "web.userinfo.password"/>
+							:</label>
 						<input type="password" class="form-control" id="modal_register_user_password"
 						       placeholder="<@spring.message "web.register.password.tips"/>">
 					</div>
 					<div class="form-group">
 						<label for="modal_register_user_password1"
-						       id="modal_register_user_password1_label"><@spring.message "web.userinfo.password"/>:</label>
+						       id="modal_register_user_password1_label"><@spring.message "web.userinfo.password"/>
+							:</label>
 						<input type="password" class="form-control" id="modal_register_user_password1"
 						       placeholder="<@spring.message "web.register.password.again.tips"/>">
 					</div>
@@ -159,11 +161,8 @@
 
 	</div>
 </div>
-
-<#--<script src="/js/sockjs.min.js"></script>-->
-<#--<script src="/js/stomp.js"></script>-->
-<script type="text/javascript">
-
+<#--<script src="/js/user.js"></script>-->
+<script>
 
 	//	handle search event
 	$("#search_btn").on('click', searchSubmit);
@@ -298,12 +297,13 @@
 		$(".login> .form-group > input").trigger('blur');
 		if ($(".login>.has-error").length == 0) {
 			if (username != null && password != null) {
-				$.post(location.origin + "/${application_name}/user/loginAjax", {
+				$.post("/${application_name}/user/loginAjax", {
 							username: username,
 							password: password
 						},
 						function (result) {
 							var res = JSON.parse(result);
+							console.log(res);
 							if (res.status == 0) {
 								$("#login_box").fadeOut(200);
 								location.reload(false);
@@ -414,5 +414,4 @@
 		$("#menu_container").toggleClass("side-container-close");
 		$("#menu_container").toggleClass("side-container-open");
 	}
-
 </script>

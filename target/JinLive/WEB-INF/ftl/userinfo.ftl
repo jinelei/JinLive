@@ -6,13 +6,9 @@
 	<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
 	<title><@spring.message "web.userinfo"/></title>
 	<script src="/js/jquery-3.2.0.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	        crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+	<script src="/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/css/base.css">
 </head>
 <body>
@@ -32,311 +28,316 @@
 					<a href="#" data-for="room_setting_disp"><@spring.message "web.liveroom"/></a>
 				</li>
 			</ul>
-		</div>
-	</div>
-	<div class="nav-toggle-panel" id="user_info_disp">
-    <#if status ==0 && user?? && user != "anonymousUser">
-		<input hidden id="modify_user_id" value="${user.userId}">
-		<br/>
-		<h3 class="text-info"><@spring.message "web.userinfo"/></h3>
-		<table class="table table-hover">
-			<tr>
-				<td><@spring.message "web.userinfo.nickname"/>：</td>
-				<td><span>
-                    <#if user.userNickname??> ${user.userNickname}
+
+			<div class="nav-toggle-panel" id="user_info_disp">
+			<#if status ==0 && user?? && user != "anonymousUser">
+				<input hidden id="modify_user_id" value="${user.userId}">
+				<br/>
+				<h3 class="text-info"><@spring.message "web.userinfo"/></h3>
+				<table class="table table-hover">
+					<tr>
+						<td><@spring.message "web.userinfo.nickname"/>：</td>
+						<td><span>
+							<#if user.userNickname??> ${user.userNickname}
                     <#else>
-						<@spring.message "web.none"/>
-                    </#if></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_nickname" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_user_nickname_input" type="text" class="form-control modify-user-input"
-						       name="nickname"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_user_nickname_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_user_nickname_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.userinfo.sex"/>：</td>
-				<td><span>
-                    <#if user.userSex == 0><@spring.message "web.screct"/><#elseif  user.userSex == 1><@spring.message "web.userinfo.sex.man"/><#elseif user.userSex ==2><@spring.message "web.userinfo.sex.woman"/></#if></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_sex" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_user_sex_input" type="text" class="form-control modify-user-input"
-						       name="sex"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_user_sex_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_user_sex_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.userinfo.age"/>：</td>
-				<td><span>
-                    <#if user.userAge??>${user.userAge}<#else><@spring.message "web.none"/></#if></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_age" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_user_age_input" type="text" class="form-control modify-user-input"
-						       name="age"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_user_age_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_user_age_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.userinfo.height"/>：</td>
-				<td><span>
-                    <#if user.userHeight?? >${user.userHeight}<#else><@spring.message "web.none"/></#if></span>
-					&nbsp;&nbsp;&nbsp; <a id="modify_user_height" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_user_height_input" type="text" class="form-control modify-user-input"
-						       name="height"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_user_height_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_user_height_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.userinfo.weight"/>：</td>
-				<td><span>
-                    <#if user.userWeight??>${user.userWeight}<#else><@spring.message "web.none"/></#if></span>
-					&nbsp;&nbsp;&nbsp; <a id="modify_user_weight" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_user_weight_input" type="text" class="form-control modify-user-input"
-						       name="weight"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_user_weight_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_user_weight_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-		</table>
+								<@spring.message "web.none"/>
+							</#if></span>
+							&nbsp;&nbsp;&nbsp;<a id="modify_user_nickname" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_user_nickname_input" type="text" class="form-control modify-user-input"
+								       name="nickname"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_user_nickname_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_user_nickname_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.userinfo.sex"/>：</td>
+						<td><span>
+							<#if user.userSex == 0><@spring.message "web.screct"/><#elseif  user.userSex == 1><@spring.message "web.userinfo.sex.man"/><#elseif user.userSex ==2><@spring.message "web.userinfo.sex.woman"/></#if></span>
+							&nbsp;&nbsp;&nbsp;<a id="modify_user_sex" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_user_sex_input" type="text" class="form-control modify-user-input"
+								       name="sex"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_user_sex_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_user_sex_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.userinfo.age"/>：</td>
+						<td><span>
+							<#if user.userAge??>${user.userAge}<#else><@spring.message "web.none"/></#if></span>
+							&nbsp;&nbsp;&nbsp;<a id="modify_user_age" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_user_age_input" type="text" class="form-control modify-user-input"
+								       name="age"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_user_age_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_user_age_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.userinfo.height"/>：</td>
+						<td><span>
+							<#if user.userHeight?? >${user.userHeight}<#else><@spring.message "web.none"/></#if></span>
+							&nbsp;&nbsp;&nbsp; <a id="modify_user_height" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_user_height_input" type="text" class="form-control modify-user-input"
+								       name="height"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_user_height_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_user_height_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.userinfo.weight"/>：</td>
+						<td><span>
+							<#if user.userWeight??>${user.userWeight}<#else><@spring.message "web.none"/></#if></span>
+							&nbsp;&nbsp;&nbsp; <a id="modify_user_weight" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_user_weight_input" type="text" class="form-control modify-user-input"
+								       name="weight"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_user_weight_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_user_weight_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+				</table>
 
-		<br/>
-		<h3 class="text-info"><@spring.message "web.userinfo.contact"/></h3>
-		<table class="table table-hover">
-			<tr>
-				<td><@spring.message "web.userinfo.email"/>：</td>
-				<td>
-                    <#if user.userEmail??>${user.userEmail}<#else><@spring.message "web.none"/></#if></span>
-					&nbsp;&nbsp;&nbsp; <a id="modify_user_email" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_user_email_input" type="text" class="form-control modify-user-input"
-						       name="email"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_user_email_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_user_email_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-user-remove-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.userinfo.phone"/>：</td>
-				<td><span>
-                    <#if user.userPhone??>${user.userPhone}<#else><@spring.message "web.none"/></#if></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_phone" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_user_phone_input" type="text" class="form-control modify-user-input"
-						       name="phone"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_user_phone_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_user_phone_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-		</table>
-		<br/>
-		<h3 class="text-info"><@spring.message "web.userinfo.account"/></h3>
-		<table class="table table-hover">
-			<tr>
-				<td><@spring.message "web.userinfo.password"/>：</td>
-				<td>
-					<span>********</span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_user_password" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_user_password_input" type="password" class="form-control modify-user-input"
-						       name="password"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_user_password_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_user_password_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.userinfo.status"/>：</td>
-				<td>
-                    <#if user.userStatus??><input hidden id="user_status" value="${user.userStatus}"></#if>
-					<span id="user_status_disp"></span>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.userinfo.treasure"/>：</td>
-				<td><span>
-                    <#if user.userTreasure??>${user.userTreasure}<#else><@spring.message "web.none"/></#if></span>
-				</td>
-			</tr>
-		</table>
-    <#else>
-		<div style="text-align: center">
-			<h4 style="padding-top: 80px">Please
-				<a class="text-primary" data-whatever="login" data-toggle="modal"
-				   data-target="#user_modal" href="#"><@spring.message "web.login"/></a>
-			</h4>
-		</div>
-    </#if>
-	</div>
-	<div class="nav-toggle-panel" id="user_subscribe_disp" style="display: none;">
-    <#if online?? || offline??>
-        <#if online??>
-			<h4 class="text-primary"><@spring.message "web.room.live"/></h4>
-            <#list online as room>
-				<div class="col-lg-3">
-					<#include  'room-item-component.ftl'>
+				<br/>
+				<h3 class="text-info"><@spring.message "web.userinfo.contact"/></h3>
+				<table class="table table-hover">
+					<tr>
+						<td><@spring.message "web.userinfo.email"/>：</td>
+						<td>
+								<#if user.userEmail??>${user.userEmail}<#else><@spring.message "web.none"/></#if></span>
+							&nbsp;&nbsp;&nbsp; <a id="modify_user_email" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_user_email_input" type="text" class="form-control modify-user-input"
+								       name="email"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_user_email_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_user_email_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-user-remove-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.userinfo.phone"/>：</td>
+						<td><span>
+							<#if user.userPhone??>${user.userPhone}<#else><@spring.message "web.none"/></#if></span>
+							&nbsp;&nbsp;&nbsp;<a id="modify_user_phone" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_user_phone_input" type="text" class="form-control modify-user-input"
+								       name="phone"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_user_phone_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_user_phone_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<br/>
+				<h3 class="text-info"><@spring.message "web.userinfo.account"/></h3>
+				<table class="table table-hover">
+					<tr>
+						<td><@spring.message "web.userinfo.password"/>：</td>
+						<td>
+							<span>********</span>
+							&nbsp;&nbsp;&nbsp;<a id="modify_user_password" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_user_password_input" type="password" class="form-control modify-user-input"
+								       name="password"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_user_password_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-user-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_user_password_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-user-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.userinfo.status"/>：</td>
+						<td>
+							<#if user.userStatus??><input hidden id="user_status" value="${user.userStatus}"></#if>
+							<span id="user_status_disp"></span>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.userinfo.treasure"/>：</td>
+						<td><span>
+							<#if user.userTreasure??>${user.userTreasure}<#else><@spring.message "web.none"/></#if></span>
+						</td>
+					</tr>
+				</table>
+			<#else>
+				<div style="text-align: center">
+					<h4 style="padding-top: 80px">Please
+						<a class="text-primary" data-whatever="login" data-toggle="modal"
+						   data-target="#user_modal" href="#"><@spring.message "web.login"/></a>
+					</h4>
 				</div>
-            </#list>
-        </#if>
-        <#if offline??>
-			<h4 class="text-primary"><@spring.message "web.room.reset"/></h4>
-            <#list offline as room>
-				<div class="col-lg-3">
-					<#include  'room-item-component.ftl'>
+			</#if>
+			</div>
+
+			<div class="nav-toggle-panel" id="user_subscribe_disp" style="display: none;">
+            <br/>
+			<#if online?? || offline??>
+				<#if online??>
+					<h3 class="text-info"><@spring.message "web.room.live"/></h3>
+					<#list online as room>
+						<div class="col-lg-3">
+							<#include  'room-item-component.ftl'>
+						</div>
+					</#list>
+				</#if>
+				<#if offline??>
+					<h4 class="text-primary"><@spring.message "web.room.reset"/></h4>
+					<#list offline as room>
+						<div class="col-lg-3">
+							<#include  'room-item-component.ftl'>
+						</div>
+					</#list>
+				</#if>
+			<#else>
+				<h4 class="text-primary"><@spring.message "web.subscribe.none"/></h4>
+			</#if>
+				<div hidden>
+					<form action="${nginx_server}/${application_name}/room" method="post">
+						<input type="text" id="stream_key" name="stream_key"/>
+						<input type="submit" id="submit"/>
+					</form>
 				</div>
-            </#list>
-        </#if>
-    <#else>
-		<h4 class="text-primary"><@spring.message "web.subscribe.none"/></h4>
-    </#if>
-		<div hidden>
-			<form action="${nginx_server}/${application_name}/room" method="post">
-				<input type="text" id="stream_key" name="stream_key"/>
-				<input type="submit" id="submit"/>
-			</form>
+			</div>
+
+			<div class="nav-toggle-panel" id="room_setting_disp" style="display: none;">
+				<br/>
+				<h3 class="text-info"><@spring.message "web.liveroom"/></h3>
+				<table class="table table-hover">
+
+					<tr>
+						<td><@spring.message "web.room.name"/>：</td>
+						<td>
+							<span id="set_room_name"></span>
+							&nbsp;&nbsp;&nbsp;<a id="modify_room_name" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_room_name_input" type="text" class="form-control modify-room-input"
+								       name="name"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_room_name_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_room_name_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.room.stream"/>：</td>
+						<td>
+							<span id="set_room_stream_key"></span>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.category"/>：</td>
+						<td>
+							<span id="set_room_category"></span>
+							&nbsp;&nbsp;&nbsp;<a id="modify_room_category" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<select class="form-control" id="modify_room_category_select" name="category">
+								</select>
+							<#--<input id="modify_room_category_input" type="text" class="form-control modify-room-input"-->
+							<#--name="category"-->
+							<#--placeholder="Input new Value" aria-describedby="basic-addon1">-->
+								<span id="modify_room_category_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_room_category_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><@spring.message "web.room.introduce"/>：</td>
+						<td>
+							<span id="set_room_introduce"></span>
+							&nbsp;&nbsp;&nbsp;<a id="modify_room_introduce" class="modify_a"><@spring.message "web.modify"/></a>
+						</td>
+						<td style="display: none;">
+							<div class="input-group">
+								<input id="modify_room_introduce_input" type="text" class="form-control modify-room-input"
+								       name="introduce"
+								       placeholder="Input new Value" aria-describedby="basic-addon1">
+								<span id="modify_room_introduce_submit"
+								      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
+								      aria-hidden="true"></span>
+								<span id="modify_room_introduce_cancel"
+								      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
+								      aria-hidden="true"></span>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+
 		</div>
-	</div>
-
-	<div class="nav-toggle-panel" id="room_setting_disp" style="display: none;">
-		<h3 class="text-info"><@spring.message "web.liveroom"/></h3>
-		<table class="table table-hover">
-
-			<tr>
-				<td><@spring.message "web.room.name"/>：</td>
-				<td>
-					<span id="set_room_name"></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_room_name" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_room_name_input" type="text" class="form-control modify-room-input"
-						       name="name"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_room_name_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_room_name_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.room.stream"/>：</td>
-				<td>
-					<span id="set_room_stream_key"></span>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.category"/>：</td>
-				<td>
-					<span id="set_room_category"></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_room_category" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<select class="form-control" id="modify_room_category_select" name="category">
-						</select>
-                    <#--<input id="modify_room_category_input" type="text" class="form-control modify-room-input"-->
-                    <#--name="category"-->
-                    <#--placeholder="Input new Value" aria-describedby="basic-addon1">-->
-						<span id="modify_room_category_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_room_category_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><@spring.message "web.room.introduce"/>：</td>
-				<td>
-					<span id="set_room_introduce"></span>
-					&nbsp;&nbsp;&nbsp;<a id="modify_room_introduce" class="modify_a"><@spring.message "web.modify"/></a>
-				</td>
-				<td style="display: none;">
-					<div class="input-group">
-						<input id="modify_room_introduce_input" type="text" class="form-control modify-room-input"
-						       name="introduce"
-						       placeholder="Input new Value" aria-describedby="basic-addon1">
-						<span id="modify_room_introduce_submit"
-						      class="glyphicon glyphicon-ok input-group-addon modify-room-submit-btn"
-						      aria-hidden="true"></span>
-						<span id="modify_room_introduce_cancel"
-						      class="glyphicon glyphicon-remove input-group-addon modify-room-cancel-btn"
-						      aria-hidden="true"></span>
-					</div>
-				</td>
-			</tr>
-		</table>
 	</div>
 
 </div>
