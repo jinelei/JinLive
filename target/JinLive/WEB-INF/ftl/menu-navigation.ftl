@@ -87,7 +87,7 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<div id="icon_box">
-				<img onclick="reloadIndex()" class="img-circle" src="/images/pacman.png"/>
+				<img onclick="location.href='/${application_name}'" class="img-circle" src="/images/pacman.png"/>
 			</div>
 		</div>
 	</div>
@@ -259,7 +259,7 @@
 		var sex = $("#modal_register_user_sex option:selected").index();
 		$(".register > .form-group > input").trigger('blur');
 		if ($(".register>.has-error").length == 0) {
-			$.post(location.origin + "/${application_name}/user/registerAjax", {
+			$.post("/${application_name}/user/registerAjax", {
 				username: username,
 				password: password,
 				phone: phone,
@@ -285,7 +285,7 @@
 	}
 	function userLogoutSubmit() {
 		console.log("logout");
-		$.get(location.origin + "/${application_name}/logout", function (data, status) {
+		$.get("/${application_name}/logout", function (data, status) {
 			if (status == "success") {
 				location.reload(false);
 			}
@@ -306,9 +306,9 @@
 							console.log(res);
 							if (res.status == 0) {
 								$("#login_box").fadeOut(200);
-								location.reload(false);
+								location.reload();
 							} else {
-								alert("login error")
+								alert("用户名或密码错误！")
 							}
 						}
 				)
@@ -326,11 +326,11 @@
 		});
 	}
 	//	load category data
-	$.get(location.origin + "/${application_name}/search/category", processCategoryData);
+	$.get("/${application_name}/search/category", processCategoryData);
 
 	function processCategoryData(data) {
 		var tmp = JSON.parse(data);
-		console.log(tmp)
+//		console.log(tmp)
 		$.each(tmp.array, function (key, value) {
 			var row_fluid_div = $("<div class='list-group'></div>").appendTo($("#category_list"));
 			$("<span class='list-group-item text-primary'> " + value.tag.tagName.tagName + "</span>").appendTo($(row_fluid_div));
@@ -340,7 +340,7 @@
 				var category_item = $("<div class='category-name-item' id='" + t.categoryId + "'>" + t.categoryName + "</div>").appendTo($(item_tag_category));
 				$(category_item).on('click', function () {
 					var category_id = $(this).attr("id");
-					window.location.href = "/${application_name}/category/cid/" + category_id;
+					location.href = "/${application_name}/category/cid/" + category_id;
 				})
 			})
 		})
@@ -349,12 +349,9 @@
 		console.log("search")
 		var key = $("#search_input").val();
 		if (key != "") {
-			location.href = location.origin + "/${application_name}/search/key/" + key;
+			location.href = "/${application_name}/search/key/" + key;
 		}
 
-	}
-	function reloadIndex() {
-		location.href = location.origin + "/${application_name}";
 	}
 	function modalShowAction(event) {
 		var button = $(event.relatedTarget);

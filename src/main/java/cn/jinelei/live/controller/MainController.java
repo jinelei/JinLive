@@ -1,14 +1,9 @@
 package cn.jinelei.live.controller;
 
-import cn.jinelei.live.exception.RoomException;
-import cn.jinelei.live.exception.UserException;
-import cn.jinelei.live.model.data.Room;
-import cn.jinelei.live.model.data.User;
 import cn.jinelei.live.model.data.ViRoomUserCategory;
 import cn.jinelei.live.service.RoomService;
 import cn.jinelei.live.service.UserService;
 import cn.jinelei.live.service.ViRoomUserCategoryService;
-import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,29 +38,32 @@ public class MainController {
     private ViRoomUserCategoryService viRoomUserCategoryService;
 
     @RequestMapping(value = {"/index", "/"})
-    public String index(ModelMap model) {
+    public ModelAndView index(ModelAndView model) {
         List<ViRoomUserCategory> viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategory();
         logger.debug("room size: " + viRoomUserCategories.size());
-        model.addAttribute("rooms", viRoomUserCategories);
+        model.setViewName("index");
+        model.addObject("rooms", viRoomUserCategories);
 
-//        logger.debug(model.toString());
-        return "index";
+        logger.debug(model.toString());
+        return model;
     }
 
 
     @RequestMapping(value = "/temp", method = RequestMethod.GET)
-    public String template(ModelMap model) {
-        return "template";
+    public ModelAndView template(ModelAndView model) {
+        model.setViewName("template");
+        return model;
     }
 
     @RequestMapping("/test")
-    public String test(HttpServletRequest request) {
+    public ModelAndView test(ModelAndView model, HttpServletRequest request) {
 //        request.getSession().setAttribute("jin", "asdf");
 //        String str = (String) request.getSession().getAttribute("jin");
 //        logger.debug(str);
 //        template.convertAndSend("/topic/msg","asdasdf");
 //        return "fileupload";
-        return "test";
+        model.setViewName("test");
+        return model;
     }
 
 
