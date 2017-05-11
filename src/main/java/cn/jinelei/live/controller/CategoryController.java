@@ -1,5 +1,6 @@
 package cn.jinelei.live.controller;
 
+import cn.jinelei.live.exception.CategoryException;
 import cn.jinelei.live.model.data.Category;
 import cn.jinelei.live.model.data.ViRoomUserCategory;
 import cn.jinelei.live.model.enumstatus.room.RoomStatus;
@@ -18,7 +19,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -44,26 +48,45 @@ public class CategoryController {
     @RequestMapping(value = "/cid/{cid}", method = RequestMethod.GET)
     public ModelAndView searchGet(@PathVariable int cid, ModelAndView model) {
         logger.debug("search cid: " + cid);
+        try {
+            model.addObject("categoryName", categoryService.getCategory(cid).getCategoryName());
+        } catch (CategoryException e) {
+            e.printStackTrace();
+        }
         List<ViRoomUserCategory> viRoomUserCategoryByCategory = viRoomUserCategoryService.getAllViRoomUserCategoryByCategory(cid);
         if (viRoomUserCategoryByCategory.size() > 0) {
             model.addObject("byCategoryId", viRoomUserCategoryByCategory);
-            model.addObject("categoryName", viRoomUserCategoryByCategory.get(0).getCategoryName());
         }
         model.setViewName("category");
+        logger.debug(model.toString());
         return model;
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ModelAndView allCategory(ModelAndView model) {
-        List<ViRoomUserCategory> viRoomUserCategories = null;
-        PageInfo<ViRoomUserCategory> viRoomUserCategoryPageInfo = viRoomUserCategoryService.getAllViRoomUserCategoryByStatusPageInfo(RoomStatus.ONLINE.ordinal());
-        if (viRoomUserCategoryPageInfo.getTotal() / LiveItemPageLimit > 0) {
-            viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategoryByStatusLimit(RoomStatus.ONLINE.ordinal(), 0, LiveItemPageLimit);
-        } else {
-            viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategoryByStatus(RoomStatus.ONLINE.ordinal());
-        }
-        model.addObject("byOnline", viRoomUserCategories);
         model.setViewName("category");
+        model.addObject("categoryName","所有分类");
+//        List<ViRoomUserCategory> viRoomUserCategories = null;
+//        PageInfo<ViRoomUserCategory> viRoomUserCategoryPageInfo = viRoomUserCategoryService.getAllViRoomUserCategoryByStatusPageInfo(RoomStatus.ONLINE.ordinal());
+//        if (viRoomUserCategoryPageInfo.getTotal() / LiveItemPageLimit > 0) {
+//            viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategoryByStatusLimit(RoomStatus.ONLINE.ordinal(), 0, LiveItemPageLimit);
+//        } else {
+//            viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategoryByStatus(RoomStatus.ONLINE.ordinal());
+//        }
+//        model.addObject("byOnline", viRoomUserCategories);
+
+        Map<Integer, List<ViRoomUserCategory>> result = new HashMap<Integer, List<ViRoomUserCategory>>();
+
+        List<Category> categories = categoryService.getCategoryAll();
+        categories.forEach(category -> {
+            List<ViRoomUserCategory> viRoomUserCategories = viRoomUserCategoryService.getAllViRoomUserCategoryByCategory(category.getCategoryId());
+            result.put(category.getCategoryId(), viRoomUserCategories);
+        });
+
+        model.addObject("status", result.isEmpty() ? 1 : 0);
+        model.addObject("roomMap", result);
+        model.addObject("categoryList", categories);
+        logger.debug(result.toString());
         return model;
     }
 

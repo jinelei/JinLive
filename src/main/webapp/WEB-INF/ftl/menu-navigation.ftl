@@ -116,7 +116,7 @@
 		</div>
 		<div id="category_category" class="side-close span12 side-menu-mini">
 			<#--<img width="50px" height="50px" src="/images/menu.png"/>-->
-			<a href="/${application_name}/subscribe">
+			<a href="/${application_name}/category/all">
 				<span class="glyphicon glyphicon-th-large" style="font-size: 42px"/>
 			</a>
 		</div>

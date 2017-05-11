@@ -14,7 +14,7 @@
 <div class="row">
 <div class="span12">
     <#if offline??>
-		<h4 class="text-primary"><@spring.message "web.room.reset"/></h4>
+		<h4 class="text-primary"><@spring.message "web.room.rest"/></h4>
         <#list offline as room>
 			<div class="col-lg-3">
                 <#include  'room-item-component.ftl'>

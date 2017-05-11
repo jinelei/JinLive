@@ -10,13 +10,15 @@
 			<img width="300" height="170" src="/images/default-screenshot.png">
         </#if>
 		</div>
-		<div class="item_info_room_status">
-        <#if  room.roomStatus == 1 >
-			<span>Live</span>
-        <#else>
-			<span>Rest</span>
-        </#if>
+    <#if room.roomStatus == 1 >
+		<div class="item_info_room_status_live">
+			<span><@spring.message "web.room.live"/></span>
 		</div>
+    <#else>
+		<div class="item_info_room_status_rest">
+			<span><@spring.message "web.room.rest"/></span>
+		</div>
+    </#if>
 	</a>
 	<div class="item_info">
 		<span class="item_info_room_name"> ${room.roomName}</span>
