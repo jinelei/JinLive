@@ -109,13 +109,22 @@
 <#--side box close display-->
 	<div class="side-close row ">
 		<div id="category_all" class="side-close span12 side-menu-mini">
-			<img width="50px" height="50px" src="/images/computer.png"/>
+        <#--<img width="50px" height="50px" src="/images/computer.png"/>-->
+			<a href="/${application_name}/user/subscribe">
+				<span class="glyphicon glyphicon-heart" aria-hidden="true" style="font-size: 42px"/>
+			</a>
 		</div>
 		<div id="category_category" class="side-close span12 side-menu-mini">
-			<img width="50px" height="50px" src="/images/menu.png"/>
+			<#--<img width="50px" height="50px" src="/images/menu.png"/>-->
+			<a href="/${application_name}/subscribe">
+				<span class="glyphicon glyphicon-th-large" style="font-size: 42px"/>
+			</a>
 		</div>
 		<div class="side-close side-menu-mini span12">
-			<img width="50px" height="50px" src="/images/computer.png"/>
+			<#--<img width="50px" height="50px" src="/images/computer.png"/>-->
+			<a href="/${application_name}/subscribe">
+				<span class="glyphicon glyphicon-bookmark" style="font-size: 42px"/>
+			</a>
 		</div>
 	</div>
 <#--category list-->

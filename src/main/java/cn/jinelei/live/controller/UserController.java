@@ -230,6 +230,39 @@ public class UserController {
         return jsonObject.toString();
     }
 
+    @RequestMapping(value = "/subscribe", method = RequestMethod.GET)
+    public ModelAndView subscribe(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView("subscribe");
+        Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try {
+            if (object instanceof String) {
+                model.addObject("status", 2);
+            } else {
+                User user = userService.getUserInfo(((User) object).getUserId());
+                List<ViUserSubscribe> data = viUserSubscribeService.getAllViUserSubscribeBySubscriberId(user.getUserId());
+                if (data != null) {
+                    List<ViUserSubscribe> online = new ArrayList<>();
+                    List<ViUserSubscribe> offline = new ArrayList<>();
+                    for (ViUserSubscribe viUserSubscribe : data) {
+                        if (viUserSubscribe.getRoomStatus().equals(RoomStatus.ONLINE.ordinal()))
+                            online.add(viUserSubscribe);
+                        else
+                            offline.add(viUserSubscribe);
+                    }
+                    if (online.size() > 0)
+                        model.addObject("online", online);
+                    if (offline.size() > 0)
+                        model.addObject("offline", offline);
+                }
+                model.addObject("status", 0);
+            }
+        } catch (UserException e) {
+            model.addObject("status", 1);
+        }
+        logger.debug(model.toString());
+        return model;
+    }
+
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public ModelAndView userinfo(HttpServletRequest request) {
         ModelAndView model = new ModelAndView("userinfo");
@@ -245,7 +278,7 @@ public class UserController {
                     List<ViUserSubscribe> online = new ArrayList<>();
                     List<ViUserSubscribe> offline = new ArrayList<>();
                     for (ViUserSubscribe viUserSubscribe : data) {
-                        if (viUserSubscribe.getRoomStatus().equals(RoomStatus.ONLINE))
+                        if (viUserSubscribe.getRoomStatus().equals(RoomStatus.ONLINE.ordinal()))
                             online.add(viUserSubscribe);
                         else
                             offline.add(viUserSubscribe);
